@@ -1,0 +1,185 @@
+
+apply plugin: 'java'
+apply plugin: 'ear'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'sonar-runner'
+
+version = '1.0'
+
+sonarRunner {
+    sonarProperties {
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.jdbc.url", "jdbc:mysql://localhost/sonar"
+        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+        property "sonar.jdbc.username", "sonar"
+        property "sonar.jdbc.password", "sonar"
+    }
+}
+
+javadoc {
+  exclude { details -> details.file.absolutePath.contains('generated-sources') }
+}
+
+eclipse {
+  classpath {
+ 
+    //default settings for downloading sources and Javadoc:
+    downloadSources = true
+    downloadJavadoc = true
+    file {
+      // Classpath entry for Eclipse which changes the order of classpathentries; otherwise no sources for 3rd party jars are shown
+      withXml { xml ->
+        def node = xml.asNode()
+        node.remove( node.find { it.@path == 'org.eclipse.jst.j2ee.internal.web.container' } )
+        node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jst.j2ee.internal.web.container', exported: 'true'])
+      }
+    }
+  }
+  
+  wtp {
+    facet {
+      facet name: 'java', version: '1.8'
+    }
+  }  
+}
+
+
+
+configurations {  
+  javaAgentSpringInstrument
+  jaxws  
+}
+
+ear.onlyIf { false }
+build.dependsOn jar
+
+sourceSets {
+  main {
+    java.srcDir file( 'build/generated-sources/java')
+  }
+}
+
+
+task copyWSDLs(type: Copy) {
+  from new File( projectDir, 'src/main/wsdl')
+  into new File( sourceSets.main.output.resourcesDir, 'me/ineson/demo/service')
+}
+
+
+jar.dependsOn copyWSDLs
+
+dependencies {
+	compile(
+    [ "javax.servlet:javax.servlet-api:+" ],
+    [ "javax.ws.rs:javax.ws.rs-api:2.+" ],
+    [ "org.glassfish.jersey.containers:jersey-container-servlet:2.+" ],
+    [ "org.glassfish.jersey.media:jersey-media-json-jackson:2.+" ],
+    [ "org.glassfish.jersey.ext:jersey-spring3:2.+" ]
+//    [ "com.sun.xml.ws:jaxws-rt:2.2.1" ],
+	)
+  compile( "com.sun.xml.ws:jaxws-rt:2.2.1") {
+    exclude module: 'junit'
+  }
+	
+	
+  testCompile(
+    [ "org.dbunit:dbunit:2.+" ]
+  )
+  testRuntime(
+    [ "org.springframework:spring-instrument:4.0.5.RELEASE" ]
+  )
+  javaAgentSpringInstrument "org.springframework:spring-instrument:4.0.5.RELEASE"
+  jaxws "com.sun.xml.ws:jaxws-tools:2.2.9+" 
+}
+
+
+
+test {
+  systemProperties "db.driver": "com.mysql.jdbc.Driver"
+  systemProperties "db.url": "jdbc:mysql://localhost:3306/solarSystemTest"
+  systemProperties "db.userid": "planetTest"
+  systemProperties "db.password": "plan3t"
+}
+
+
+task intTestReport(dependsOn: jar, type: TestReport) {
+  destinationDir = file("$buildDir/reports/intTests")
+  // Include the results from the `test` task in all subprojects
+  //reportOn subprojects*.test
+}
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "http://repository.codehaus.org"}
+    }
+    dependencies {
+        classpath(
+            [ "org.codehaus.groovy.modules.http-builder:http-builder:0.7.+" ]
+        ) 
+        
+    }
+}
+
+
+task wsimport << { 
+    //def generatedDir = "build/generated-sources/java"
+    def generatedDir = new File( buildDir, '/generated-sources/java')
+    def inputWsdl = "$projectDir/src/main/wsdl/SolarBodyService.wsdl"
+    // inputs.file inputWsdl
+    //outputs.dir = generatedDir
+
+//    doFirst {
+        System.properties['javax.xml.accessExternalSchema'] = "file";
+        generatedDir.mkdirs()
+        ant.taskdef(name:'wsimport',
+            classname:'com.sun.tools.ws.ant.WsImport',
+            classpath:configurations.jaxws.asPath)
+        ant.wsimport(
+            sourceDestDir: "$generatedDir",
+//            package: "com.example.incident.gateway.thinger",
+            wsdl: inputWsdl,
+//            destdir: "$buildDir/classes/main",
+//            verbose:true,
+            extension:true,
+            xnocompile:true
+        ) {
+//            xjcarg(value:"-Djavax.xml.accessExternalSchema=all")
+//            arg(value:"-disableXmlSecurity")
+        }
+//    }
+}
+
+compileJava.dependsOn wsimport
+
+
+/*
+task wsgen {
+    def classesDir = new File( buildDir, '/wsGen/classes')
+    def sourcesDir = new File( buildDir, '/wsGen/src')
+    def resourcesDir = new File( buildDir, '/wsGen/resources')
+    classesDir.mkdirs()
+    sourcesDir.mkdirs()
+    resourcesDir.mkdirs()
+        ant {
+            taskdef(name:'wsgen',
+                classname:'com.sun.tools.ws.ant.WsGen',
+                classpath: configurations.jaxws.asPath)
+            wsgen(
+                classpath:sourceSets.main.output.classesDir.path + ";" + sourceSets.main.compileClasspath.asPath,
+                destdir: classesDir,
+                sourcedestdir: sourcesDir,
+                resourcedestdir: resourcesDir,
+                keep:true,
+                verbose:true,
+                genwsdl:true,
+                protocol:'Xsoap1.2',
+                extension:true, 
+                sei:'me.ineson.demo.service.SolarBodyServiceEndpoint')
+    }
+
+}
+
+*/
+
