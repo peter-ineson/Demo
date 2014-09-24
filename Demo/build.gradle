@@ -1,0 +1,89 @@
+
+buildscript {
+  repositories {
+      jcenter()
+  }
+}
+
+//apply plugin: 'sonar-runner'
+
+def springVersion = "4.0.5.RELEASE"
+
+allprojects {
+  apply plugin: 'java'
+  apply plugin: 'eclipse-wtp'
+  apply plugin: 'project-report'
+  apply plugin: 'jacoco'
+  apply plugin: 'checkstyle'
+  apply plugin: 'pmd'
+
+  test {
+    ignoreFailures = true
+  }
+
+  checkstyle {
+    showViolations = false
+    ignoreFailures = true
+  }
+  
+  pmd {
+    ignoreFailures = true
+  }
+
+  jacoco {
+    toolVersion = "0.7.1.201405082137"
+  }
+
+  group = 'me.ineson'
+  version = '1.0'
+}
+
+subprojects {
+
+  repositories {
+    mavenCentral()
+    jcenter()
+  }
+
+  dependencies {
+    compile "org.springframework:spring-context:" + springVersion
+    compile "org.apache.commons:commons-lang3:3.+"
+    compile "org.apache.commons:commons-collections4:4.+"
+    compile "org.slf4j:slf4j-api:1.+"
+    compile "org.slf4j:jcl-over-slf4j:1.+"
+    compile "org.slf4j:log4j-over-slf4j:1.+"
+    compile "org.slf4j:jul-to-slf4j:1.+"
+    compile "ch.qos.logback:logback-classic:1.+"
+    
+    testCompile "junit:junit:4.+"
+    testCompile "org.springframework:spring-test:" + springVersion
+    testCompile "org.mockito:mockito-core:1.9+"
+    
+  }
+
+  eclipse {
+    classpath {
+      //default settings for downloading sources and Javadoc:
+      downloadSources = true
+      downloadJavadoc = true
+      file {
+        // Classpath entry for Eclipse which changes the order of classpathentries; otherwise no sources for 3rd party jars are shown
+        withXml { xml ->
+          def node = xml.asNode()
+          node.remove( node.find { it.@path == 'org.eclipse.jst.j2ee.internal.web.container' } )
+          node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jst.j2ee.internal.web.container', exported: 'true'])
+        }
+      }
+    }
+    
+  }
+
+  test {
+    reports.html.enabled = true
+  } 
+  
+}
+
+
+
+
