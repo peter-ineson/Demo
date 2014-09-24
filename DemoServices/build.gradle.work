@@ -1,0 +1,272 @@
+
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'sonar-runner'
+
+version = '1.0'
+
+sonarRunner {
+    sonarProperties {
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.jdbc.url", "jdbc:mysql://localhost/sonar"
+        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+        property "sonar.jdbc.username", "sonar"
+        property "sonar.jdbc.password", "sonar"
+    }
+}
+
+
+eclipse {
+  classpath {
+ 
+    //default settings for downloading sources and Javadoc:
+/*    downloadSources = true
+    downloadJavadoc = true
+    file {
+      // Classpath entry for Eclipse which changes the order of classpathentries; otherwise no sources for 3rd party jars are shown
+      withXml { xml ->
+        def node = xml.asNode()
+        node.remove( node.find { it.@path == 'org.eclipse.jst.j2ee.internal.web.container' } )
+        node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jst.j2ee.internal.web.container', exported: 'true'])
+      }
+    }
+    */
+  }
+  
+  wtp {
+    facet {
+      facet name: 'java', version: '1.8'
+      facet name: 'jst.web', version: '3.1'
+    }
+  }  
+}
+
+
+/*
+repositories {
+	mavenCentral()
+  maven {
+        url "http://download.java.net/maven/2"
+  }
+	
+}
+*/
+
+configurations {  
+    javaAgentSpringInstrument
+    dbUnit  
+    intTestCompile.extendsFrom testCompile
+    intTestRuntime.extendsFrom testRuntime
+    //    javaAgentOpenJpa  
+}
+
+
+sourceSets {
+    intTest {
+        java.srcDir file('src/intTest/java')
+        resources.srcDir file('src/intTest/resources')
+        compileClasspath += sourceSets.main.output 
+//        compileClasspath = sourceSets.main.output + configurations.intTest
+//        runtimeClasspath = output + compileClasspath
+    }
+}
+
+dependencies {
+	compile(
+    [ "javax.transaction:javax.transaction-api:1.2" ],
+	  [ "org.eclipse.persistence:javax.persistence:2.1.0" ],
+	  [ "org.eclipse.persistence:eclipselink:2.5+" ],
+	  [ "org.springframework.data:spring-data-mongodb:1.5+" ],
+    [ "cglib:cglib:2.2.2" ],
+    [ "org.springframework.data:spring-data-jpa:1.6.1.RELEASE" ],
+    [ "javax.ws.rs:javax.ws.rs-api:2.+" ],
+    [ "org.glassfish.jersey.containers:jersey-container-servlet:2.+" ],
+    [ "org.glassfish.jersey.media:jersey-media-json-jackson:2.+" ],
+    [ "org.glassfish.jersey.ext:jersey-spring3:2.+" ],
+    [ "com.sun.xml.ws:jaxws-rt:2.2.8" ],
+    [ "org.mongodb:mongo-java-driver:2.+" ]
+	)
+  testCompile(
+    [ "mysql:mysql-connector-java:5.1.31" ],
+    [ "org.dbunit:dbunit:2.+" ]
+  )
+  testRuntime(
+    [ "org.springframework:spring-instrument:4.0.5.RELEASE" ]
+  )
+//  intTestCompile(
+//    [ "org.dbunit:dbunit:2.+" ]
+//  )
+  dbUnit(
+    [ "mysql:mysql-connector-java:5.1.31" ],
+    [ "org.dbunit:dbunit:2.+" ]
+  )
+  javaAgentSpringInstrument "org.springframework:spring-instrument:4.0.5.RELEASE" 
+}
+
+task(configDbUnit) << {
+  ant.echo(message:  "config db unit" )
+  ant.taskdef(name: 'dbunit', 
+      classname: 'org.dbunit.ant.DbUnitTask',
+      classpath: configurations.testCompile.asPath)
+}
+
+test.dependsOn configDbUnit
+
+test.doFirst() {
+  String argsString1 = "-javaagent:${configurations.javaAgentSpringInstrument.asPath}"  
+  println(argsString1)
+
+  // set JVM arguments for the test JVM(s)
+  jvmArgs "${argsString1}"
+
+
+  ant.echo(message: "Refreshing Db" )
+  ant.dbunit(
+    driver: "com.mysql.jdbc.Driver",
+    url: "jdbc:mysql://localhost:3306/solarSystemTest?sessionVariables=FOREIGN_KEY_CHECKS=0",
+//    url: "jdbc:mysql://localhost:3306/solarSystemTest&sessionVariables=FOREIGN_KEY_CHECKS=0",
+    userid: "planetTest",
+    password: "plan3t"
+  ) {
+    operation(type: 'CLEAN_INSERT',src: 'src/test/resources/dbUnitExport.xml', format: 'flat')
+  }
+
+}
+
+test {
+  systemProperties "db.driver": "com.mysql.jdbc.Driver"
+  systemProperties "db.url": "jdbc:mysql://localhost:3306/solarSystemTest"
+  systemProperties "db.userid": "planetTest"
+  systemProperties "db.password": "plan3t"
+//  systemProperties "db.schema": "BIRT"
+//  systemProperties "db.system.userid": "system"
+//  systemProperties "db.system.password": "manager"
+}
+
+
+task exportDb() << {
+  ant.echo(message: "Exporting db" )
+/*    
+  systemProperties "db.driver": "com.mysql.jdbc.Driver"
+  systemProperties "db.url": "jdbc:mysql://localhost:3306/solarSystemTest"
+  systemProperties "db.userid": "planetTest"
+  systemProperties "db.password": "plan3t"
+
+  ant.taskdef(name: 'dbunit', 
+      classname: 'org.dbunit.ant.DbUnitTask',
+      // classpath: configurations.pmd.asPath
+      classpath: configurations.testCompile.asPath)
+*/
+  ant.dbunit(
+    driver: "com.mysql.jdbc.Driver",
+    url: "jdbc:mysql://localhost:3306/solarSystemTest",
+    userid: "planetTest",
+    password: "plan3t"
+  ) {
+    export(dest: 'src/main/domain/dbUnitExport.xml', format: 'flat')
+  }
+}
+
+  
+
+
+task intTest(type: Test) {
+
+    testClassesDir = sourceSets.intTest.output.classesDir
+    classpath += sourceSets.intTest.runtimeClasspath
+}
+
+/*
+  task intTestReport(dependsOn: intTest, type: TestReport) {
+    destinationDir = file("$buildDir/reports/allTests")
+    // Include the results from the `test` task in all subprojects
+    reportOn subprojects*.test
+  }
+*/
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "http://repository.codehaus.org"}
+    }
+    dependencies {
+        classpath 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.+'
+    }
+}
+
+import groovyx.net.http.HTTPBuilder
+
+enum ServerStatus {
+    Running, NotRunning, NotDeployed
+}
+
+
+task callTc << {
+  logger.quiet "Connecting to Tomcat"
+
+  def authSite = new HTTPBuilder( 'http://localhost:8080' )
+  authSite.auth.basic 'admin', 'admin'
+
+  def deployStartCountdown = 30 
+  def deployEndCountdown = 60 
+  def deploymentIfTestStr = "/" + project.name + ":"
+ 
+  while (true) {
+    def status = null
+
+    def listApps = authSite.get( path:'/manager/text/list' ) { resp, reader ->
+      println "response status: ${resp.statusLine}"
+      
+      status = ServerStatus.NotDeployed
+      reader.each {
+//        println "Line: -----" + it
+
+        if (it.startsWith(deploymentIfTestStr)) {
+          println "*****************************" + it
+          if (it.startsWith(deploymentIfTestStr + "running:")) {
+            status = ServerStatus.Running
+          } else {
+            status = ServerStatus.NotRunning
+          }        
+          return true
+        }
+
+      }
+      System.out << reader
+      println '\n--------------------'
+      println "Status: " + status
+    }
+
+    println "deployStartCountdown " + deployStartCountdown + ", deployEndCountdown " + deployEndCountdown
+
+    if( status == null) {
+      println "Error: failed to get status."
+      break
+    }
+    if (deployStartCountdown > 0) {
+      if (status == ServerStatus.NotRunning) {
+        deployStartCountdown = -1
+      } else {
+        deployStartCountdown--;
+      }
+    } else if (deployStartCountdown == 0) {
+      println "Error: Deploying does not appear to have started."
+      break
+    } else if (deployEndCountdown > 0) {
+      if (status == ServerStatus.Running) {
+        println "Deployment complete."
+        break
+      }
+      deployEndCountdown--
+    } else {
+      println "Error: Deploying does not appear to have completed."
+      break
+    }
+
+    Thread.sleep 1000
+  } 
+}
+//}
+
+
+

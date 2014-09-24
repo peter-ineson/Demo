@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- This program is free software: you can redistribute it and/or modify
+   - it under the terms of the GNU General Public License as published by
+   - the Free Software Foundation, either version 3 of the License, or
+   - (at your option) any later version.
+   -
+   - This program is distributed in the hope that it will be useful,
+   - but WITHOUT ANY WARRANTY; without even the implied warranty of
+   - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   - GNU General Public License for more details.
+   -
+   - You should have received a copy of the GNU General Public License
+   - along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+<definitions targetNamespace="http://service.demo.ineson.me/" name="SolarBodyService" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:tns="http://service.demo.ineson.me/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+  <types>
+    <xsd:schema>
+      <xsd:import namespace="http://service.demo.ineson.me/" schemaLocation="SolarBodyService_schema1.xsd"/>
+    </xsd:schema>
+  </types>
+  <message name="submitSuggestedUpdate">
+    <part name="parameters" element="tns:submitSuggestedUpdate"/>
+  </message>
+  <message name="submitSuggestedUpdateResponse">
+    <part name="parameters" element="tns:submitSuggestedUpdateResponse"/>
+  </message>
+  <message name="listSuggestedUpdates">
+    <part name="parameters" element="tns:listSuggestedUpdates"/>
+  </message>
+  <message name="listSuggestedUpdatesResponse">
+    <part name="parameters" element="tns:listSuggestedUpdatesResponse"/>
+  </message>
+  <message name="countSuggestedUpdates">
+    <part name="parameters" element="tns:countSuggestedUpdates"/>
+  </message>
+  <message name="countSuggestedUpdatesResponse">
+    <part name="parameters" element="tns:countSuggestedUpdatesResponse"/>
+  </message>
+  <message name="acceptSuggestedUpdate">
+    <part name="parameters" element="tns:acceptSuggestedUpdate"/>
+  </message>
+  <message name="acceptSuggestedUpdateResponse">
+    <part name="parameters" element="tns:acceptSuggestedUpdateResponse"/>
+  </message>
+  <message name="rejectSuggestedUpdate">
+    <part name="parameters" element="tns:rejectSuggestedUpdate"/>
+  </message>
+  <message name="rejectSuggestedUpdateResponse">
+    <part name="parameters" element="tns:rejectSuggestedUpdateResponse"/>
+  </message>
+  <portType name="SolarBodyService">
+    <operation name="submitSuggestedUpdate">
+      <input wsam:Action="http://service.demo.ineson.me/SolarBodyService/submitSuggestedUpdateRequest" message="tns:submitSuggestedUpdate"/>
+      <output wsam:Action="http://service.demo.ineson.me/SolarBodyService/submitSuggestedUpdateResponse" message="tns:submitSuggestedUpdateResponse"/>
+    </operation>
+    <operation name="listSuggestedUpdates">
+      <input wsam:Action="http://service.demo.ineson.me/SolarBodyService/listSuggestedUpdatesRequest" message="tns:listSuggestedUpdates"/>
+      <output wsam:Action="http://service.demo.ineson.me/SolarBodyService/listSuggestedUpdatesResponse" message="tns:listSuggestedUpdatesResponse"/>
+    </operation>
+    <operation name="countSuggestedUpdates">
+      <input wsam:Action="http://service.demo.ineson.me/SolarBodyService/countSuggestedUpdatesRequest" message="tns:countSuggestedUpdates"/>
+      <output wsam:Action="http://service.demo.ineson.me/SolarBodyService/countSuggestedUpdatesResponse" message="tns:countSuggestedUpdatesResponse"/>
+    </operation>
+    <operation name="acceptSuggestedUpdate">
+      <input wsam:Action="http://service.demo.ineson.me/SolarBodyService/acceptSuggestedUpdateRequest" message="tns:acceptSuggestedUpdate"/>
+      <output wsam:Action="http://service.demo.ineson.me/SolarBodyService/acceptSuggestedUpdateResponse" message="tns:acceptSuggestedUpdateResponse"/>
+    </operation>
+    <operation name="rejectSuggestedUpdate">
+      <input wsam:Action="http://service.demo.ineson.me/SolarBodyService/rejectSuggestedUpdateRequest" message="tns:rejectSuggestedUpdate"/>
+      <output wsam:Action="http://service.demo.ineson.me/SolarBodyService/rejectSuggestedUpdateResponse" message="tns:rejectSuggestedUpdateResponse"/>
+    </operation>
+  </portType>
+  <binding name="SolarBodyServicePortBinding" type="tns:SolarBodyService">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <operation name="submitSuggestedUpdate">
+      <soap12:operation soapAction=""/>
+      <input>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="listSuggestedUpdates">
+      <soap12:operation soapAction=""/>
+      <input>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="countSuggestedUpdates">
+      <soap12:operation soapAction=""/>
+      <input>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="acceptSuggestedUpdate">
+      <soap12:operation soapAction=""/>
+      <input>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="rejectSuggestedUpdate">
+      <soap12:operation soapAction=""/>
+      <input>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="SolarBodyService">
+    <port name="SolarBodyService" binding="tns:SolarBodyServicePortBinding">
+      <soap12:address location="REPLACE_WITH_ACTUAL_URL"/>
+    </port>
+  </service>
+</definitions>
+

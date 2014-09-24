@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- This program is free software: you can redistribute it and/or modify
+   - it under the terms of the GNU General Public License as published by
+   - the Free Software Foundation, either version 3 of the License, or
+   - (at your option) any later version.
+   -
+   - This program is distributed in the hope that it will be useful,
+   - but WITHOUT ANY WARRANTY; without even the implied warranty of
+   - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   - GNU General Public License for more details.
+   -
+   - You should have received a copy of the GNU General Public License
+   - along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+<xs:schema version="1.0"
+   targetNamespace="http://service.demo.ineson.me/"
+   xmlns:tns="http://service.demo.ineson.me/"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="acceptSuggestedUpdate" type="tns:acceptSuggestedUpdate"/>
+
+  <xs:element name="acceptSuggestedUpdateResponse" type="tns:acceptSuggestedUpdateResponse"/>
+
+  <xs:element name="countSuggestedUpdates" type="tns:countSuggestedUpdates"/>
+
+  <xs:element name="countSuggestedUpdatesResponse" type="tns:countSuggestedUpdatesResponse"/>
+
+  <xs:element name="listSuggestedUpdates" type="tns:listSuggestedUpdates"/>
+
+  <xs:element name="listSuggestedUpdatesResponse" type="tns:listSuggestedUpdatesResponse"/>
+
+  <xs:element name="rejectSuggestedUpdate" type="tns:rejectSuggestedUpdate"/>
+
+  <xs:element name="rejectSuggestedUpdateResponse" type="tns:rejectSuggestedUpdateResponse"/>
+<!-- 
+  <xs:element name="solarBody" type="tns:solarBody"/>
+  <xs:element name="xxx"  type="tns:solarBody"/>
+ -->
+
+  <xs:element name="submitSuggestedUpdate" type="tns:submitSuggestedUpdate"/>
+
+  <xs:element name="submitSuggestedUpdateResponse" type="tns:submitSuggestedUpdateResponse"/>
+
+  <xs:complexType name="submitSuggestedUpdate">
+    <xs:sequence>
+      <xs:element ref="tns:suggestion" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="submitSuggestedUpdateResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="listSuggestedUpdates">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:long" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="listSuggestedUpdatesResponse">
+    <xs:sequence>
+      <xs:element ref="tns:suggestion" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="countSuggestedUpdates">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="countSuggestedUpdatesResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:long" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="acceptSuggestedUpdate">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+      <xs:element ref="tns:solarBody" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <xs:complexType name="acceptSuggestedUpdateResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="rejectSuggestedUpdate">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="rejectSuggestedUpdateResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:element name="solarBody">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long" minOccurs="0"/>
+        <xs:element name="name" type="xs:string" minOccurs="0"/>
+        <xs:element name="bodyType" type="tns:solarBodyType" minOccurs="0"/>
+        <xs:element name="description" type="xs:string" minOccurs="0"/>
+        <xs:element name="orbitBodyId" type="xs:long" minOccurs="0"/>
+        <xs:element name="orbitDistance" type="xs:long" minOccurs="0"/>
+        <xs:element name="radius" type="xs:long" minOccurs="0"/>
+        <xs:element name="mass" type="xs:decimal" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="solarBodyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Sun"/>
+      <xs:enumeration value="Planet"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="solarBodyLink">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:long" minOccurs="0"/>
+        <xs:element name="solarBodyId" type="xs:long" minOccurs="0"/>
+        <xs:element name="linkType" type="tns:solarBodyLinkType" minOccurs="0"/>
+        <xs:element name="name" type="xs:string" minOccurs="0"/>
+        <xs:element name="url" type="xs:string" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="solarBodyLinkType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Wiki"/>
+      <xs:enumeration value="NASA"/>
+      <xs:enumeration value="Other"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="solarBodyImage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="solarBodyId" type="xs:long" minOccurs="0"/>
+        <xs:element name="image" type="xs:base64Binary" minOccurs="0"/>
+        <xs:element name="filename" type="xs:string" minOccurs="0"/>
+        <xs:element name="contentType" type="xs:string" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="suggestion">
+	  <xs:complexType>
+	    <xs:sequence>
+        <xs:element name="id" type="xs:string" minOccurs="0"/>
+        <xs:element name="solarBodyId" type="xs:long" minOccurs="0"/>
+        <xs:element name="createdDate" type="xs:dateTime" minOccurs="0"/>
+        <xs:element name="name" type="xs:string" minOccurs="0"/>
+	      <xs:element name="emailAddress" type="xs:string" minOccurs="0"/>
+        <xs:element name="comment" type="xs:string" minOccurs="0"/>
+	    </xs:sequence>
+	  </xs:complexType>
+  </xs:element>
+
+
+
+</xs:schema>
+
