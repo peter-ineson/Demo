@@ -56,3 +56,5 @@ build
 .classpath
 .project
 .settings
+/Demo/.classpath
+/Demo/.project
