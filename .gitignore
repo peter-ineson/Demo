@@ -58,3 +58,9 @@ build
 .settings
 /Demo/.classpath
 /Demo/.project
+/Demo/bin
+/Demo/build
+/Demo/.classpath
+/Demo/.project
+/Demo/.gradle
+/Demo/.settings
