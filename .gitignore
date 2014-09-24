@@ -42,3 +42,7 @@ RemoteSystemsTempFiles
 /Demo/.classpath
 /Demo/.project
 /Demo/.gradle
+/DemoServices/.classpath
+/DemoServices/.project
+/DemoServices/bin
+/DemoServices/build
