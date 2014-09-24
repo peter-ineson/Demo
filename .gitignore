@@ -36,3 +36,9 @@ Icon
 .Trashes
 /.metadata
 RemoteSystemsTempFiles
+/Demo/.settings
+/Demo/bin
+/Demo/build
+/Demo/.classpath
+/Demo/.project
+/Demo/.gradle

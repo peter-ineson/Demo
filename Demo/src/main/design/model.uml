@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_KZxVINH5EeOH9pBuE4VNVA" name="model">
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_k-CeANH5EeOH9pBuE4VNVA" name="Add planet"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_v2dZENH5EeOH9pBuE4VNVA" name="Edit planet data"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_DM63cNH6EeOH9pBuE4VNVA" clientDependency="_YwinENXCEeOuMMumCRZjPg" name="Submit new planet data"/>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_VrzNkNH6EeOH9pBuE4VNVA" name="Admin"/>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_XSEAwNH6EeOH9pBuE4VNVA" name="Guest"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_p7ahgNH6EeOH9pBuE4VNVA" name="View Planet"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_xvI8gNH6EeOH9pBuE4VNVA" name="View planet data" memberEnd="_xvI8gdH6EeOH9pBuE4VNVA _xvI8hNH6EeOH9pBuE4VNVA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_xvI8gdH6EeOH9pBuE4VNVA" name="eternal user" type="_XSEAwNH6EeOH9pBuE4VNVA" association="_xvI8gNH6EeOH9pBuE4VNVA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xvI8gtH6EeOH9pBuE4VNVA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xvI8g9H6EeOH9pBuE4VNVA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_xvI8hNH6EeOH9pBuE4VNVA" name="view plant" type="_p7ahgNH6EeOH9pBuE4VNVA" association="_xvI8gNH6EeOH9pBuE4VNVA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xvI8hdH6EeOH9pBuE4VNVA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xvI8htH6EeOH9pBuE4VNVA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_BOoJUNH7EeOH9pBuE4VNVA" name="Add planet" memberEnd="_BOowYNH7EeOH9pBuE4VNVA _BOowY9H7EeOH9pBuE4VNVA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_BOowYNH7EeOH9pBuE4VNVA" name="admin" type="_VrzNkNH6EeOH9pBuE4VNVA" association="_BOoJUNH7EeOH9pBuE4VNVA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BOowYdH7EeOH9pBuE4VNVA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BOowYtH7EeOH9pBuE4VNVA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_BOowY9H7EeOH9pBuE4VNVA" name="add planet" type="_k-CeANH5EeOH9pBuE4VNVA" association="_BOoJUNH7EeOH9pBuE4VNVA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BOowZNH7EeOH9pBuE4VNVA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BOowZdH7EeOH9pBuE4VNVA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_EnEr0NH7EeOH9pBuE4VNVA" name="Edit planet data" memberEnd="_EnEr0dH7EeOH9pBuE4VNVA _EnEr1NH7EeOH9pBuE4VNVA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_EnEr0dH7EeOH9pBuE4VNVA" name="admin" type="_VrzNkNH6EeOH9pBuE4VNVA" association="_EnEr0NH7EeOH9pBuE4VNVA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_EnEr0tH7EeOH9pBuE4VNVA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_EnEr09H7EeOH9pBuE4VNVA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_EnEr1NH7EeOH9pBuE4VNVA" name="edit planet data" type="_v2dZENH5EeOH9pBuE4VNVA" association="_EnEr0NH7EeOH9pBuE4VNVA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_EnEr1dH7EeOH9pBuE4VNVA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_EnEr1tH7EeOH9pBuE4VNVA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_Ipf_cNH7EeOH9pBuE4VNVA" name="Suggest new planet data" memberEnd="_Ipf_cdH7EeOH9pBuE4VNVA _Ipf_dNH7EeOH9pBuE4VNVA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_Ipf_cdH7EeOH9pBuE4VNVA" name="eternal user" type="_XSEAwNH6EeOH9pBuE4VNVA" association="_Ipf_cNH7EeOH9pBuE4VNVA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ipf_ctH7EeOH9pBuE4VNVA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Ipf_c9H7EeOH9pBuE4VNVA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_Ipf_dNH7EeOH9pBuE4VNVA" name="submit new information" type="_DM63cNH6EeOH9pBuE4VNVA" association="_Ipf_cNH7EeOH9pBuE4VNVA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ipf_ddH7EeOH9pBuE4VNVA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Ipf_dtH7EeOH9pBuE4VNVA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_T0Ir4NH7EeOH9pBuE4VNVA" name="Review new data" memberEnd="_T0Ir4dH7EeOH9pBuE4VNVA _T0Ir5NH7EeOH9pBuE4VNVA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_T0Ir4dH7EeOH9pBuE4VNVA" name="admin" type="_VrzNkNH6EeOH9pBuE4VNVA" association="_T0Ir4NH7EeOH9pBuE4VNVA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_T0Ir4tH7EeOH9pBuE4VNVA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_T0Ir49H7EeOH9pBuE4VNVA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_T0Ir5NH7EeOH9pBuE4VNVA" name="submit new information" type="_DM63cNH6EeOH9pBuE4VNVA" association="_T0Ir4NH7EeOH9pBuE4VNVA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_T0Ir5dH7EeOH9pBuE4VNVA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_T0Ir5tH7EeOH9pBuE4VNVA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_bzVt8NT3EeOuMMumCRZjPg" name="View planet data" memberEnd="_bzVt8dT3EeOuMMumCRZjPg _bzVt9NT3EeOuMMumCRZjPg">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_bzVt8dT3EeOuMMumCRZjPg" name="admin" type="_VrzNkNH6EeOH9pBuE4VNVA" association="_bzVt8NT3EeOuMMumCRZjPg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bzVt8tT3EeOuMMumCRZjPg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bzVt89T3EeOuMMumCRZjPg" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_bzVt9NT3EeOuMMumCRZjPg" name="view planet" type="_p7ahgNH6EeOH9pBuE4VNVA" association="_bzVt8NT3EeOuMMumCRZjPg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bzVt9dT3EeOuMMumCRZjPg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bzVt9tT3EeOuMMumCRZjPg" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_YwinENXCEeOuMMumCRZjPg" name="If new data was accepted" client="_DM63cNH6EeOH9pBuE4VNVA" supplier="_v2dZENH5EeOH9pBuE4VNVA"/>
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_rDu38NzQEeO1iopbJ-E3NA" name="Interaction1">
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_Gu3fQNzyEeO1iopbJ-E3NA" name="MessageRecv2" covered="_QtMMkNzREeO1iopbJ-E3NA" message="_Gu1DANzyEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:ExecutionOccurrenceSpecification" xmi:id="_naxRkNzuEeO1iopbJ-E3NA" name="ActionExecSpecStart" covered="_Bcm-cNzREeO1iopbJ-E3NA" execution="_nazt0NzuEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:ActionExecutionSpecification" xmi:id="_nazt0NzuEeO1iopbJ-E3NA" name="ActionExecSpec" covered="_Bcm-cNzREeO1iopbJ-E3NA" finish="_na0U4NzuEeO1iopbJ-E3NA" start="_naxRkNzuEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_vNuQgNzuEeO1iopbJ-E3NA" name="MessageSend" covered="_Bcm-cNzREeO1iopbJ-E3NA" message="_vNsbUNzuEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:ActionExecutionSpecification" xmi:id="_vxMxANzuEeO1iopbJ-E3NA" name="ActionExecSpec0" covered="_JRG1gNzREeO1iopbJ-E3NA" finish="_vxNYENzuEeO1iopbJ-E3NA" start="_vNu3kNzuEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_vNu3kNzuEeO1iopbJ-E3NA" name="MessageRecv" covered="_JRG1gNzREeO1iopbJ-E3NA" message="_vNsbUNzuEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:ExecutionOccurrenceSpecification" xmi:id="_vxNYENzuEeO1iopbJ-E3NA" name="ActionExecSpec0Finish" covered="_JRG1gNzREeO1iopbJ-E3NA" execution="_vxMxANzuEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_W5HLMNzwEeO1iopbJ-E3NA" name="MessageSend0" covered="_Bcm-cNzREeO1iopbJ-E3NA" message="_W5FWANzwEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:ActionExecutionSpecification" xmi:id="_XPPMMNzwEeO1iopbJ-E3NA" name="ActionExecSpec1" covered="_JRG1gNzREeO1iopbJ-E3NA" finish="_XPPzQNzwEeO1iopbJ-E3NA" start="_W5HyQNzwEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_W5HyQNzwEeO1iopbJ-E3NA" name="MessageRecv0" covered="_JRG1gNzREeO1iopbJ-E3NA" message="_W5FWANzwEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:ActionExecutionSpecification" xmi:id="_HgrWsNzyEeO1iopbJ-E3NA" name="ActionExecSpec3" covered="_QtMMkNzREeO1iopbJ-E3NA" finish="_HgrWsdzyEeO1iopbJ-E3NA" start="_Gu3fQNzyEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_INNiANzxEeO1iopbJ-E3NA" name="MessageSend1" covered="_JRG1gNzREeO1iopbJ-E3NA" message="_INLs0NzxEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:ActionExecutionSpecification" xmi:id="_IkMeoNzxEeO1iopbJ-E3NA" name="ActionExecSpec2" covered="_N39r4NzREeO1iopbJ-E3NA" finish="_IkMeodzxEeO1iopbJ-E3NA" start="_INOwINzxEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_INOwINzxEeO1iopbJ-E3NA" name="MessageRecv1" covered="_N39r4NzREeO1iopbJ-E3NA" message="_INLs0NzxEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_Gu24MNzyEeO1iopbJ-E3NA" name="MessageSend2" covered="_N39r4NzREeO1iopbJ-E3NA" message="_Gu1DANzyEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:ExecutionOccurrenceSpecification" xmi:id="_XPPzQNzwEeO1iopbJ-E3NA" name="ActionExecSpec1Finish" covered="_JRG1gNzREeO1iopbJ-E3NA" execution="_XPPMMNzwEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:ExecutionOccurrenceSpecification" xmi:id="_HgrWsdzyEeO1iopbJ-E3NA" name="ActionExecSpec3Finish" covered="_QtMMkNzREeO1iopbJ-E3NA" execution="_HgrWsNzyEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:ExecutionOccurrenceSpecification" xmi:id="_IkMeodzxEeO1iopbJ-E3NA" name="ActionExecSpec2Finish" covered="_N39r4NzREeO1iopbJ-E3NA" execution="_IkMeoNzxEeO1iopbJ-E3NA"/>
+    <fragment xmi:type="uml:ExecutionOccurrenceSpecification" xmi:id="_na0U4NzuEeO1iopbJ-E3NA" name="ActionExecSpecFinish" covered="_Bcm-cNzREeO1iopbJ-E3NA" execution="_nazt0NzuEeO1iopbJ-E3NA"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_Bcm-cNzREeO1iopbJ-E3NA" name="Client" coveredBy="_naxRkNzuEeO1iopbJ-E3NA _na0U4NzuEeO1iopbJ-E3NA _nazt0NzuEeO1iopbJ-E3NA _vNuQgNzuEeO1iopbJ-E3NA _W5HLMNzwEeO1iopbJ-E3NA"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_JRG1gNzREeO1iopbJ-E3NA" name="PlanetController" coveredBy="_vNu3kNzuEeO1iopbJ-E3NA _vxNYENzuEeO1iopbJ-E3NA _vxMxANzuEeO1iopbJ-E3NA _W5HyQNzwEeO1iopbJ-E3NA _XPPzQNzwEeO1iopbJ-E3NA _XPPMMNzwEeO1iopbJ-E3NA _INNiANzxEeO1iopbJ-E3NA"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_N39r4NzREeO1iopbJ-E3NA" name="PlanetDao" coveredBy="_INOwINzxEeO1iopbJ-E3NA _IkMeodzxEeO1iopbJ-E3NA _IkMeoNzxEeO1iopbJ-E3NA _Gu24MNzyEeO1iopbJ-E3NA"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_QtMMkNzREeO1iopbJ-E3NA" name="DB" coveredBy="_Gu3fQNzyEeO1iopbJ-E3NA _HgrWsdzyEeO1iopbJ-E3NA _HgrWsNzyEeO1iopbJ-E3NA"/>
+    <message xmi:type="uml:Message" xmi:id="_vNsbUNzuEeO1iopbJ-E3NA" name="1:planetValidate" receiveEvent="_vNu3kNzuEeO1iopbJ-E3NA" sendEvent="_vNuQgNzuEeO1iopbJ-E3NA"/>
+    <message xmi:type="uml:Message" xmi:id="_W5FWANzwEeO1iopbJ-E3NA" name="2:planetSave" receiveEvent="_W5HyQNzwEeO1iopbJ-E3NA" sendEvent="_W5HLMNzwEeO1iopbJ-E3NA"/>
+    <message xmi:type="uml:Message" xmi:id="_INLs0NzxEeO1iopbJ-E3NA" name="3:persist" receiveEvent="_INOwINzxEeO1iopbJ-E3NA" sendEvent="_INNiANzxEeO1iopbJ-E3NA"/>
+    <message xmi:type="uml:Message" xmi:id="_Gu1DANzyEeO1iopbJ-E3NA" name="4:InsertOrUpdate" receiveEvent="_Gu3fQNzyEeO1iopbJ-E3NA" sendEvent="_Gu24MNzyEeO1iopbJ-E3NA"/>
+  </packagedElement>
+</uml:Model>
