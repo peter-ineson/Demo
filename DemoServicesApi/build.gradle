@@ -20,28 +20,6 @@ javadoc {
   exclude { details -> details.file.absolutePath.contains('generated-sources') }
 }
 
-eclipse {
-  classpath {
- 
-    //default settings for downloading sources and Javadoc:
-    downloadSources = true
-    downloadJavadoc = true
-    file {
-      // Classpath entry for Eclipse which changes the order of classpathentries; otherwise no sources for 3rd party jars are shown
-      withXml { xml ->
-        def node = xml.asNode()
-        node.remove( node.find { it.@path == 'org.eclipse.jst.j2ee.internal.web.container' } )
-        node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jst.j2ee.internal.web.container', exported: 'true'])
-      }
-    }
-  }
-  
-  wtp {
-    facet {
-      facet name: 'java', version: '1.8'
-    }
-  }  
-}
 
 
 
@@ -99,13 +77,6 @@ test {
   systemProperties "db.url": "jdbc:mysql://localhost:3306/solarSystemTest"
   systemProperties "db.userid": "planetTest"
   systemProperties "db.password": "plan3t"
-}
-
-
-task intTestReport(dependsOn: jar, type: TestReport) {
-  destinationDir = file("$buildDir/reports/intTests")
-  // Include the results from the `test` task in all subprojects
-  //reportOn subprojects*.test
 }
 
 

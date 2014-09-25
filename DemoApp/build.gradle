@@ -32,6 +32,9 @@ dependencies {
     exclude module: 'junit'
   }
 
+  testCompile(
+    [ project(":TestingFramework") ]
+  )
 
 /*
   testCompile(

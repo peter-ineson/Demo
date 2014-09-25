@@ -1,0 +1,61 @@
+
+apply plugin: 'java'
+apply plugin: 'ear'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'sonar-runner'
+
+version = '1.0'
+
+sonarRunner {
+    sonarProperties {
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.jdbc.url", "jdbc:mysql://localhost/sonar"
+        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+        property "sonar.jdbc.username", "sonar"
+        property "sonar.jdbc.password", "sonar"
+    }
+}
+
+
+configurations {  
+  javaAgentSpringInstrument
+}
+
+ear.onlyIf { false }
+build.dependsOn jar
+
+
+dependencies {
+	compile(
+    [ "javax.servlet:javax.servlet-api:+" ],
+    [ "javax.ws.rs:javax.ws.rs-api:2.+" ],
+    [ "org.glassfish.jersey.containers:jersey-container-servlet:2.+" ],
+    [ "org.glassfish.jersey.media:jersey-media-json-jackson:2.+" ],
+    [ "org.glassfish.jersey.ext:jersey-spring3:2.+" ]
+//    [ "com.sun.xml.ws:jaxws-rt:2.2.1" ],
+	)
+  compile( "com.sun.xml.ws:jaxws-rt:2.2.1") {
+    exclude module: 'junit'
+  }
+	
+	
+  testCompile(
+    [ "org.dbunit:dbunit:2.+" ]
+  )
+  testRuntime(
+    [ "org.springframework:spring-instrument:4.0.5.RELEASE" ]
+  )
+  javaAgentSpringInstrument "org.springframework:spring-instrument:4.0.5.RELEASE"
+}
+
+
+
+test {
+  systemProperties "db.driver": "com.mysql.jdbc.Driver"
+  systemProperties "db.url": "jdbc:mysql://localhost:3306/solarSystemTest"
+  systemProperties "db.userid": "planetTest"
+  systemProperties "db.password": "plan3t"
+}
+
+
+

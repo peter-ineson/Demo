@@ -12,15 +12,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package me.ineson.demo.service.utils;
+package me.ineson.testing.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-
-import me.ineson.demo.service.rest.SolarBodyRestClient;
 
 import org.apache.commons.lang3.SystemUtils;
 import org.slf4j.Logger;
@@ -32,7 +30,7 @@ import org.slf4j.LoggerFactory;
  */
 public class GradleConfig {
 
-    private static final Logger log = LoggerFactory.getLogger(SolarBodyRestClient.class);
+    private static final Logger log = LoggerFactory.getLogger(GradleConfig.class);
 
     private static Properties GRADLE_PROPERTIES = null;
     

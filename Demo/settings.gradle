@@ -1,2 +1,2 @@
 
-includeFlat 'DemoServicesApi', 'DemoServices', 'DemoApp'
+includeFlat 'DemoServicesApi', 'DemoServices', 'DemoApp', 'TestingFramework'

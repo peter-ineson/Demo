@@ -27,7 +27,7 @@ import me.ineson.demo.app.DbConstants;
 import me.ineson.demo.service.SolarBody;
 import me.ineson.demo.service.SolarBodyType;
 import me.ineson.demo.service.rest.SolarBodyRestClient;
-import me.ineson.demo.service.utils.GradleConfig;
+import me.ineson.testing.utils.GradleConfig;
 
 import org.junit.Assert;
 import org.junit.Test;
