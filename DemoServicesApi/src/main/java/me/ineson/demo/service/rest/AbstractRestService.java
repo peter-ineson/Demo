@@ -76,6 +76,7 @@ public abstract class AbstractRestService<T> {
         return result;
     }
 
+    @SuppressWarnings("unchecked")
     protected List<T> findMany(String url, Map<String, Object> criteria, Collection<String> orderBy) {
         log.debug("Calling url {}", url);
         WebTarget target = CLIENT.target(url);
