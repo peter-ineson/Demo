@@ -54,6 +54,7 @@ public class ImageController {
         
         if( image != null) {
             httpResponse.setContentType(image.getContentType());
+            httpResponse.setContentLength( image.getImage().length);
             try( OutputStream responseOutputStream = httpResponse.getOutputStream()) {
                 try( InputStream imageInputStream = new ByteArrayInputStream( image.getImage())) {
                     IOUtils.copy( imageInputStream, responseOutputStream);
