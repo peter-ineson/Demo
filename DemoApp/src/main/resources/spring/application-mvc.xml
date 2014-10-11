@@ -44,4 +44,8 @@
    -->
   <mvc:resources mapping="/webjars/**" location="/webjars/" />
 
+  <mvc:interceptors>
+    <bean class="me.ineson.demo.app.SecurityInterceptor" />
+  </mvc:interceptors>
+
 </beans>

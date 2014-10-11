@@ -28,6 +28,7 @@ import com.sun.xml.ws.client.BindingProviderProperties;
 public class SolarBodyServiceTest {
 
     private static final Logger log = LoggerFactory.getLogger( SolarBodyServiceTest.class);
+
     @Before
     public void setUp() throws Exception {
     }

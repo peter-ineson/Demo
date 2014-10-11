@@ -30,6 +30,8 @@ public class Config {
 
     public static final String SERVICE_REST_URL = "serviceRestUrl";
     
+    public static final String SOLAR_SYSTEM_CENTRE_ID = "solarSystem.centreSolarBodyId";
+
     /**
      * @param basePath
      * @param config
@@ -59,6 +61,27 @@ public class Config {
         String value = getString(key);
         if( StringUtils.isBlank(value)) {
             throw new IllegalStateException( "Configuration error: a key of " + key + " has not returned a value.");
+        }
+        return value;
+    }
+
+    /**
+     * @param key
+     * @return
+     */
+    public Long getLong(String key) {
+        key = buildFullKey(key);
+        return config.getLong(key, null);
+    }
+
+    /**
+     * @param key
+     * @return
+     */
+    public Long getLongManadtory(String key) {
+        Long value = getLong(key);
+        if (value == null) {
+            throw new IllegalStateException("Configuration error: a key of " + key + " has not returned a value.");
         }
         return value;
     }

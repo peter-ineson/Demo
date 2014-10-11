@@ -75,7 +75,12 @@ subprojects {
           println "Node: " + webContainerNode
           if ( webContainerNode != null) {
             node.remove( webContainerNode )
+          }
+          plugins.withType(WarPlugin) {          
             node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jst.j2ee.internal.web.container', exported: 'true'])
+          }
+          plugins.withType(EarPlugin) {          
+            node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jst.j2ee.internal.module.container', exported: 'true'])
           }
         }
       }

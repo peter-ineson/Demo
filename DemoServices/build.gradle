@@ -93,7 +93,8 @@ dependencies {
 
   testCompile(
     [ "mysql:mysql-connector-java:5.1.31" ],
-    [ "org.dbunit:dbunit:2.+" ]
+    [ "org.dbunit:dbunit:2.+" ],
+    [ project(":TestingFramework") ]
   )
   testRuntime(
     [ "org.springframework:spring-instrument:4.0.5.RELEASE" ]

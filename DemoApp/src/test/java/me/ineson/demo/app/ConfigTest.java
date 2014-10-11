@@ -30,11 +30,11 @@ import org.junit.Test;
  * 
  * @author peter
  */
-/**
- * @author peter
- *
- */
 public class ConfigTest {
+
+    private static final Long LONG_1 = 1L;
+
+    private static final Long LONG_2 = 2L;
 
     /**
      * 
@@ -97,6 +97,55 @@ public class ConfigTest {
         }
 
         verify(mockAbstractConfiguration, times(1)).getString("testAppF.key3");
+        verifyNoMoreInteractions(mockAbstractConfiguration);
+    }
+
+    @Test
+    public void testGetLong() {
+        AbstractConfiguration mockAbstractConfiguration = mock(XMLConfiguration.class);
+        when(mockAbstractConfiguration.getLong("testApp.key1", null)).thenReturn(LONG_1);
+        Config config = new Config("testApp", mockAbstractConfiguration);
+
+        Long value = config.getLong("key1");
+
+        verify(mockAbstractConfiguration, times(1)).getLong("testApp.key1",null);
+        verifyNoMoreInteractions(mockAbstractConfiguration);
+
+        Assert.assertEquals(LONG_1, value);
+    }
+
+    @Test
+    public void testGetLongManadtorySuccess() {
+        AbstractConfiguration mockAbstractConfiguration = mock(XMLConfiguration.class);
+        when(mockAbstractConfiguration.getLong("testApp.key2", null)).thenReturn(LONG_2);
+        Config config = new Config("testApp", mockAbstractConfiguration);
+
+        Long value = config.getLongManadtory("key2");
+
+        verify(mockAbstractConfiguration, times(1)).getLong("testApp.key2",null);
+        verifyNoMoreInteractions(mockAbstractConfiguration);
+
+        Assert.assertEquals(LONG_2, value);
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testGetLongManadtoryFail() {
+        AbstractConfiguration mockAbstractConfiguration = mock(XMLConfiguration.class);
+        Long nullValue = null;
+        when(mockAbstractConfiguration.getLong("testAppF.key3", null)).thenReturn(null);
+        Config config = new Config("testAppF", mockAbstractConfiguration);
+
+        try {
+            config.getLongManadtory("key3");
+            Assert.fail("Mandatory ");
+        } catch (IllegalStateException e) {
+            // Should fail
+        }
+
+        verify(mockAbstractConfiguration, times(1)).getLong("testAppF.key3", null);
         verifyNoMoreInteractions(mockAbstractConfiguration);
     }
 

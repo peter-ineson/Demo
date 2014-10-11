@@ -32,14 +32,18 @@
   <xs:element name="rejectSuggestedUpdate" type="tns:rejectSuggestedUpdate"/>
 
   <xs:element name="rejectSuggestedUpdateResponse" type="tns:rejectSuggestedUpdateResponse"/>
-<!-- 
-  <xs:element name="solarBody" type="tns:solarBody"/>
-  <xs:element name="xxx"  type="tns:solarBody"/>
- -->
 
   <xs:element name="submitSuggestedUpdate" type="tns:submitSuggestedUpdate"/>
 
   <xs:element name="submitSuggestedUpdateResponse" type="tns:submitSuggestedUpdateResponse"/>
+
+  <xs:element name="login" type="tns:login"/>
+
+  <xs:element name="loginResponse" type="tns:loginResponse"/>
+
+  <xs:element name="getGuestUser" type="tns:getGuestUser"/>
+
+  <xs:element name="getGuestUserResponse" type="tns:getGuestUserResponse"/>
 
   <xs:complexType name="submitSuggestedUpdate">
     <xs:sequence>
@@ -93,6 +97,29 @@
 
   <xs:complexType name="rejectSuggestedUpdateResponse">
     <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="login">
+    <xs:sequence>
+      <xs:element name="username" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="password" type="xs:string" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="loginResponse">
+    <xs:sequence>
+      <xs:element ref="tns:user" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getGuestUser">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getGuestUserResponse">
+    <xs:sequence>
+      <xs:element ref="tns:user" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
   </xs:complexType>
 
   <xs:element name="solarBody">
@@ -161,7 +188,23 @@
 	  </xs:complexType>
   </xs:element>
 
+  <xs:element name="user">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="username" type="xs:string" minOccurs="0"/>
+        <xs:element name="name" type="xs:string" minOccurs="0"/>
+        <xs:element name="password" type="xs:string" minOccurs="0"/>
+        <xs:element name="role" type="tns:userRole" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 
+  <xs:simpleType name="userRole">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Guest"/>
+      <xs:enumeration value="Admin"/>
+    </xs:restriction>
+  </xs:simpleType>
 
 </xs:schema>
 

@@ -24,11 +24,15 @@ import javax.jws.soap.SOAPBinding.Use;
 
 import me.ineson.demo.service.db.domain.SolarBody;
 import me.ineson.demo.service.db.repo.jpa.SolarBodyRepository;
+import me.ineson.demo.service.db.repo.jpa.UserRepository;
 import me.ineson.demo.service.db.repo.mongo.SuggestionRepository;
+import me.ineson.demo.service.utils.UserHelper;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 /**
@@ -40,6 +44,9 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 public class SolarBodyServiceImpl extends SpringBeanAutowiringSupport implements SolarBodyService {
 
     private static final Logger log = LoggerFactory.getLogger(SolarBodyServiceImpl.class);
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private SolarBodyRepository solarBodyRepository;
@@ -96,6 +103,36 @@ public class SolarBodyServiceImpl extends SpringBeanAutowiringSupport implements
     public void acceptSuggestedUpdate(String arg0, me.ineson.demo.service.SolarBody arg1) {
         // TODO Auto-generated method stub
         
+    }
+
+    @Override
+    public User login(String username, String password) {
+        me.ineson.demo.service.db.domain.User loginUser = null;
+        log.debug( "Checkin login details of username {}", username);
+        
+        if( StringUtils.isNotBlank( username) && StringUtils.isNotBlank( password)) {
+            loginUser = userRepository.findOne( me.ineson.demo.service.db.domain.User.GUEST_USERNAME);
+
+            // If user was found, but the password was incorrect.
+            if( loginUser != null && ! password.equals( loginUser.getPassword())) {
+                log.debug( "User found, password did not match");
+                loginUser = null;
+            }
+        }
+
+        return UserHelper.convert(loginUser);
+    }
+
+    @Override
+    public User getGuestUser() {
+        
+        me.ineson.demo.service.db.domain.User guestUser = userRepository.findOne( me.ineson.demo.service.db.domain.User.GUEST_USERNAME);
+        log.info("Found guest user {}", guestUser);
+        Assert.notNull(guestUser, "Guest user");
+
+        User user = UserHelper.convert(guestUser);
+        log.info("Converted guest user {}", user);
+        return user;
     }
 
 }

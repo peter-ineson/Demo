@@ -1,6 +1,9 @@
 <config>
-  <app>
+  <DemoApp>
+    <solarSystem>
+      <!-- Is hopefully the Sun -->
+      <centreSolarBodyId>1</centreSolarBodyId>
+    </solarSystem>
     <serviceRestUrl>http://localhost:8080/DemoServices/rest</serviceRestUrl>
-  </app>
-</config>
- 
+  </DemoApp>
+</config> 

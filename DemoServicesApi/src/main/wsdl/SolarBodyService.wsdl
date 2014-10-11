@@ -48,6 +48,18 @@
   <message name="rejectSuggestedUpdateResponse">
     <part name="parameters" element="tns:rejectSuggestedUpdateResponse"/>
   </message>
+  <message name="login">
+    <part name="parameters" element="tns:login"/>
+  </message>
+  <message name="loginResponse">
+    <part name="parameters" element="tns:loginResponse"/>
+  </message>
+  <message name="getGuestUser">
+    <part name="parameters" element="tns:getGuestUser"/>
+  </message>
+  <message name="getGuestUserResponse">
+    <part name="parameters" element="tns:getGuestUserResponse"/>
+  </message>
   <portType name="SolarBodyService">
     <operation name="submitSuggestedUpdate">
       <input wsam:Action="http://service.demo.ineson.me/SolarBodyService/submitSuggestedUpdateRequest" message="tns:submitSuggestedUpdate"/>
@@ -68,6 +80,14 @@
     <operation name="rejectSuggestedUpdate">
       <input wsam:Action="http://service.demo.ineson.me/SolarBodyService/rejectSuggestedUpdateRequest" message="tns:rejectSuggestedUpdate"/>
       <output wsam:Action="http://service.demo.ineson.me/SolarBodyService/rejectSuggestedUpdateResponse" message="tns:rejectSuggestedUpdateResponse"/>
+    </operation>
+    <operation name="login">
+      <input wsam:Action="http://service.demo.ineson.me/SolarBodyService/loginRequest" message="tns:login"/>
+      <output wsam:Action="http://service.demo.ineson.me/SolarBodyService/loginResponse" message="tns:loginResponse"/>
+    </operation>
+    <operation name="getGuestUser">
+      <input wsam:Action="http://service.demo.ineson.me/SolarBodyService/getGuestUserRequest" message="tns:getGuestUser"/>
+      <output wsam:Action="http://service.demo.ineson.me/SolarBodyService/getGuestUserResponse" message="tns:getGuestUserResponse"/>
     </operation>
   </portType>
   <binding name="SolarBodyServicePortBinding" type="tns:SolarBodyService">
@@ -117,10 +137,28 @@
         <soap12:body use="literal"/>
       </output>
     </operation>
+    <operation name="login">
+      <soap12:operation soapAction=""/>
+      <input>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="getGuestUser">
+      <soap12:operation soapAction=""/>
+      <input>
+        <soap12:body use="literal"/>
+      </input>
+      <output>
+        <soap12:body use="literal"/>
+      </output>
+    </operation>
   </binding>
   <service name="SolarBodyService">
     <port name="SolarBodyService" binding="tns:SolarBodyServicePortBinding">
-      <soap12:address location="REPLACE_WITH_ACTUAL_URL"/>
+      <soap12:address location="http://localhost:8080/DemoServices/solarBodyService"/>
     </port>
   </service>
 </definitions>

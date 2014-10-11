@@ -27,7 +27,7 @@
 	</bean>
 
   <bean name="configuration" class="me.ineson.demo.app.Config">
-    <constructor-arg value="app" />
+    <constructor-arg value="DemoApp" />
     <constructor-arg ref="commonsConfiguration" />
   </bean>
 
