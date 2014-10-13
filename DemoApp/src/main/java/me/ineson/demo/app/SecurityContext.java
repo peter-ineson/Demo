@@ -23,10 +23,21 @@ import me.ineson.demo.service.UserRole;
  * @author peter
  *
  */
-public class UserContext {
+public class SecurityContext {
+    
+    public static final String ATTRIBUTE_NAME = "security"; 
     
     @Getter @Setter private User user;
     
+    public SecurityContext() {
+        super();
+    }
+
+    public SecurityContext(User user) {
+        super();
+        this.user = user;
+    }
+
     /**
      * Returns true if the user has a role of Guest or no user object.
      * @return true if a guest user.

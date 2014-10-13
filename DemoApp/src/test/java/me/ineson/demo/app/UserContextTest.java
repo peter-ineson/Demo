@@ -27,11 +27,11 @@ import org.junit.Test;
 public class UserContextTest {
 
     /**
-     * Test method for {@link me.ineson.demo.app.UserContext#setUser(me.ineson.demo.service.User)}.
+     * Test method for {@link me.ineson.demo.app.SecurityContext#setUser(me.ineson.demo.service.User)}.
      */
     @Test
     public void testSetGetUser() {
-        UserContext userContext = new UserContext();
+        SecurityContext userContext = new SecurityContext();
 
         assertNull(userContext.getUser());
 
@@ -44,21 +44,21 @@ public class UserContextTest {
     }
 
     /**
-     * Test method for {@link me.ineson.demo.app.UserContext#isGuest()}.
+     * Test method for {@link me.ineson.demo.app.SecurityContext#isGuest()}.
      */
     @Test
     public void testNullUser() {
-        UserContext userContext = new UserContext();
+        SecurityContext userContext = new SecurityContext();
         assertTrue(userContext.isGuest());
         assertFalse(userContext.isAdmin());
     }
 
     /**
-     * Test method for {@link me.ineson.demo.app.UserContext#isGuest()}.
+     * Test method for {@link me.ineson.demo.app.SecurityContext#isGuest()}.
      */
     @Test
     public void testNullUserRole() {
-        UserContext userContext = new UserContext();
+        SecurityContext userContext = new SecurityContext();
         User user = new User();
         userContext.setUser(user);
 
@@ -67,11 +67,11 @@ public class UserContextTest {
     }
     
     /**
-     * Test method for {@link me.ineson.demo.app.UserContext#isAdmin()}.
+     * Test method for {@link me.ineson.demo.app.SecurityContext#isAdmin()}.
      */
     @Test
     public void testUserRoleGuest() {
-        UserContext userContext = new UserContext();
+        SecurityContext userContext = new SecurityContext();
         User user = new User();
         user.setRole(UserRole.GUEST);
         userContext.setUser(user);
@@ -81,11 +81,11 @@ public class UserContextTest {
     }
 
     /**
-     * Test method for {@link me.ineson.demo.app.UserContext#isAdmin()}.
+     * Test method for {@link me.ineson.demo.app.SecurityContext#isAdmin()}.
      */
     @Test
     public void testUserRoleAdmin() {
-        UserContext userContext = new UserContext();
+        SecurityContext userContext = new SecurityContext();
         User user = new User();
         user.setRole(UserRole.ADMIN);
         userContext.setUser(user);

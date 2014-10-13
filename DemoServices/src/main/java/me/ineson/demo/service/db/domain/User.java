@@ -26,7 +26,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Entity implementation class for Entity: Planet
+ * Entity implementation class for Entity: User
  *
  */
 @Entity(name="User")

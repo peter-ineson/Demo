@@ -17,7 +17,11 @@ package me.ineson.demo.app;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import me.ineson.demo.service.SolarBody;
+import me.ineson.demo.service.SolarBodyEndpointClient;
+import me.ineson.demo.service.User;
 import me.ineson.demo.service.rest.SolarBodyRestClient;
 
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,7 +47,13 @@ public class MainController {
 
     @Autowired
     private Config config;
+ 
+    private SolarBodyEndpointClient SERVICE_ENDPOINT_CLIENT = new SolarBodyEndpointClient();
     
+    /**
+     * @param model
+     * @return
+     */
     @RequestMapping(value="/index", method = RequestMethod.GET)
     public String mainPage(Model model) {
  
@@ -61,20 +71,34 @@ public class MainController {
         return "index";
     }
 
+    /**
+     * @param form
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public @ResponseBody String login(@RequestBody LoginForm form) {
-        log.info( "User " + " attempting to login");
+    public @ResponseBody String login(@ModelAttribute("login") LoginForm form, HttpSession session) {
+        log.info( "User " + form.getUsername() + " attempting to login");
         String response = StringUtils.EMPTY;
-        SolarBodyRestClient client = new SolarBodyRestClient();
-        String serviceUrl = config.getStringManadtory( Config.SERVICE_REST_URL);
-        Long theSunId = config.getLongManadtory( Config.SOLAR_SYSTEM_CENTRE_ID);
- 
+        
+        String serviceUrl = config.getStringManadtory( Config.SERVICE_ENDPOINT_URL);
+        User user = SERVICE_ENDPOINT_CLIENT.login(serviceUrl, form.getUsername(), form.getPassword());
 
-        return "index";
+        if( user != null) {
+            session.setAttribute( SecurityContext.ATTRIBUTE_NAME, new SecurityContext(user));
+        } else {
+            response = "Login failed, username or password was incorrect.";
+        } 
+
+        return response;
     }
     
+    /**
+     * @param model
+     * @return
+     */
     @RequestMapping(value="/logout")
-    public String logpout(Model model) {
+    public String logout(Model model) {
  
         SolarBodyRestClient client = new SolarBodyRestClient();
         String serviceUrl = config.getStringManadtory( Config.SERVICE_REST_URL);

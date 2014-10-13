@@ -42,5 +42,5 @@
   <solarbodylink id="22" solarBodyId="9" linkType="Wiki" url="http://en.wikipedia.org/wiki/Neptune"/>
   <solarbodylink id="23" solarBodyId="9" linkType="NASA" url="http://solarsystem.nasa.gov/planets/profile.cfm?Object=Neptune"/>
   <user username="admin" password="admin" name="God!" role="Admin"/>
-  <user username="guest" name="Visitor" role="Guest"/>
+  <user username="guest" name="Guest" role="Guest"/>
 </dataset>

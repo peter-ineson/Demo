@@ -65,9 +65,7 @@ public class SolarBodyEndpointClient {
     }
 
     public User getGuestUser(String endpointUrl) {
-        User user = getPort(endpointUrl).getGuestUser();
-        log.info("guest return {}",user);
-        return user;
+        return getPort(endpointUrl).getGuestUser();
     }
 
     private SolarBodyService getPort( String endpointUrl) {

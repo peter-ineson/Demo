@@ -161,7 +161,7 @@ CREATE TABLE `User` (
 
 INSERT INTO `User` ( `username`, `password`, `name`, `role`)
   VALUES
-    ( 'guest',null,'Visitor','Guest'),
+    ( 'guest',null,'Guest','Guest'),
     ( 'admin','admin','God!','Admin');
 
 COMMIT;

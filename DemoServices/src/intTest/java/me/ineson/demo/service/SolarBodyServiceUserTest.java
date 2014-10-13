@@ -16,6 +16,7 @@ package me.ineson.demo.service;
 
 import me.ineson.testing.utils.GradleConfig;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -28,15 +29,46 @@ public class SolarBodyServiceUserTest {
     private final static String ENDPOINT_URL = GradleConfig.getProperty("DemoService.intTest.solarBodyServiceEndpointUrl");
 
     private SolarBodyEndpointClient client = new SolarBodyEndpointClient();
-    
+
     @Test
     public void testgetGuestUser() {
 
-        log.info("WSDL file: " + ENDPOINT_URL);
         User user = client.getGuestUser(ENDPOINT_URL);
         log.info("Guest user: {}", user);
 
         Assert.assertNotNull("Guest user", user);
+        Assert.assertEquals("username", me.ineson.demo.service.db.domain.User.GUEST_USERNAME, user.getUsername());
+        Assert.assertNull("password", user.getPassword());
+        Assert.assertEquals("role", UserRole.GUEST, user.getRole());
+        Assert.assertTrue("name not empty", StringUtils.isNotEmpty(user.getName()));
     }
 
+    @Test
+    public void testLoginInvalidParameters() {
+        User user = client.login(ENDPOINT_URL, null, null);
+        Assert.assertNull("all null", user);
+
+        user = client.login(ENDPOINT_URL, "blah", null);
+        Assert.assertNull("null password", user);
+
+        user = client.login(ENDPOINT_URL, null, "blah");
+        Assert.assertNull("null username", user);
+    }
+
+    @Test
+    public void testLoginInvalidPassaword() {
+        User user = client.login(ENDPOINT_URL, "admin", "blah");
+        Assert.assertNull("invalid password", user);
+    }
+    
+    @Test
+    public void testLoginSuccess() {
+        User user = client.login(ENDPOINT_URL, "admin", "admin");
+        log.info("Admin user: {}", user);
+        Assert.assertNotNull("admin user", user);
+        Assert.assertEquals("username", "admin", user.getUsername());
+        Assert.assertNull("password", user.getPassword());
+        Assert.assertEquals("role", UserRole.ADMIN, user.getRole());
+        Assert.assertTrue("name not empty", StringUtils.isNotEmpty(user.getName()));
+    }
 }

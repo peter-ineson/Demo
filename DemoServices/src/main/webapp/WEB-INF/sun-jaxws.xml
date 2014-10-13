@@ -15,9 +15,12 @@
 <endpoints
   xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime"
   version="2.0">
+
   <endpoint
       name="SolarBodyService"
       implementation="me.ineson.demo.service.SolarBodyServiceImpl"
       binding="http://java.sun.com/xml/ns/jaxws/2003/05/soap/bindings/HTTP/"
       url-pattern="/solarBodyService"/>
+
 </endpoints>
+       

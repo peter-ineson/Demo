@@ -16,13 +16,11 @@ package me.ineson.demo.service;
 
 import java.util.List;
 
-import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.Style;
 import javax.jws.soap.SOAPBinding.Use;
 
-import me.ineson.demo.service.db.domain.SolarBody;
 import me.ineson.demo.service.db.repo.jpa.SolarBodyRepository;
 import me.ineson.demo.service.db.repo.jpa.UserRepository;
 import me.ineson.demo.service.db.repo.mongo.SuggestionRepository;
@@ -64,7 +62,6 @@ public class SolarBodyServiceImpl extends SpringBeanAutowiringSupport implements
         log.info("Post Validate injection, repo sug" + suggestionRepository);
     }
 
-    @WebMethod
     public List<Suggestion> listSuggestedUpdates(Long planetId) {
         validateInjection();
         // TODO: Rest API?
@@ -73,7 +70,6 @@ public class SolarBodyServiceImpl extends SpringBeanAutowiringSupport implements
         return null;
     }
 
-    @WebMethod
     public Long countSuggestedUpdates() {
         //validateInjection();
         // TODO: Rest API?
@@ -81,13 +77,7 @@ public class SolarBodyServiceImpl extends SpringBeanAutowiringSupport implements
         return suggestionRepository.count();
     }
 
-    @WebMethod
-    public void acceptSuggestedUpdate(String suggestionId, SolarBody planet) {
-        validateInjection();
 
-    }
-
-    @WebMethod
     public void rejectSuggestedUpdate(String suggestionId) {
         validateInjection();
 
@@ -108,10 +98,10 @@ public class SolarBodyServiceImpl extends SpringBeanAutowiringSupport implements
     @Override
     public User login(String username, String password) {
         me.ineson.demo.service.db.domain.User loginUser = null;
-        log.debug( "Checkin login details of username {}", username);
+        log.debug( "Checking login details of username {}", username);
         
         if( StringUtils.isNotBlank( username) && StringUtils.isNotBlank( password)) {
-            loginUser = userRepository.findOne( me.ineson.demo.service.db.domain.User.GUEST_USERNAME);
+            loginUser = userRepository.findOne( username);
 
             // If user was found, but the password was incorrect.
             if( loginUser != null && ! password.equals( loginUser.getPassword())) {
@@ -125,7 +115,6 @@ public class SolarBodyServiceImpl extends SpringBeanAutowiringSupport implements
 
     @Override
     public User getGuestUser() {
-        
         me.ineson.demo.service.db.domain.User guestUser = userRepository.findOne( me.ineson.demo.service.db.domain.User.GUEST_USERNAME);
         log.info("Found guest user {}", guestUser);
         Assert.notNull(guestUser, "Guest user");
@@ -134,5 +123,5 @@ public class SolarBodyServiceImpl extends SpringBeanAutowiringSupport implements
         log.info("Converted guest user {}", user);
         return user;
     }
-
+    
 }

@@ -56,24 +56,25 @@
 		   <li><a href='#'><span>About</span></a></li>
 		   <li class='last'><a href='#'><span>Contact</span></a></li>
 		   <li class="position-right">
-		     <a href='#'><span>Guest</span></a>
+		     <a href='#'><span><c:out value="${security.user.name}"></c:out></span></a>
 		      <ul>
-		         <li><a id="menuOption_login" href='#' style="width: 35px;"><span>Login</span></a></li>
+		         <c:if test="${security.guest}"><li><a id="menuOption_login" href='#' style="width: 35px;"><span>Login</span></a></li></c:if>
+             <c:if test="${not security.guest}"><li><a id="menuOption_login" href='#' style="width: 35px;"><span>Logout</span></a></li></c:if>
 		      </ul>
 		   </li>
 		</ul>
 		</div>
     <div id="menuBackground">
     </div>  
-
-		<div id="login-form" title="Login">
+<p>:${security.guest}:${security.admin}:${security.user}:${security.user.username}:${security.user.name}:</p>
+		<div id="login-dialog" title="Login">
 		  <p class="validateTips">Enter your username and password.</p>
-		  <form >
+		  <form id="login-form" name="login">
 		    <fieldset>
 		      <label for="name">Username</label>
 		      <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
 		      <label for="password">Password</label>
-		      <input type="password" name="password" id="password" class="text ui-widget-content ui-corner-all">
+		      <input type="password" name="login.password" id="password" class="text ui-widget-content ui-corner-all">
 		      <!-- Allow form submission with keyboard without duplicating the dialog button -->
 		      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 		    </fieldset>
@@ -128,7 +129,7 @@
           }
         }
 
-        function addUser() {
+        function loginUser() {
           var valid = true;
 
           allFields.removeClass( "ui-state-error" );
@@ -137,20 +138,35 @@
           valid = valid && checkMadatory( password, "Password");
 
           if ( valid ) {
-            alert( "submit form");
-            dialog.dialog( "close");
+          	var datastring = $("#login-form").serialize();
+          	$.ajax({
+          	            type: "POST",
+          	            url: "app/login",
+          	            data: datastring,
+          	            success: function(data) {
+          	              alert("data: " + data);
+          	            	if( data == "") {
+          	            		location.reload();
+          	            	} else {
+          	                updateTips( data);
+          	            	}
+          	            },
+          	            error: function(){
+          	                  alert('error handing here');
+          	            }
+          	        });          	
           }
 
           return valid;
         }
 
-        dialog = $( "#login-form" ).dialog({
+        dialog = $( "#login-dialog" ).dialog({
           autoOpen: false,
           height: 300,
           width: 350,
           modal: true,
           buttons: {
-            "Login": addUser,
+            "Login": loginUser,
             Cancel: function() {
               dialog.dialog( "close" );
             }
@@ -162,12 +178,13 @@
 
         form = dialog.find( "form" ).on( "submit", function( event ) {
           event.preventDefault();
-          alert("Logging in");
+          loginUser();
         });
 
     	
       $( "#menuOption_login" ).on( "click", function() {
-        dialog.dialog( "open" );
+      	resetForm();
+      	dialog.dialog( "open" );
       });
     });
 

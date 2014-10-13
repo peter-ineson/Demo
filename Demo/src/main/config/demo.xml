@@ -4,6 +4,8 @@
       <!-- Is hopefully the Sun -->
       <centreSolarBodyId>1</centreSolarBodyId>
     </solarSystem>
+    <solarBodyServiceEndpointUrl>http://localhost:8080/DemoServices/solarBodyService</solarBodyServiceEndpointUrl>
     <serviceRestUrl>http://localhost:8080/DemoServices/rest</serviceRestUrl>
   </DemoApp>
-</config> 
+</config>
+ 

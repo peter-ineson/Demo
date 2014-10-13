@@ -30,6 +30,8 @@ public class Config {
 
     public static final String SERVICE_REST_URL = "serviceRestUrl";
     
+    public static final String SERVICE_ENDPOINT_URL = "solarBodyServiceEndpointUrl";
+
     public static final String SOLAR_SYSTEM_CENTRE_ID = "solarSystem.centreSolarBodyId";
 
     /**
