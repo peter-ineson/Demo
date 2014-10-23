@@ -134,7 +134,7 @@ public class ConfigTest {
     @Test
     public void testGetLongManadtoryFail() {
         AbstractConfiguration mockAbstractConfiguration = mock(XMLConfiguration.class);
-        Long nullValue = null;
+
         when(mockAbstractConfiguration.getLong("testAppF.key3", null)).thenReturn(null);
         Config config = new Config("testAppF", mockAbstractConfiguration);
 

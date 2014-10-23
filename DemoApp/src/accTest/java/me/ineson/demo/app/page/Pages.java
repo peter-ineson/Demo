@@ -12,23 +12,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package me.ineson.demo.app;
+package me.ineson.demo.app.page;
 
-import lombok.Getter;
-import lombok.Setter;
+import org.jbehave.web.selenium.WebDriverProvider;
 
 /**
  * @author peter
  *
  */
-public class LoginForm {
-
-    @Getter@Setter private String username;
-
-    @Getter@Setter private String password;
-
-    @Override
-    public String toString() {
-        return String.format("LoginForm [username=%s]", username);
+public class Pages {
+    private final WebDriverProvider driverProvider;
+    private Home home;
+ 
+    public Pages(WebDriverProvider driverProvider) {
+        this.driverProvider = driverProvider;
     }
+ 
+    public Home home(){
+        if ( home == null ){
+            home = new Home(driverProvider);
+        }
+        return home;
+    }
+ 
 }

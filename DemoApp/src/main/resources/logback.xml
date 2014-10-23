@@ -21,7 +21,7 @@
   </appender>
   
   <logger name="me.ineson" level="debug"/>
-  
+
   <!-- 
   <logger name="com.sun.jersey" level="trace"/>
   <logger name="org.springframework" level="debug"/>

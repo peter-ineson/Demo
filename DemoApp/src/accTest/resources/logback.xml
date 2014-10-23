@@ -22,6 +22,8 @@
   
   <logger name="me.ineson" level="debug"/>
   
+  <logger name="org.jbehave" level="trace"/>
+
   <!-- 
   <logger name="com.sun.jersey" level="trace"/>
   <logger name="org.springframework" level="debug"/>

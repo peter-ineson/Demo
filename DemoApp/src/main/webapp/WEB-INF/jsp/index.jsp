@@ -31,12 +31,23 @@
 
    </style>
 
-
    <script src='<c:url value="/js/cssMenu.js" />'></script>
      
     <script type="text/javascript">
-        $(document).ready(function() {
-        });
+
+      function logoutUser() {
+        $.ajax({
+            type: "GET",
+            url: "app/logout",
+            complete: function() {
+              location.reload();
+            }
+        });           
+      }
+    
+      $(document).ready(function() {
+        $("#menuOption_logout" ).on("click", logoutUser);
+      });
     </script>
 
   </head>
@@ -56,25 +67,25 @@
 		   <li><a href='#'><span>About</span></a></li>
 		   <li class='last'><a href='#'><span>Contact</span></a></li>
 		   <li class="position-right">
-		     <a href='#'><span><c:out value="${security.user.name}"></c:out></span></a>
+		     <a href='#'><span id="securityUserName"><c:out value="${security.user.name}"></c:out></span></a>
 		      <ul>
 		         <c:if test="${security.guest}"><li><a id="menuOption_login" href='#' style="width: 35px;"><span>Login</span></a></li></c:if>
-             <c:if test="${not security.guest}"><li><a id="menuOption_login" href='#' style="width: 35px;"><span>Logout</span></a></li></c:if>
+             <c:if test="${not security.guest}"><li><a id="menuOption_logout" href='#' style="width: 35px;"><span>Logout</span></a></li></c:if>
 		      </ul>
 		   </li>
 		</ul>
 		</div>
     <div id="menuBackground">
     </div>  
-<p>:${security.guest}:${security.admin}:${security.user}:${security.user.username}:${security.user.name}:</p>
-		<div id="login-dialog" title="Login">
+
+		<div id="login-dialog" title="Login" class="hidden">
 		  <p class="validateTips">Enter your username and password.</p>
 		  <form id="login-form" name="login">
 		    <fieldset>
 		      <label for="name">Username</label>
-		      <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
+		      <input type="text" name="username" id="username" class="text ui-widget-content ui-corner-all">
 		      <label for="password">Password</label>
-		      <input type="password" name="login.password" id="password" class="text ui-widget-content ui-corner-all">
+		      <input type="password" name="password" id="password" class="text ui-widget-content ui-corner-all">
 		      <!-- Allow form submission with keyboard without duplicating the dialog button -->
 		      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
 		    </fieldset>
@@ -85,9 +96,9 @@
 		
     	$(function() {
         var dialog, form,
-          name = $( "#name" ),
+          username = $( "#username" ),
           password = $( "#password" ),
-          allFields = $( [] ).add( name ).add( password ),
+          allFields = $( [] ).add( username ).add( password ),
 
           tips = $( ".validateTips" );
 
@@ -104,7 +115,7 @@
           tips
             .text( "Enter your username and password." )
             .removeClass( "ui-state-highlight");
-          name.val("");
+          username.val("");
           password.val("");
         }
 
@@ -134,7 +145,7 @@
 
           allFields.removeClass( "ui-state-error" );
 
-          valid = valid && checkMadatory( name, "Username");
+          valid = valid && checkMadatory( username, "Username");
           valid = valid && checkMadatory( password, "Password");
 
           if ( valid ) {
@@ -144,7 +155,6 @@
           	            url: "app/login",
           	            data: datastring,
           	            success: function(data) {
-          	              alert("data: " + data);
           	            	if( data == "") {
           	            		location.reload();
           	            	} else {
@@ -182,12 +192,13 @@
         });
 
     	
-      $( "#menuOption_login" ).on( "click", function() {
-      	resetForm();
-      	dialog.dialog( "open" );
+        $( "#menuOption_login" ).on( "click", function() {
+        	resetForm();
+        	dialog.dialog( "open" );
+        });
       });
-    });
 
+    	
 		</script>
   </body>
 </html>

@@ -47,6 +47,13 @@ dependencies {
     [ "org.springframework:spring-instrument:4.0.5.RELEASE" ]
   )
 //  javaAgentSpringInstrument "org.springframework:spring-instrument:4.0.5.RELEASE"
+
+  testCompile(
+//    [ "org.jbehave:jbehave-core:4.+" ],
+//    [ "org.jbehave.web:jbehave-web:3.5.+" ]
+    [ "org.jbehave.web:jbehave-web-selenium:3.6+" ],
+    [ "org.jbehave.web:jbehave-web-selenium-java-spring-archetype:3.6+" ]
+  )
 }
 
 
@@ -54,6 +61,8 @@ configurations {
     javaAgentSpringInstrument
     intTestCompile.extendsFrom testCompile
     intTestRuntime.extendsFrom testRuntime
+    accTestCompile.extendsFrom testCompile
+    accTestRuntime.extendsFrom testRuntime
 }
 
 sourceSets {
@@ -63,6 +72,12 @@ sourceSets {
         compileClasspath += sourceSets.main.output + sourceSets.test.output
 //        compileClasspath = sourceSets.main.output + configurations.intTest
 //        runtimeClasspath = output + compileClasspath
+    }
+    accTest {
+        java.srcDir file('src/accTest/java')
+        resources.srcDir file('src/accTest/resources') 
+        resources.srcDir file('src/accTest/stories') 
+        compileClasspath += sourceSets.main.output + sourceSets.test.output
     }
 }
 
@@ -112,6 +127,34 @@ task intTestReport(dependsOn: jar, type: TestReport) {
   destinationDir = file("$buildDir/reports/intTests")
   // Include the results from the `test` task in all subprojects
   //reportOn subprojects*.test
+}
+
+
+task accTest(type: Test) {
+
+    systemProperty "browser", "chrome"
+    systemProperty "webdriver.chrome.driver", "C:\\Users\\peter\\Downloads\\chromedriver_win32\\chromedriver.exe"
+//    systemProperty "browser", "ie"
+//    systemProperty "webdriver.ie.driver", "C:\\Users\\peter\\Downloads\\IEDriverServer_x64_2.43.0\\IEDriverServer.exe"
+
+    ignoreFailures = true
+    doFirst {
+        // Need 'target' directory on *nix systems to get any output
+        //file('target').mkdirs()
+     
+        def filter = System.getProperty('bdd.stories') 
+        if (filter == null) {
+          filter = '*'
+        }
+        def stories = sourceSets.test.resources.matching { 
+          it.include filter
+        }.asPath
+        systemProperty('bdd.stories', stories)
+    }
+
+    testClassesDir = sourceSets.accTest.output.classesDir
+    classpath += sourceSets.accTest.runtimeClasspath
+//    systemProperty "DemoApp.intTest.serviceRestUrl", System.properties['DemoApp.intTest.serviceRestUrl']  
 }
 
 buildscript {
@@ -212,4 +255,6 @@ task callTc << {
 
 callTc.dependsOn deployWar
 intTest.dependsOn callTc
+
+accTest.dependsOn callTc
 
