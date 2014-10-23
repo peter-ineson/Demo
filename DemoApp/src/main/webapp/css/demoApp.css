@@ -3,6 +3,11 @@ body {
      background-image: url('../images/Starry-Sky.jpg');
 } 
     
+.hidden {
+  display: none;
+}
+
+
 #menuBackground {
   position: absolute;
   left: 0px;

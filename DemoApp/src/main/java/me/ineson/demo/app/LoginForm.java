@@ -23,7 +23,12 @@ import lombok.Setter;
  */
 public class LoginForm {
 
-    @Getter @Setter private String username;
+    @Getter@Setter private String username;
 
-    @Getter @Setter private String password;
+    @Getter@Setter private String password;
+
+    @Override
+    public String toString() {
+        return String.format("LoginForm [username=%s]", username);
+    }
 }

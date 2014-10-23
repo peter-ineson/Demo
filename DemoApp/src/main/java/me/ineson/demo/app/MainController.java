@@ -98,20 +98,9 @@ public class MainController {
      * @return
      */
     @RequestMapping(value="/logout")
-    public String logout(Model model) {
- 
-        SolarBodyRestClient client = new SolarBodyRestClient();
-        String serviceUrl = config.getStringManadtory( Config.SERVICE_REST_URL);
-        Long theSunId = config.getLongManadtory( Config.SOLAR_SYSTEM_CENTRE_ID);
- 
-        SolarBody theSun = client.findById( serviceUrl, theSunId);
-        Assert.notNull(theSun, "Lookup of Sun id " + theSunId);
-        List<SolarBody>planets = client.findOrbitingBody( serviceUrl, theSunId);
-
-        model.addAttribute("sun", theSun);
-        model.addAttribute("planets", planets);
- 
-        return "index";
+    public @ResponseBody void logout(HttpSession session) {
+        log.info( "User " + session.getAttribute(SecurityContext.ATTRIBUTE_NAME) + " is logging out");
+        session.invalidate();
     }
 
 }

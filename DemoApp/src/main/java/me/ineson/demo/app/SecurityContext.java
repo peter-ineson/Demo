@@ -54,4 +54,7 @@ public class SecurityContext {
         return (user != null && user.getRole() == UserRole.ADMIN);
     }
 
+    public String getUsername() {
+        return (user == null) ? null : user.getUsername();
+    }
 }
