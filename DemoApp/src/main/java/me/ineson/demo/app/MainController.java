@@ -56,6 +56,7 @@ public class MainController {
      */
     @RequestMapping(value="/index", method = RequestMethod.GET)
     public String mainPage(Model model) {
+        log.info("########################### Index");
  
         SolarBodyRestClient client = new SolarBodyRestClient();
         String serviceUrl = config.getStringManadtory( Config.SERVICE_REST_URL);
@@ -68,6 +69,7 @@ public class MainController {
         model.addAttribute("sun", theSun);
         model.addAttribute("planets", planets);
  
+        log.info("########################### Index - end");
         return "index";
     }
 

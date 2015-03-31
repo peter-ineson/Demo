@@ -1,6 +1,18 @@
 
 apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
+apply plugin: 'sonar-runner'
+
+
+sonarRunner {
+    sonarProperties {
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.jdbc.url", "jdbc:mysql://localhost/sonar"
+        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+        property "sonar.jdbc.username", "sonar"
+        property "sonar.jdbc.password", "sonar"
+    }
+}
 
 
 configurations {  

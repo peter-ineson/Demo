@@ -64,6 +64,16 @@
 		         </c:forEach>
 		      </ul>
 		   </li>
+		   <c:if test="${security.admin}">
+	       <li class='active has-sub'><a href='#'><span>Edit</span></a>
+	          <ul>
+	             <li><a href='#'><span><c:out value="${sun.name}"/></span></a></li>
+	             <c:forEach items="${planets}" var="planet">
+	               <li><a href='#'><span><c:out value="${planet.name}"/></span></a></li>
+	             </c:forEach>
+	          </ul>
+	       </li>
+		   </c:if>
 		   <li><a href='#'><span>About</span></a></li>
 		   <li class='last'><a href='#'><span>Contact</span></a></li>
 		   <li class="position-right">
@@ -200,5 +210,7 @@
 
     	
 		</script>
+		
+		:security.admin=${security.admin}:security.guest=${security.guest}:
   </body>
 </html>

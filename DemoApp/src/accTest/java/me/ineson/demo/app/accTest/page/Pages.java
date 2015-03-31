@@ -12,26 +12,46 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package me.ineson.demo.app.page;
+package me.ineson.demo.app.accTest.page;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.jbehave.web.selenium.WebDriverProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author peter
  *
  */
+@Named
 public class Pages {
-    private final WebDriverProvider driverProvider;
+    
+    private static final Logger log = LoggerFactory.getLogger(Pages.class);
+    
+    private WebDriverProvider driverProvider;
+    private boolean driverInitialised = false;
+    
+    @Inject
     private Home home;
  
+    @Inject
     public Pages(WebDriverProvider driverProvider) {
+        log.info( "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd " + driverProvider);
         this.driverProvider = driverProvider;
     }
  
     public Home home(){
+        /*
         if ( home == null ){
             home = new Home(driverProvider);
         }
+        if( !driverInitialised) {
+            driverProvider.initialize();
+            driverInitialised = true;
+        }
+        */
         return home;
     }
  

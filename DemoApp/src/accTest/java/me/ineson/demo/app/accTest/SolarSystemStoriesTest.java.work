@@ -29,10 +29,14 @@ import me.ineson.demo.app.page.Pages;
 import me.ineson.demo.app.steps.SolarSystemSteps;
 
 import org.jbehave.core.Embeddable;
+import org.jbehave.core.annotations.UsingEmbedder;
+import org.jbehave.core.annotations.UsingSteps;
 import org.jbehave.core.configuration.Configuration;
+import org.jbehave.core.embedder.Embedder;
 import org.jbehave.core.embedder.executors.SameThreadExecutors;
 import org.jbehave.core.io.LoadFromClasspath;
 import org.jbehave.core.io.StoryFinder;
+import org.jbehave.core.junit.AnnotatedEmbedderRunner;
 import org.jbehave.core.junit.JUnitStories;
 import org.jbehave.core.reporters.StoryReporterBuilder;
 import org.jbehave.core.steps.InjectableStepsFactory;
@@ -48,6 +52,7 @@ import org.jbehave.web.selenium.SeleniumStepMonitor;
 import org.jbehave.web.selenium.WebDriverProvider;
 import org.jbehave.web.selenium.WebDriverScreenshotOnFailure;
 import org.jbehave.web.selenium.WebDriverSteps;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

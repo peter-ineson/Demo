@@ -12,10 +12,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package me.ineson.demo.app.page;
+package me.ineson.demo.app.accTest.page;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import me.ineson.demo.service.db.domain.User;
+import me.ineson.demo.service.db.repo.jpa.UserRepository;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.jbehave.web.selenium.WebDriverProvider;
@@ -29,30 +35,36 @@ import org.slf4j.LoggerFactory;
  * @author peter
  *
  */
+@Named
 public class Home extends AbstractPage {
     
-    private static final Logger log = LoggerFactory.getLogger( Home.class); 
+    private static final Logger log = LoggerFactory.getLogger( Home.class);
+    
+    @Inject
+    private UserRepository userRepository;
         
+    @Inject
     public Home(WebDriverProvider driverProvider) {
         super(driverProvider);
         log.info("############################### home");
     }
 
     public void open() {
+        log.info("############################### userRepository " + userRepository);
+        
         get("http://localhost:8080/DemoApp");
         manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         log.info("############################### open 3");
     }
 
     public void dashBoardLoaded() {
-        log.info("############################### dashBoardLoaded 1");
         WebElement element = findElement(By.id("cssmenu"));
         if (element == null) {
             Assert.fail("dashboard not loaded, main menu not loaded.");
         }
     }
 
-    public void loginUserName(String nameOfUser) {
+    public void loginUserName(String username) {
         List<WebElement> elements = findElements(By.id("securityUserName"));
         if (CollectionUtils.isEmpty(elements)) {
             Assert.fail("User's name not found.");
@@ -61,7 +73,15 @@ public class Home extends AbstractPage {
             Assert.fail("Too many User's name not found.");
         }
         WebElement element = elements.get(0);
-        Assert.assertEquals("User's name mismatch.", nameOfUser, element.getText());
+        
+        // Now lookup the user
+        User user = userRepository.findOne(username);
+        log.info("############################### user: " + user);
+        log.info("############################### user: " + user.getUsername());
+        log.info("############################### user: " + user.getName());
+        Assert.assertNotNull("Failed to find user with username " + username, user);
+        
+        Assert.assertEquals("User's name mismatch.", user.getName(), element.getText());
     }
 
     public void find(String step) {
