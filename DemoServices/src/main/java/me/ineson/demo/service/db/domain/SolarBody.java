@@ -31,6 +31,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -45,7 +46,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * Entity implementation class for Entity: Planet
  *
  */
-@Entity(name="SolarBody")
+@Entity
+@Table(name="SolarBody")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SolarBody implements Serializable {

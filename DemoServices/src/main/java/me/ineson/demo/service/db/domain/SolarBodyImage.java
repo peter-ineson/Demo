@@ -23,6 +23,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
@@ -35,7 +36,8 @@ import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
  * Entity implementation class for Entity: Planet
  *
  */
-@Entity(name="SolarBodyImage")
+@Entity
+@Table(name="SolarBodyImage")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SolarBodyImage implements Serializable {
 
