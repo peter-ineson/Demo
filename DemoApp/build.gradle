@@ -49,8 +49,23 @@ dependencies {
       [ "org.jbehave.web:jbehave-web-selenium-java-spring-archetype:3.+" ],
       [ project(":DemoServices") ]
   )
+
+  testCompile(
+//    [ "org.jbehave:jbehave-core:4.+" ],
+//    [ "org.jbehave.web:jbehave-web:3.5.+" ]
+    [ "org.jbehave.web:jbehave-web-selenium:3.6+" ],
+    [ "org.jbehave.web:jbehave-web-selenium-java-spring-archetype:3.6+" ]
+  )
 }
 
+
+configurations {  
+    javaAgentSpringInstrument
+    intTestCompile.extendsFrom testCompile
+    intTestRuntime.extendsFrom testRuntime
+    accTestCompile.extendsFrom testCompile
+    accTestRuntime.extendsFrom testRuntime
+}
 
 sourceSets {
     intTest {
