@@ -62,7 +62,7 @@ task deployWar(dependsOn: war) << {
 
 dependencies {
   providedCompile "javax.servlet:javax.servlet-api:3.1.0"
-  providedCompile "org.projectlombok:lombok:1.14.+"
+  providedCompile "org.projectlombok:lombok:1.16.+"
 	compile(
     [ "javax.transaction:javax.transaction-api:1.2" ],
 	  [ "org.eclipse.persistence:javax.persistence:2.1.0" ],
