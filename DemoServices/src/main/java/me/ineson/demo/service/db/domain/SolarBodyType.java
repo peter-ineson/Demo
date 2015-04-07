@@ -20,5 +20,6 @@ package me.ineson.demo.service.db.domain;
  */
 public enum SolarBodyType {
     Sun,
-    Planet
+    Planet,
+    DwarfPlanet
 }

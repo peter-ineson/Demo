@@ -21,6 +21,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +30,8 @@ import lombok.Setter;
  * Entity implementation class for Entity: User
  *
  */
-@Entity(name="User")
+@Entity
+@Table(name="User")
 public class User implements Serializable {
 
     public static final String GUEST_USERNAME = "guest";

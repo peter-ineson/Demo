@@ -26,6 +26,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -34,7 +35,8 @@ import lombok.Setter;
  * Entity implementation class for Entity: Planet
  *
  */
-@Entity(name="SolarBodyLink")
+@Entity
+@Table(name="SolarBodyLink")
 public class SolarBodyLink implements Serializable {
 
 	private static final long serialVersionUID = 1L;
