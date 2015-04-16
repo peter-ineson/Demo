@@ -1,7 +1,21 @@
 
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "http://repository.codehaus.org"}
+    }
+    dependencies {
+        classpath(
+            [ "org.codehaus.groovy.modules.http-builder:http-builder:0.7.+"],
+            [ "net.serenity-bdd:serenity-gradle-plugin:1.0.+" ]
+        ) 
+        
+    }
+}
+
 apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
-
+apply plugin: 'net.serenity-bdd.aggregator'
 
 configurations {  
     javaAgentSpringInstrument
@@ -11,6 +25,7 @@ configurations {
     accTestRuntime.extendsFrom testRuntime
 }
 
+
 dependencies {
   providedCompile "javax.servlet:javax.servlet-api:3.1.0"
   providedCompile "org.projectlombok:lombok:1.16.+"
@@ -19,19 +34,28 @@ dependencies {
     [ "commons-configuration:commons-configuration:1.+" ],
     [ "commons-collections:commons-collections:3.2.+" ],
     [ "org.springframework:spring-webmvc:4.0.5.RELEASE" ],
-    [ "org.glassfish.web:javax.servlet.jsp.jstl:1.2+" ],
     [ "org.webjars:bootstrap:3.1+" ],
     [ "org.webjars:jquery:2.1.1" ],
     [ "org.webjars:jquery-ui:1.11.1" ],
     [ "org.webjars:jquery-ui-themes:1.11.0" ],
     [ project(":DemoServicesApi") ]
   )
+  compile( "org.glassfish.web:javax.servlet.jsp.jstl:1.2+") {
+    exclude module: 'servlet-api'
+    exclude module: 'jsp-api'
+  }
   compile( "com.sun.xml.ws:jaxws-rt:2.2.1") {
     exclude module: 'junit'
   }
 
   testCompile(
-    [ project(":TestingFramework") ]
+    [ project(":TestingFramework") ],
+    [ "net.serenity-bdd:core:1.0.+" ],
+    [ "net.serenity-bdd:serenity-junit:1.0.+" ],
+    [ "net.serenity-bdd:serenity-cucumber:1.0.+" ],
+    [ "net.serenity-bdd:serenity-jbehave:1.0.+" ],
+    [ "org.assertj:assertj-core:1.7.+" ],
+    [ "org.slf4j:slf4j-simple:1.+" ]
   )
   testRuntime(
     [ "mysql:mysql-connector-java:5.1.31" ],
@@ -58,14 +82,8 @@ dependencies {
   )
 }
 
+gradle.startParameter.continueOnFailure = true
 
-configurations {  
-    javaAgentSpringInstrument
-    intTestCompile.extendsFrom testCompile
-    intTestRuntime.extendsFrom testRuntime
-    accTestCompile.extendsFrom testCompile
-    accTestRuntime.extendsFrom testRuntime
-}
 
 sourceSets {
     intTest {
@@ -110,7 +128,8 @@ eclipse {
 }
 
 task deployWar(dependsOn: war) << {
-  ant.unwar(src: war.archivePath, dest: 'D:\\Apps\\tomcat\\apache-tomcat-8.0.17\\webapps\\'+project.archivesBaseName) 
+  ant.unwar(src: war.archivePath, dest: '/home/peter/Apps/tomcat/apache-tomcat-8.0.21/webapps/'+project.archivesBaseName) 
+//  ant.unwar(src: war.archivePath, dest: 'D:\\Apps\\tomcat\\apache-tomcat-8.0.17\\webapps\\'+project.archivesBaseName) 
 }
 
 tasks.withType(Test) {
@@ -135,7 +154,7 @@ task intTestReport(dependsOn: jar, type: TestReport) {
 task accTest(type: Test) {
 
     systemProperty "browser", "chrome"
-    systemProperty "webdriver.chrome.driver", "C:\\Users\\peter\\Downloads\\chromedriver_win32\\chromedriver.exe"
+//    systemProperty "webdriver.chrome.driver", "C:\\Users\\peter\\Downloads\\chromedriver_win32\\chromedriver.exe"
 //    systemProperty "browser", "ie"
 //    systemProperty "webdriver.ie.driver", "C:\\Users\\peter\\Downloads\\IEDriverServer_x64_2.43.0\\IEDriverServer.exe"
 
@@ -165,18 +184,6 @@ task accTest(type: Test) {
 //    systemProperty "DemoApp.intTest.serviceRestUrl", System.properties['DemoApp.intTest.serviceRestUrl']  
 }
 
-buildscript {
-    repositories {
-        mavenCentral()
-        maven { url "http://repository.codehaus.org"}
-    }
-    dependencies {
-        classpath(
-            [ "org.codehaus.groovy.modules.http-builder:http-builder:0.7.+" ]
-        ) 
-        
-    }
-}
 
 import groovyx.net.http.HTTPBuilder
 import static groovyx.net.http.Method.GET

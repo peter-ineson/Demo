@@ -7,7 +7,6 @@ USE `SolarSystem`;
 -- CREATE SCHEMA `SolarSystemTest`;
 -- USE `SolarSystemTest`;
 
-
 CREATE TABLE `SolarBody` ( 
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` CHAR(40) NOT NULL,

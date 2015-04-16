@@ -57,7 +57,8 @@ sourceSets {
 
 
 task deployWar(dependsOn: war) << {
-  ant.unwar(src: war.archivePath, dest: 'D:\\Apps\\tomcat\\apache-tomcat-8.0.17\\webapps\\'+project.archivesBaseName) 
+  ant.unwar(src: war.archivePath, dest: '/home/peter/Apps/tomcat/apache-tomcat-8.0.21/webapps/'+project.archivesBaseName)
+//  ant.unwar(src: war.archivePath, dest: 'D:\\Apps\\tomcat\\apache-tomcat-8.0.17\\webapps\\'+project.archivesBaseName) 
 }
 
 dependencies {
