@@ -12,7 +12,7 @@ CREATE TABLE `SolarBody` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` CHAR(40) NOT NULL,
   `orbitSolarBodyId` INT,
-  `bodyType` enum('Sun','Planet') NOT NULL,
+  `bodyType` enum('Sun','Planet','DwarfPlanet') NOT NULL,
   `description` VARCHAR(4000) NOT NULL,
   `radius` BIGINT NOT NULL,
   `mass` FLOAT NOT NULL,

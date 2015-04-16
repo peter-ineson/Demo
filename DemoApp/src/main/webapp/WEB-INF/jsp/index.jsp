@@ -77,7 +77,7 @@
 		   <li><a href='#'><span>About</span></a></li>
 		   <li class='last'><a href='#'><span>Contact</span></a></li>
 		   <li class="position-right">
-		     <a href='#'><span id="securityUserName"><c:out value="${security.user.name}"></c:out></span></a>
+		     <a id="menuOption_username" href='#'><span id="securityUserName"><c:out value="${security.user.name}"></c:out></span></a>
 		      <ul>
 		         <c:if test="${security.guest}"><li><a id="menuOption_login" href='#' style="width: 35px;"><span>Login</span></a></li></c:if>
              <c:if test="${not security.guest}"><li><a id="menuOption_logout" href='#' style="width: 35px;"><span>Logout</span></a></li></c:if>
