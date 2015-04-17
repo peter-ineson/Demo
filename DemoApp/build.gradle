@@ -64,7 +64,8 @@ dependencies {
   javaAgentSpringInstrument "org.springframework:spring-instrument:4.0.5.RELEASE"
 
 
-  accTestCompile(
+  // TODO: "accTestCompile(" - note currently the eclipse plugin does not pick up the acceptance test classpath
+  testCompile(
     [ "net.serenity-bdd:core:1.0.+" ],
     [ "net.serenity-bdd:serenity-junit:1.0.+" ],
     [ "net.serenity-bdd:serenity-cucumber:1.0.+" ],
