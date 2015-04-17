@@ -54,13 +54,7 @@ dependencies {
   }
 
   testCompile(
-    [ project(":TestingFramework") ],
-    [ "net.serenity-bdd:core:1.0.+" ],
-    [ "net.serenity-bdd:serenity-junit:1.0.+" ],
-    [ "net.serenity-bdd:serenity-cucumber:1.0.+" ],
-    [ "net.serenity-bdd:serenity-jbehave:1.0.+" ],
-    [ "org.assertj:assertj-core:1.7.+" ],
-    [ "org.slf4j:slf4j-simple:1.+" ]
+    [ project(":TestingFramework") ]
   )
   testRuntime(
     [ "mysql:mysql-connector-java:5.1.31" ],
@@ -69,22 +63,15 @@ dependencies {
   )
   javaAgentSpringInstrument "org.springframework:spring-instrument:4.0.5.RELEASE"
 
-  testCompile(
-      [ "org.jbehave:jbehave-spring:3.9+" ],
-//    [ "org.jbehave.web:jbehave-web:3.5.+" ]
-//      [ "org.jbehave.web:jbehave-web-selenium:3.6+" ],
-//      [ "org.jbehave.web:jbehave-web-selenium-java-spring-archetype:3.6+" ],
-//      [ "org.jbehave.web:jbehave-web-selenium:3.+" ],
-//      [ "org.jbehave.web:jbehave-web-selenium-java-spring-archetype:3.+" ],
-      [ project(":DemoServices") ]
-  )
 
-  testCompile(
-//    [ "org.jbehave:jbehave-core:4.+" ],
-//    [ "org.jbehave.web:jbehave-web:3.5.+" ]
-//    [ "org.jbehave.web:jbehave-web-selenium:3.6+" ],
-//    [ "org.jbehave.web:jbehave-web-selenium-java-spring-archetype:3.6+" ]
+  accTestCompile(
+    [ "net.serenity-bdd:core:1.0.+" ],
+    [ "net.serenity-bdd:serenity-junit:1.0.+" ],
+    [ "net.serenity-bdd:serenity-cucumber:1.0.+" ],
+    [ "net.serenity-bdd:serenity-jbehave:1.0.+" ],
+    [ "org.slf4j:slf4j-simple:1.+" ]
   )
+  
 }
 
 gradle.startParameter.continueOnFailure = true

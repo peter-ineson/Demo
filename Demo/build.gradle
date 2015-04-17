@@ -77,9 +77,14 @@ subprojects {
         withXml { xml ->
           def node = xml.asNode()
           def webContainerNode = node.find { it.@path == 'org.eclipse.jst.j2ee.internal.web.container' }
-          println "Node: " + webContainerNode
+          println "WAR Node: " + webContainerNode
           if ( webContainerNode != null) {
             node.remove( webContainerNode )
+          }
+          def earContainerNode = node.find { it.@path == 'org.eclipse.jst.j2ee.internal.module.container' }
+          println "EAR Node: " + earContainerNode
+          if ( earContainerNode != null) {
+            node.remove( earContainerNode )
           }
           plugins.withType(WarPlugin) {          
             println "Node: adding WarPlugin"
@@ -87,6 +92,11 @@ subprojects {
           }
           plugins.withType(EarPlugin) {          
             println "Node: adding earPlugin"
+            def exitingContainerNode = node.find { it.@path == 'org.eclipse.jdt.launching.JRE_CONTAINER' }
+            println "JAR Node: " + exitingContainerNode
+            if ( exitingContainerNode != null) {
+              //node.remove( exitingContainerNode )
+            }
             node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jst.j2ee.internal.module.container', exported: 'true'])
           }
         }
@@ -101,6 +111,25 @@ subprojects {
   
 }
 
-
-
+/*
+      file {
+        // Classpath entry for Eclipse which changes the order of classpathentries; otherwise no sources for 3rd party jars are shown
+        withXml { xml ->
+          def node = xml.asNode()
+          def webContainerNode = node.find { it.@path == 'org.eclipse.jst.j2ee.internal.web.container' }
+          println "Node: " + webContainerNode
+          if ( webContainerNode != null) {
+            node.remove( webContainerNode )
+          }
+          plugins.withType(WarPlugin) {          
+            println "Node: adding WarPlugin"
+            node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jst.j2ee.internal.web.container', exported: 'true'])
+          }
+          plugins.withType(EarPlugin) {          
+            println "Node: adding earPlugin"
+            node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jst.j2ee.internal.module.container', exported: 'true'])
+          }
+        }
+      }
+*/
 
