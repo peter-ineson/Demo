@@ -1,3 +1,4 @@
+evaluationDependsOn(':DemoServices')
 
 buildscript {
     repositories {
@@ -29,11 +30,15 @@ configurations {
 dependencies {
   providedCompile "javax.servlet:javax.servlet-api:3.1.0"
   providedCompile "org.projectlombok:lombok:1.16.+"
+    //compile "org.springframework:spring-context:" + springVersion
+
   compile(
     [ "commons-io:commons-io:2.+" ],
     [ "commons-configuration:commons-configuration:1.+" ],
     [ "commons-collections:commons-collections:3.2.+" ],
-    [ "org.springframework:spring-webmvc:4.0.5.RELEASE" ],
+    [ "org.springframework:spring-webmvc:$springVersion" ],
+    
+    
     [ "org.webjars:bootstrap:3.1+" ],
     [ "org.webjars:jquery:2.1.1" ],
     [ "org.webjars:jquery-ui:1.11.1" ],
@@ -69,16 +74,16 @@ dependencies {
 //    [ "org.jbehave.web:jbehave-web:3.5.+" ]
 //      [ "org.jbehave.web:jbehave-web-selenium:3.6+" ],
 //      [ "org.jbehave.web:jbehave-web-selenium-java-spring-archetype:3.6+" ],
-      [ "org.jbehave.web:jbehave-web-selenium:3.+" ],
-      [ "org.jbehave.web:jbehave-web-selenium-java-spring-archetype:3.+" ],
+//      [ "org.jbehave.web:jbehave-web-selenium:3.+" ],
+//      [ "org.jbehave.web:jbehave-web-selenium-java-spring-archetype:3.+" ],
       [ project(":DemoServices") ]
   )
 
   testCompile(
 //    [ "org.jbehave:jbehave-core:4.+" ],
 //    [ "org.jbehave.web:jbehave-web:3.5.+" ]
-    [ "org.jbehave.web:jbehave-web-selenium:3.6+" ],
-    [ "org.jbehave.web:jbehave-web-selenium-java-spring-archetype:3.6+" ]
+//    [ "org.jbehave.web:jbehave-web-selenium:3.6+" ],
+//    [ "org.jbehave.web:jbehave-web-selenium-java-spring-archetype:3.6+" ]
   )
 }
 
