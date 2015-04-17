@@ -102,6 +102,7 @@ sourceSets {
         java.srcDir file('src/accTest/java')
         resources.srcDir file('src/accTest/resources') 
         resources.srcDir file('src/accTest/stories') 
+        resources.srcDir file('src/accTest/features') 
         compileClasspath += sourceSets.main.output + sourceSets.test.output
     }
 }
