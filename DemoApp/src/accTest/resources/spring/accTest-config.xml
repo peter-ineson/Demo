@@ -14,20 +14,12 @@
   -->
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:p="http://www.springframework.org/schema/p"
-    
     xsi:schemaLocation="
-        http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/jee      http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         ">
 
-  <bean id="dataSourceSolarSystem"
-        class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-        p:driverClassName="com.mysql.jdbc.Driver"
-        p:url="jdbc:mysql://localhost:3306/solarSystem"
-        p:username="planet"
-        p:password="plan3t" /> 
-
-
+  <import resource="application-db.xml"/>
+  <import resource="test-mongoDb-datasource.xml"/>
+  <import resource="test-jdbc-datasource.xml"/>
 
 </beans>

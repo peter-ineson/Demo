@@ -186,7 +186,11 @@
           width: 350,
           modal: true,
           buttons: {
-            "Login": loginUser,
+            "Login": {
+            	text: "Login",
+            	id: "login-dialog-button-login", 
+            	click: loginUser
+            },
             Cancel: function() {
               dialog.dialog( "close" );
             }
@@ -210,7 +214,6 @@
 
     	
 		</script>
-		
-		:security.admin=${security.admin}:security.guest=${security.guest}:
+
   </body>
 </html>

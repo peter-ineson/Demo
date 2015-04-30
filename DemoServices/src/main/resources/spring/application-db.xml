@@ -31,6 +31,7 @@
   <context:load-time-weaver/>   
 
   <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <property name="persistenceUnitName" value="solarSystemPersistenceUnit" />
     <property name="dataSource" ref="dataSourceSolarSystem"/>
     <!-- 
     <property name="loadTimeWeaver">

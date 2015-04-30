@@ -50,4 +50,9 @@ public class User implements Serializable {
 	@Column
     @Enumerated(EnumType.STRING)
     @Getter@Setter private UserRole role;
+
+    @Override
+    public String toString() {
+        return String.format("User [username=%s, name=%s, role=%s]", username, name, role);
+    }
 }
