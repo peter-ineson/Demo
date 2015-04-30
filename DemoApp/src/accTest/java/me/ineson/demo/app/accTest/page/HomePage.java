@@ -16,6 +16,7 @@ import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -108,6 +109,12 @@ public class HomePage extends PageObject {
             menuOptions = foundMenuOption.findElements(By.cssSelector("ul > li"));
         }
         
+    }
+
+    public void logout() {
+        assertThat( menuOptionLogout.isPresent()).as( "Logout menu option exists").isEqualTo(true);
+        menuOptionUsername.click();
+        menuOptionLogout.click();
     }
 
 }

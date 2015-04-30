@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Splitter;
 
-import cucumber.api.Pending;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -26,6 +25,14 @@ public class AuthenticationScenarioSteps {
         landingPageSteps.openHomePage();
     }
 
+    
+
+    @Given("^logged in as (.*) user$")
+    public void openAsUser( String username) {
+        landingPageSteps.openHomePage();
+        landingPageSteps.loginAsUser(username);
+    }
+    
     @When("^does not login$")
     public void nopStop() {
     }
@@ -35,6 +42,11 @@ public class AuthenticationScenarioSteps {
         landingPageSteps.loginAsUser(username);
     }
 
+    @When("^logout$")
+    public void logout() {
+        landingPageSteps.logout();
+    }
+    
     @Then("^should be (.*) user$")
     public void checkTheCurrentUser(String user) {
         landingPageSteps.checkCurrentUser(user);
@@ -55,17 +67,4 @@ public class AuthenticationScenarioSteps {
         landingPageSteps.checkForMenuOptions(hasOption, menuOptions);
     }
 
-    
-    
-    @When("^I search for items containing '(.*)'$")
-    public void searchByKeyword(String keyword) {
-        landingPageSteps.searches_for_items_containing(keyword);
-    }
-
-    
-    
-    @Then("^I should only see items related to '(.*)'$")
-    public void resultsForACategoryAndKeywordInARegion(String keyword) {
-        landingPageSteps.should_see_items_related_to(keyword);
-    }
 }

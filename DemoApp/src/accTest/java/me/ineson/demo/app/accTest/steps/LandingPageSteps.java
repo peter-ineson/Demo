@@ -60,21 +60,11 @@ public class LandingPageSteps {
         loginDialog.submitLogin();
         
     }
-    
-    
-    
-	@Step
-	public void searches_for_items_containing(String keyword) {
-		log.info("Searching for " + keyword);
-		
-	}
 
-	@Step
-	public void should_see_items_related_to(String keyword) {
-		log.info("Should have found " + keyword);
-		Assert.assertEquals( "wool", keyword);
-		
-	}
+    @Step
+    public void logout() {
+        homePage.logout();
+    }
 
 
 
