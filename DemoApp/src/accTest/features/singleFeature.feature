@@ -4,12 +4,8 @@ Feature: Single Feature
   As a user
   I want to be able to login and logout of web site
 
-  @Authentication_adminLogout
-  Scenario: When an admin user logs out they return to a guest user 
-    Given logged in as admin user
-    When logout
-    Then should be guest user
-    And the main menu does not have a Edit option
-    And the main menu does have a Login option
-    And the main menu does not have a Logout option
-
+  @Authentication_noPassword
+  Scenario: Login as an admin user without a password then an error message is displayed 
+    Given user accesses the web site
+    When login as admin user with no password
+    Then the login dialog displays an error message

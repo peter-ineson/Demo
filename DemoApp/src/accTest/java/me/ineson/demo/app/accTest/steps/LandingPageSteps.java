@@ -8,7 +8,7 @@ import me.ineson.demo.service.db.repo.jpa.UserRepository;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.junit.spring.SpringIntegration;
 
-import org.junit.Assert;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Rule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,18 +52,44 @@ public class LandingPageSteps {
 	
     @Step
     public void loginAsUser(String username) {
-        log.info("Login as user {}", username);
+        log.info("Login as user {} with correct password", username);
         User user = userRepository.findOne( username);
         assertThat( user).as("Lookup of user " + username).isNotNull();
         loginDialog.openDialog();
         loginDialog.enterCredentials(username, user.getPassword());
         loginDialog.submitLogin();
-        
+    }
+
+    @Step
+    public void loginWithNoPassword(String username) {
+        log.info("Login as user {} no password", username);
+        User user = userRepository.findOne( username);
+        assertThat( user).as("Lookup of user " + username).isNotNull();
+        loginDialog.openDialog();
+        loginDialog.enterCredentials(username, StringUtils.EMPTY);
+        loginDialog.submitLogin();
+    }
+
+    @Step
+    public void loginWithIncorrectPassword(String username) {
+        log.info("Login as user {} no password", username);
+        User user = userRepository.findOne( username);
+        assertThat( user).as("Lookup of user " + username).isNotNull();
+        final String password = "XXXX";
+        assertThat( password.equals( user.getPassword())).as("User passwords of " + username + " matches default").isFalse();
+        loginDialog.openDialog();
+        loginDialog.enterCredentials(username, password);
+        loginDialog.submitLogin();
     }
 
     @Step
     public void logout() {
         homePage.logout();
+    }
+
+    @Step
+    public void loginFailed() {
+        loginDialog.getErrorMessage();
     }
 
 

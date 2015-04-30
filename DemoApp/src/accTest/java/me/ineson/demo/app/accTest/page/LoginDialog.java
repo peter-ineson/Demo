@@ -7,6 +7,7 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,8 +63,15 @@ public class LoginDialog extends PageObject {
 
     public void submitLogin() {
         assertThat( loginButton.isVisible()).as( "Login button visable").isEqualTo(true);
-
         loginButton.click();
+    }
+
+
+    public String getErrorMessage() {
+        WebElement loginErrorMessage = loginDialog.waitForCondition().until( ExpectedConditions.presenceOfElementLocated(By.className("validateTips")));
+        String errorMessage = loginErrorMessage.getText();
+        log.info("error message {}", errorMessage);
+        return errorMessage;
     }
 
 }

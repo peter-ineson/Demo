@@ -18,20 +18,19 @@ public class AuthenticationScenarioSteps {
     private static final Logger log = LoggerFactory.getLogger(AuthenticationScenarioSteps.class);
 
 	@Steps
-    LandingPageSteps landingPageSteps;
+    private LandingPageSteps landingPageSteps;
 
     @Given("^user accesses the web site$")
     public void openLandingPage() {
         landingPageSteps.openHomePage();
     }
 
-    
-
     @Given("^logged in as (.*) user$")
     public void openAsUser( String username) {
         landingPageSteps.openHomePage();
         landingPageSteps.loginAsUser(username);
     }
+
     
     @When("^does not login$")
     public void nopStop() {
@@ -42,17 +41,33 @@ public class AuthenticationScenarioSteps {
         landingPageSteps.loginAsUser(username);
     }
 
+    @When("^login as (.*) user with no password$")
+    public void loginWithNoPassword(String username) {
+        landingPageSteps.loginWithNoPassword(username);
+    }
+
+    @When("^login as (.*) user with incorrect password$")
+    public void loginWithIncorrectPassword(String username) {
+        landingPageSteps.loginWithIncorrectPassword(username);
+    }
+
+    
     @When("^logout$")
     public void logout() {
         landingPageSteps.logout();
     }
-    
+
     @Then("^should be (.*) user$")
     public void checkTheCurrentUser(String user) {
         landingPageSteps.checkCurrentUser(user);
     }
 
+    @Then("^the login dialog displays an error message$")
+    public void loginPageDisplaysErrorMessage() {
+        landingPageSteps.loginFailed();
+    }
 
+    
     private final static Splitter MENU_OPTION_SPLITTER = Splitter.on("->");
  
     //the main menu does not have a Edit option
