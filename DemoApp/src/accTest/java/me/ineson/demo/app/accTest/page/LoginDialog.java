@@ -68,7 +68,7 @@ public class LoginDialog extends PageObject {
 
 
     public String getErrorMessage() {
-        WebElement loginErrorMessage = loginDialog.waitForCondition().until( ExpectedConditions.presenceOfElementLocated(By.className("validateTips")));
+        WebElement loginErrorMessage = loginDialog.waitForCondition().until( ExpectedConditions.presenceOfElementLocated(By.className("ui-state-error-text")));
         String errorMessage = loginErrorMessage.getText();
         log.info("error message {}", errorMessage);
         return errorMessage;
