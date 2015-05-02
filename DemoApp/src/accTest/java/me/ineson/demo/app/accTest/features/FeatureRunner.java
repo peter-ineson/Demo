@@ -10,8 +10,8 @@ import cucumber.api.CucumberOptions;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(features={
-//        "src/accTest/features/landingPage/authentication.feature"
-        "src/accTest/features/singleFeature.feature"
+        "src/accTest/features/landingPage/authentication.feature"
+//        "src/accTest/features/singleFeature.feature"
 })
 public class FeatureRunner {
     

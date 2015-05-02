@@ -4,7 +4,7 @@
   regexp : true, sloppy : true, vars     : true,
   white  : true
 */
-spa.model = (function () {
+demoApp.model = (function () {
   'use strict';
   var
     configMap = { guest_id: 'guest'},

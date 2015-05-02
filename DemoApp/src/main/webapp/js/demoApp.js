@@ -5,17 +5,38 @@
   white  : true
 */
 /* global $, spa:true */
-spa = (function () {
+demoApp = (function () {
   'use strict';
+  var logout;
+  
+  logout = function () {
+      $.blockUI({ message: '<h1>Logging out...</h1>' }); 
+
+      $.ajax({
+          type: "POST",
+          url: "app/logout",
+          complete: function() {
+            location.reload();
+          }
+      });           
+    }
+
   var initModule = function ($container) {
     //demoApp.data.initModule();
-    demoApp.model.initModule();
-    if( demoApp.shell && $container) {
-      demoApp.shell.initModule($container);
+    //demoApp.model.initModule();
+    //if( demoApp.shell && $container) {
+    //  demoApp.shell.initModule($container);
+    //}
+    demoApp.dialog.initModule();
+    if( demoApp.dialog.login ) {
+      demoApp.dialog.login.initModule( $( "#login-dialog" ) );
     }
   };
     
-  return { initModule : initModule};
+  return {
+	  initModule : initModule,
+	  logout : logout
+  };
 }());
 
 
