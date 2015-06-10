@@ -1,13 +1,15 @@
 
 buildscript {
     repositories {
+        mavenLocal()
         mavenCentral()
         maven { url "http://repository.codehaus.org"}
     }
     dependencies {
         classpath(
             [ "org.codehaus.groovy.modules.http-builder:http-builder:0.7.+"],
-            [ "net.serenity-bdd:serenity-gradle-plugin:1.0.+" ]
+            [ "net.serenity-bdd:serenity-gradle-plugin:1.0.+" ],
+            [ "me.ineson.gradle:mochaJsPlugin:0.+" ]
         ) 
         
     }
@@ -15,8 +17,16 @@ buildscript {
 
 
 plugins {
-  id "com.eriwen.gradle.js" version "1.12.1"
+  id "com.eriwen.gradle.js" version "1.12.1"  // For jsHint
+  id "com.moowork.node" version "0.9"         // For nodeJs
 }
+
+
+task greeting(type: me.ineson.gradle.MochaJsTask) {
+    greeting = 'howdy!'
+}
+
+task greetingsrc(type: me.ineson.gradle.MochaJsTask);
 
 evaluationDependsOn(':DemoServices')
 
@@ -191,6 +201,7 @@ task accTest(type: Test) {
 
 //    systemProperty "browser", "chrome"
     systemProperty "serenity.use.unique.browser", "false"
+    systemProperty "thucydides.use.unique.browser", "false"
 //    systemProperty "webdriver.chrome.driver", "C:\\Users\\peter\\Downloads\\chromedriver_win32\\chromedriver.exe"
 //    systemProperty "browser", "ie"
 //    systemProperty "webdriver.ie.driver", "C:\\Users\\peter\\Downloads\\IEDriverServer_x64_2.43.0\\IEDriverServer.exe"
@@ -329,4 +340,34 @@ callTc.dependsOn deployWar
 intTest.dependsOn callTc
 
 accTest.dependsOn callTc
+
+
+node {
+  // Version of node to use.
+  //version = '0.11.10'
+
+  // Version of npm to use.
+  //npmVersion = '2.1.5'
+
+  // Base URL for fetching node distributions (change if you have a mirror).
+  //distBaseUrl = 'http://nodejs.org/dist'
+
+  // If true, it will download node using above parameters.
+  // If false, it will try to use globally installed node.
+  download = true
+
+  // Set the work directory for unpacking node
+  //workDir = file("${project.buildDir}/nodejs")
+
+  // Set the work directory where node_modules should be located
+  //nodeModulesDir = file("${project.projectDir}")
+}
+
+
+task myScript(type: NodeTask) {
+  // Need to add node execs to the classpath.
+  // $ ./../DemoApp/node_modules/.bin/mocha  ../DemoApp/src/intTest/javascript/myTest.js
+
+  script = file('src/intTest/javascript/myTest.js')
+}
 
