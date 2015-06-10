@@ -1,0 +1,8 @@
+{
+  "name": "MochaJs test runner",
+  "description": "Packages from running MochaJs tests",
+  "author": "user",
+  "dependencies": {
+    "mocha": "*"
+  }
+}
