@@ -82,14 +82,14 @@ buildscript {
 }
 
 
-task wsimport << { 
-    //def generatedDir = "build/generated-sources/java"
+task wsimport { 
+    def sourceDir = new File( projectDir, '/src/main/wsdl')
     def generatedDir = new File( buildDir, '/generated-sources/java')
-    def inputWsdl = "$projectDir/src/main/wsdl/SolarBodyService.wsdl"
-    // inputs.file inputWsdl
-    //outputs.dir = generatedDir
+    def inputWsdl = "$sourceDir/SolarBodyService.wsdl"
+    inputs.dir sourceDir
+    outputs.dir generatedDir
 
-//    doFirst {
+    doLast {
         System.properties['javax.xml.accessExternalSchema'] = "file";
         generatedDir.mkdirs()
         ant.taskdef(name:'wsimport',
@@ -107,7 +107,7 @@ task wsimport << {
 //            xjcarg(value:"-Djavax.xml.accessExternalSchema=all")
 //            arg(value:"-disableXmlSecurity")
         }
-//    }
+    }
 }
 
 compileJava.dependsOn wsimport
