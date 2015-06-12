@@ -18,7 +18,7 @@ buildscript {
 
 plugins {
   id "com.eriwen.gradle.js" version "1.12.1"  // For jsHint
-  id "com.moowork.node" version "0.9"         // For nodeJs
+  id "com.moowork.node" version "0.10"        // For nodeJs
 }
 
 
@@ -34,6 +34,7 @@ apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'net.serenity-bdd.aggregator'
 
+// For JS Hint
 javascript.source {
     dev {
         js {
@@ -129,7 +130,7 @@ dependencies {
 
 gradle.startParameter.continueOnFailure = true
 
-
+// For jsHint
 sourceSets {
     intTest {
         java.srcDir file('src/intTest/java')
@@ -357,10 +358,10 @@ node {
   download = true
 
   // Set the work directory for unpacking node
-  //workDir = file("${project.buildDir}/nodejs")
+  workDir = file("${project.buildDir}/${name}_nodejsWork")
 
   // Set the work directory where node_modules should be located
-  //nodeModulesDir = file("${project.projectDir}")
+  nodeModulesDir = file("${project.buildDir}/${name}_nodeJs")
 }
 
 

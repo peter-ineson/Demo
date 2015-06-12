@@ -1,6 +1,8 @@
 {
-  "name": "MochaJs test runner",
+  "name": "mocha-test-runner",
   "description": "Packages from running MochaJs tests",
+  "version": "0.0.0",
+  "private": true,
   "author": "user",
   "dependencies": {
     "mocha": "*"
