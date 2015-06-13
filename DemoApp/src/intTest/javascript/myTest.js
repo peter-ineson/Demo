@@ -19,4 +19,11 @@ testCase('Array', function(){
       assert.equal([1,2,3].indexOf(4), -1);
     });
   });
+
+  testCase('#indexOf2()', function(){
+	    assertions('should return -1 when not present', function(){
+	      assert.equal([1,2,3].indexOf(3), -1);
+	    });
+	  });
+
 });

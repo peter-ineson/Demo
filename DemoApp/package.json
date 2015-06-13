@@ -5,6 +5,7 @@
   "private": true,
   "author": "user",
   "dependencies": {
-    "mocha": "*"
+    "mocha": "latest",
+    "xunit-file": "latest"
   }
 }
