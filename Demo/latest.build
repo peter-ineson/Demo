@@ -1,4 +1,105 @@
 
+
+peter@linux-09qt:~/Dev/demo/Demo/Demo> gradle DemoApp:npmInstall --info
+...
+Compiling build file '/home/peter/Dev/demo/Demo/DemoApp/build.gradle' using StatementExtractingScriptTransformer.
+Resource missing. [HTTP GET: https://repo1.maven.org/maven2/com/moowork/gradle/gradle-node-plugin/0.10/gradle-node-plugin-0.10.pom]
+Resource missing. [HTTP HEAD: https://repo1.maven.org/maven2/com/moowork/gradle/gradle-node-plugin/0.10/gradle-node-plugin-0.10.jar]
+Resource missing. [HTTP GET: http://repository.codehaus.org/com/moowork/gradle/gradle-node-plugin/0.10/gradle-node-plugin-0.10.pom]
+Resource missing. [HTTP HEAD: http://repository.codehaus.org/com/moowork/gradle/gradle-node-plugin/0.10/gradle-node-plugin-0.10.jar]
+Download http://plugins.gradle.org/m2/com/moowork/gradle/gradle-node-plugin/0.10/gradle-node-plugin-0.10.pom
+Download http://plugins.gradle.org/m2/com/moowork/gradle/gradle-node-plugin/0.10/gradle-node-plugin-0.10.jar
+Compiling build file '/home/peter/Dev/demo/Demo/DemoApp/build.gradle' using BuildScriptTransformer.
+Evaluating project ':DemoServices' using build file '/home/peter/Dev/demo/Demo/DemoServices/build.gradle'.
+Evaluating project ':DemoServicesApi' using build file '/home/peter/Dev/demo/Demo/DemoServicesApi/build.gradle'.
+Evaluating project ':TestingFramework' using build file '/home/peter/Dev/demo/Demo/TestingFramework/build.gradle'.
+All projects evaluated.
+Selected primary task 'DemoApp:npmInstall' from project :DemoApp
+Resource missing. [HTTP GET: https://repo1.maven.org/maven2/org/nodejs/node/0.11.10/node-0.11.10.pom]
+Resource missing. [HTTP HEAD: https://repo1.maven.org/maven2/org/nodejs/node/0.11.10/node-0.11.10-linux-x86.tar.gz]
+Resource missing. [HTTP GET: https://jcenter.bintray.com/org/nodejs/node/0.11.10/node-0.11.10.pom]
+Resource missing. [HTTP HEAD: https://jcenter.bintray.com/org/nodejs/node/0.11.10/node-0.11.10-linux-x86.tar.gz]
+Resource missing. [HTTP GET: http://nodejs.org/dist/v0.11.10/ivy.xml]
+Download http://nodejs.org/dist/v0.11.10/node-v0.11.10-linux-x86.tar.gz
+Tasks to be executed: [task ':DemoApp:nodeSetup', task ':DemoApp:npmSetup', task ':DemoApp:npmInstall']
+:DemoApp:nodeSetup (Thread[Daemon worker Thread 3,5,main]) started.
+:DemoApp:nodeSetup
+Invalidating in-memory cache of /home/peter/Dev/demo/Demo/Demo/.gradle/2.3/taskArtifacts/taskArtifacts.bin
+Invalidating in-memory cache of /home/peter/Dev/demo/Demo/Demo/.gradle/2.3/taskArtifacts/fileSnapshots.bin
+Invalidating in-memory cache of /home/peter/Dev/demo/Demo/Demo/.gradle/2.3/taskArtifacts/fileHashes.bin
+Invalidating in-memory cache of /home/peter/Dev/demo/Demo/Demo/.gradle/2.3/taskArtifacts/outputFileStates.bin
+Executing task ':DemoApp:nodeSetup' (up-to-date check took 0.25 secs) due to:
+  No history is available.
+:DemoApp:nodeSetup (Thread[Daemon worker Thread 3,5,main]) completed. Took 4.357 secs.
+:DemoApp:npmSetup (Thread[Daemon worker Thread 3,5,main]) started.
+:DemoApp:npmSetup
+Skipping task ':DemoApp:npmSetup' as task onlyIf is false.
+:DemoApp:npmSetup SKIPPED
+:DemoApp:npmSetup (Thread[Daemon worker Thread 3,5,main]) completed. Took 0.004 secs.
+:DemoApp:npmInstall (Thread[Daemon worker Thread 3,5,main]) started.
+:DemoApp:npmInstall
+Executing task ':DemoApp:npmInstall' (up-to-date check took 0.003 secs) due to:
+  No history is available.
+Starting process 'command '/home/peter/.gradle/nodejs/node-v0.11.10-linux-x86/bin/node''. Working directory: /home/peter/Dev/demo/Demo/DemoApp/build/DemoApp_nodeJs Command: /home/peter/.gradle/nodejs/node-v0.11.10-linux-x86/bin/node /home/peter/.gradle/nodejs/node-v0.11.10-linux-x86/lib/node_modules/npm/bin/npm-cli.js install
+:DemoApp:npmInstall FAILED
+:DemoApp:npmInstall (Thread[Daemon worker Thread 3,5,main]) completed. Took 0.252 secs.
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':DemoApp:npmInstall'.
+> A problem occurred starting process 'command '/home/peter/.gradle/nodejs/node-v0.11.10-linux-x86/bin/node''
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --debug option to get more log output.
+
+BUILD FAILED
+
+Total time: 1 mins 55.651 secs
+Stopped 0 compiler daemon(s).
+Received result DaemonCommandResult[type=CommandFailure, value=org.gradle.launcher.exec.ReportedException: org.gradle.internal.exceptions.LocationAwareException: Execution failed for task ':DemoApp:npmInstall'.] from daemon DaemonInfo{pid=7115, address=[5409f25a-209a-436e-afe2-ad684252cbb2 port:37286, addresses:[/0:0:0:0:0:0:0:1%lo, /127.0.0.1]], idle=true, context=DefaultDaemonContext[uid=ab00ab8c-c0cc-43c5-b508-be9f869ec387,javaHome=/usr/java/jdk1.8.0_40,daemonRegistryDir=/home/peter/.gradle/daemon,pid=7115,idleTimeout=10800000,daemonOpts=-XX:MaxPermSize=256m,-XX:+HeapDumpOnOutOfMemoryError,-Xmx1024m,-Dfile.encoding=UTF-8,-Duser.country=GB,-Duser.language=en,-Duser.variant]}.
+peter@linux-09qt:~/Dev/demo/Demo/Demo> 
+
+
+> mkdir /home/peter/Dev/demo/Demo/DemoApp/build/DemoApp_nodeJs
+
+> cp /home/peter/Dev/demo/Demo/DemoApp/package.json /home/peter/Dev/demo/Demo/DemoApp/build/DemoApp_nodeJs
+
+> ls /home/peter/.gradle/nodejs/node-v0.11.10-linux-x86/lib/node_modules/mocha-test-runner/node_modules/mocha/
+
+> export PATH=$PATH:/home/peter/Dev/demo/Demo/DemoApp/build/DemoApp_nodejsWork/node-v0.11.10-linux-x86/bin
+
+peter@linux-09qt:~/Dev/demo/Demo/Demo> ./../DemoApp/node_modules/.bin/mocha  ../DemoApp/src/intTest/javascript/myTest.js
+myTest ----------------- Hello World ----------------------
+testCase =  function (title, fn){
+      var suite = Suite.create(suites[0], title);
+      suite.file = file;
+      suites.unshift(suite);
+      fn.call(suite);
+      suites.shift();
+      return suite;
+    }
+
+
+  Array
+    #indexOf()
+      ✓ should return -1 when not present
+
+
+  1 passing (57ms)
+
+
+
+
+> XUNIT_FILE=xunit.xml ./../DemoApp/node_modules/.bin/mocha  ../DemoApp/src/intTest/javascript/myTest.js --reporter xunit-file 
+
+
+> LOG_XUNIT=true ./../DemoApp/node_modules/.bin/mocha  ../DemoApp/src/intTest/javascript/myTest.js --reporter xunit-file
+
+
+
+
+
 buildscript {
     repositories {
         mavenLocal()
@@ -21,6 +122,12 @@ plugins {
   id "com.moowork.node" version "0.10"        // For nodeJs
 }
 
+
+task greeting(type: me.ineson.gradle.MochaJsTask) {
+    greeting = 'howdy!'
+}
+
+task greetingsrc(type: me.ineson.gradle.MochaJsTask);
 
 evaluationDependsOn(':DemoServices')
 
@@ -68,14 +175,10 @@ configurations {
     accTestCompile.extendsFrom testCompile
     accTestRuntime.extendsFrom testRuntime
   
-    antClasspath
 }
 
 
 dependencies {
-   antClasspath 'org.apache.ant:ant-junit:1.9.5'
-
-
   providedCompile "javax.servlet:javax.servlet-api:3.1.0"
   providedCompile "org.projectlombok:lombok:1.16.+"
     //compile "org.springframework:spring-context:" + springVersion
@@ -356,10 +459,10 @@ node {
   download = true
 
   // Set the work directory for unpacking node
-  workDir = file("${project.buildDir}/nodeJs")
+  //workDir = file("${project.buildDir}/nodeJsTest")
 
   // Set the work directory where node_modules should be located
-  nodeModulesDir = file("${project.buildDir}/nodeJsTest/test/node_modules")
+  nodeModulesDir = file("${project.buildDir}/nodeJsTest")
 }
 
 
@@ -372,174 +475,97 @@ task myScript(type: NodeTask) {
 
 
 ext {
-  cacheWebJars = file("${project.buildDir}/cache/webJars")
-
-  jsSrcDir = file("${projectDir}/src/main/webapp/js")
-  // Test dirs
-  jsTestModulesDir = file("${project.buildDir}/jsTest")
-  jsTestMochaExec = file("${ext.jsTestModulesDir}/node_modules/.bin/mocha")
-  jsTestSrcDir = file("${projectDir}/src/test/javascript")
-  // intTest dirs
-  jsIntTestModulesDir = file("${project.buildDir}/jsIntTest")
-  jsIntTestMochaExec = file("${ext.jsIntTestModulesDir}/node_modules/.bin/mocha")
-  jsIntTestSrcDir = file("${projectDir}/src/intTest/javascript")
+  jsTestDependencies = ['mocha', 'xunit-file']
+  jsTestModulesDir = file("${project.buildDir}/nodeJsTest")
+  jsTestMochaExec = file('node_modules/.bin/mocha')
 }
 
 
-task initJsTests() << {
-    if( !jsTestModulesDir.exists() ) {
-        jsTestModulesDir.mkdirs();
+
+task setupJsTest(type: NpmTask) {
+  outputs.dir file('node_modules')
+  args = ['install'] + jsTestDependencies + ['--loglevel', 'error']
+}
+
+task runJsTest(type: NodeTask, dependsOn: 'setupJsTest') {
+    script = jsTestMochaExec
+    args = ['DemoApp/src/intTest/javascript/myTest.js', '--reporter', 'xunit-file']
+    environment = [ 'LOG_XUNIT':'true' ]
+    // args = ['DemoApp/src/intTest/javascript/myTest.js', '--reporter', 'xunit-file']
+    //args = ['start', karmaConfig]
+}
+
+
+task listDepend << {
+    configurations.compile.dependencies.each { file ->
+        println file.group + ":" + file.name
     }
-    if( !jsIntTestModulesDir.exists() ) {
-        jsIntTestModulesDir.mkdirs();
+
+    println "1 -------------------------------"
+    
+    configurations.compile.files { dep -> dep.group == 'org.webjars' && dep.name != 'bootstrap' }.each { file ->
+        println file.name + " -> " + file.path
     }
-}
 
-/*
-npm_install.dependsOn(initJsTest) {
-  workingDir node.nodeModulesDir
-}
-*/
+    println "2 -------------------------------"
 
-task initJsTestPackage(type: Copy, dependsOn: 'initJsTests') {
-    from(jsTestSrcDir) {
-        include 'package.json'
+    configurations.compile.files { dep -> dep.group == 'org.webjars' && dep.name != 'bootstrap' }.each { file ->
+        println "Extract from " + file.path
+    
+        project.copy {
+            from {
+                  zipTree(file)
+            }
+            into file("$buildDir/webJars")
+        }
+        
+        logger.warn "extracted"
     }
-    into jsTestModulesDir
-}
 
-
-task initJsIntTestPackage(type: Copy, dependsOn: 'initJsTests') {
-    from(jsIntTestSrcDir) {
-        include 'package.json'
-    }
-    into jsIntTestModulesDir
-}
-
-task setupJsTest(type: NpmTask, dependsOn: ['initJsTestPackage']) {
-  //outputs.dir node.nodeModulesDir
-  workingDir jsTestModulesDir
-  args = ['install' ,'--loglevel', 'error']
-}
-
-task setupJsIntTest(type: NpmTask, dependsOn: ['initJsIntTestPackage']) {
-  //outputs.dir node.nodeModulesDir
-  workingDir jsIntTestModulesDir
-  args = ['install' ,'--loglevel', 'error']
-}
-
-
-task copyJsTestWebJars(type: Copy, dependsOn: ['extractWebJars','setupJsTest']) {
-    from new File( cacheWebJars, '/webjars')
-    into new File( jsTestModulesDir, 'webjars')
-}
-
-task copyJsTestMainSrc(type: Copy, dependsOn: ['setupJsTest']) {
-    from 'src/main/webapp/js'
-    into new File( jsTestModulesDir, 'src')
-}
-
-task copyJsTestMainTest(type: Copy, dependsOn: ['setupJsTest']) {
-    from 'src/test/javascript'
-    into new File( jsTestModulesDir, 'test')
-}
-
-task copyJsIntTestWebJars(type: Copy, dependsOn: ['extractWebJars','setupJsIntTest']) {
-    from new File( cacheWebJars, '/webjars')
-    into new File( jsIntTestModulesDir, 'webjars')
-}
-
-task copyJsIntTestMainSrc(type: Copy, dependsOn: ['setupJsTest']) {
-    from 'src/main/webapp/js'
-    into new File( jsIntTestModulesDir, 'src')
-}
-
-task copyJsIntTestMainTest(type: Copy, dependsOn: ['setupJsTest']) {
-    from 'src/test/javascript'
-    into new File( jsIntTestModulesDir, 'test')
-}
-
-task copyJsIntTestMainIntTest(type: Copy, dependsOn: ['setupJsTest']) {
-    from 'src/intTest/javascript'
-    into new File( jsIntTestModulesDir, 'intTest')
-}
-
-
-import me.ineson.gradle.mocha.task.MochaExec;
-
-task runJsTest(dependsOn: ['setupJsTest','copyJsTestWebJars','copyJsTestMainSrc','copyJsTestMainTest']) << {
-    def mocha = new MochaExec( project, 'test', jsTestModulesDir);
-    mocha.runTest( "jsTest", "myTest");
-}
-
-task runJsIntTest(dependsOn: ['setupJsIntTest','copyJsIntTestWebJars','copyJsIntTestMainSrc','copyJsIntTestMainTest', 'copyJsIntTestMainIntTest']) << {
-    def mocha = new MochaExec( project, 'intTest', jsIntTestModulesDir);
-    mocha.runTest( "jsTest", "myIntTest");
 }
 
 
 
-task extractWebJars(type: Copy) {
+task listDepend2(type: Copy) {
     configurations.compile.files { dep -> dep.group == 'org.webjars' && dep.name != 'bootstrap' }.each { file ->
         
-        //println file.name + " -> " + file.path
+        println file.name + " -> " + file.path
         from zipTree(file)
+/*
+        eachFile { FileCopyDetails fcp ->
+            println 'Check -> ' + fcp.relativePath.pathString
+            if (fcp.relativePath.pathString.startsWith( 'META-INF/resources/webjars')) {
+                // remap the file to the root
+                def segments = fcp.relativePath.segments
+                def pathsegments = segments[2..-1] as String[]
+                println 'Add ' + pathsegments
+                fcp.relativePath = new RelativePath(!fcp.file.isDirectory(), pathsegments)
+            } else if ( ! fcp.relativePath.pathString.startsWith( 'webjars')) {
+                println 'Exclude'
+                fcp.exclude()
+            }
+        }
+*/
     }
-    into cacheWebJars
+    into buildDir
     eachFile { FileCopyDetails fcp ->
-//        println 'Check -> ' + fcp.relativePath.pathString
+        println 'Check -> ' + fcp.relativePath.pathString
         if (fcp.relativePath.pathString.startsWith( 'META-INF/resources/webjars')) {
             // remap the file to the root
             def segments = fcp.relativePath.segments
             def pathsegments = segments[2..-1] as String[]
-//            println 'Add ' + pathsegments
+            println 'Add ' + pathsegments
             fcp.relativePath = new RelativePath(!fcp.file.isDirectory(), pathsegments)
         } else if ( ! fcp.relativePath.pathString.startsWith( 'webjars')) {
-//            println 'Exclude'
+            println 'Exclude'
             fcp.exclude()
         }
     }
+/*    
+*/
 }
 
-task aggregateTestReports( dependsOn: [ 'runJsTest', 'test']) << {
-    aggregateReports( 
-        new File( project.buildDir, '/test-results'),
-        new File( project.buildDir, 'reports/allTests'));
-}
 
-test.finalizedBy aggregateTestReports
-runJsTest.finalizedBy aggregateTestReports
 
-task aggregateIntTestReports( dependsOn: [ 'runJsIntTest', 'intTest']) << {
-    aggregateReports( 
-        new File( project.buildDir, '/intTest-results'),
-        new File( project.buildDir, 'reports/allIntTests'));
-}
 
-intTest.finalizedBy aggregateIntTestReports
-runJsIntTest.finalizedBy aggregateIntTestReports
-
-def aggregateReports( File resultsDir, File reportDir) {
-    if( !reportDir.exists() ) {
-        println("creating subdir " +reportDir)
-
-        if(reportDir.mkdirs()) {
-            println("succeeded in making folder")
-        } else {
-            println("failed to make folder")
-        }
-    }
-
-    ant.taskdef(
-        name: 'junitreport_js',
-        classname: 'org.apache.tools.ant.taskdefs.optional.junit.XMLResultAggregator',
-        classpath: configurations.antClasspath.asPath
-    )
-    
-    
-    ant.junitreport_js(todir: resultsDir.absolutePath) {
-        fileset(dir: resultsDir.absolutePath, includes: 'TEST-*.xml')
-        report(todir: reportDir.absolutePath, format: "frames")
-    }
-}
 

@@ -6,6 +6,7 @@
   "author": "user",
   "dependencies": {
     "mocha": "latest",
-    "xunit-file": "latest"
+    "xunit-file": "latest",
+    "jsdom": "latest"
   }
 }

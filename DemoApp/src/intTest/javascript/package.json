@@ -1,0 +1,12 @@
+{
+  "name": "mocha-intTest-runner",
+  "description": "Packages from running MochaJs intTests",
+  "version": "0.0.0",
+  "private": true,
+  "author": "user",
+  "dependencies": {
+    "mocha": "latest",
+    "xunit-file": "latest",
+    "phantomjs": "latest"
+  }
+}
