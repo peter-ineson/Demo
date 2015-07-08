@@ -8,11 +8,11 @@ var assertions = require('mocha').it
 var assert = require('assert')
 
 console.error("testCase = ", testCase);
+console.error("pre = ", pre);
+console.error("assertions = ", assertions);
+console.error("assert = ", assert);
 
 testCase('js.myTest', function(){
-  pre(function(){
-    // ...
-  });
 
   testCase('run1', function(){
     assertions('should return -1 when not present', function(){
