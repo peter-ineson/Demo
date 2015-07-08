@@ -87,6 +87,22 @@ public class SolarBodyRestTest {
      * Test method for {@link org.springframework.data.repository.CrudRepository#exists(java.io.Serializable)}.
      */
     @Theory
+    public void testFindWhereBodyType(MediaType mediaType) {
+        SolarBodyRestClient client = new SolarBodyRestClient(mediaType);
+
+        Map<String, Object> criteria = new HashMap<String, Object>();
+        criteria.put("bodyType", SolarBodyType.PLANET.name());
+
+        List<SolarBody> bodies = client.findAll(HOST_URL, criteria, null);
+
+        Assert.assertNotNull("find all results", bodies);
+        Assert.assertEquals("find all record count", 8, bodies.size());
+    }
+    
+    /**
+     * Test method for {@link org.springframework.data.repository.CrudRepository#exists(java.io.Serializable)}.
+     */
+    @Theory
     public void testFindWhereCmr(MediaType mediaType) {
         SolarBodyRestClient client = new SolarBodyRestClient(mediaType);
 

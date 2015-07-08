@@ -23,6 +23,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import me.ineson.demo.service.db.domain.SolarBodyType;
 import me.ineson.demo.service.rest.SolarBodyEndpoint;
 
 import org.apache.commons.lang3.StringUtils;
@@ -97,8 +98,31 @@ public class RestUtils {
                         }
                     }
 
+                    
+                    Object realValue = value;
+                    if( "bodyType".equals(fieldPath)) {
+                        me.ineson.demo.service.SolarBodyType solarBodyType = me.ineson.demo.service.SolarBodyType.valueOf(value);
+                        switch (solarBodyType) {
+                        case PLANET:
+                            realValue = SolarBodyType.Planet;
+                            break;
+
+                        case SUN:
+                            realValue = SolarBodyType.Sun;
+                            break;
+
+                        case DWARF_PLANET:
+                            realValue = SolarBodyType.DwarfPlanet;
+                            break;
+
+                        default:
+                            realValue = solarBodyType;
+                        }
+                        log.info( "enum bodyType before {} after {}", value, realValue);
+                    }
+                    
                     log.info( "expression9 {}", expression);
-                    predicates.add(builder.equal(expression, value));
+                    predicates.add(builder.equal(expression, realValue));
                 }
 
             }

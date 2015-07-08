@@ -92,8 +92,7 @@ public class SolarBodyEndpoint {
             ) {
         log.debug("FindAll for mt {}, where={}, orderBy={}", accept, where, orderBy);
 
-        WebTarget target = CLIENT.target(config.getStringManadtory(Config.SERVICE_REST_URL))
-                .path(PATH);
+        WebTarget target = CLIENT.target(config.getStringManadtory(Config.SERVICE_REST_URL)).path(PATH);
 
         if (StringUtils.isNotBlank(where)) {
             target = target.queryParam("where", where);

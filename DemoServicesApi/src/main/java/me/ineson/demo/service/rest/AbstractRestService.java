@@ -70,7 +70,7 @@ public abstract class AbstractRestService<T> {
             result = null;
         } else {
             log.error( "Unknown response findOne lookup url {}, response {}\n{}",url, response, response.readEntity(String.class));
-            throw new IllegalStateException( "Service returned an error");
+            throw new IllegalStateException( "Service returned an error " + response + ", url " + url );
         }
         
         return result;

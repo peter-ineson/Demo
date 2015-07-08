@@ -9,8 +9,9 @@ demoApp.data = (function() {
   'use strict';
   var
     stateMap = { sio: null },
-    makeSio, getSio, initModule;
+    loadPlanets, initModule;
   
+/*
   makeSio = function() {
     var socket = io.connect( '/chat');
     
@@ -25,16 +26,32 @@ demoApp.data = (function() {
       }
     };    
   };
-  
+
   getSio = function() {
     if ( ! stateMap.sio ) { stateMap.sio = makeSio(); }
     return stateMap.sio;
   };
+*
+*
+*/
+  
+  //encodeURIComponent( "bodyType=PLANET");
+  loadPlanets = function() {
+	$.getJSON( "rest/solarBodies", { where: "bodyType=PLANET"} , function( planets ) {
+        console.log( "planets = ", planets )
+      for (var planetIdx in planets) {
+        console.log( "planetIdx = ", planetIdx );
+        console.log( "Planet = ",  planets[ planetIdx]);
+		demoApp.model.makeSolarBody(planets[ planetIdx]);
+      }
+    });
+  };
+
   
   initModule = function() {};
   
   return {
-    getSio: getSio,
+	loadPlanets: loadPlanets,
     initModule: initModule
   };
 

@@ -91,6 +91,8 @@ dependencies {
     [ "org.webjars:jquery-ui:1.11.1" ],
     [ "org.webjars:jquery-ui-themes:1.11.0" ],
     [ "org.webjars:jquery-blockui:2.65" ],
+    [ "org.webjars:EventEmitter:4.2.7-1" ],
+    [ "org.webjars:sockjs-client:1.0.0" ],
 
     [ project(":DemoServicesApi") ]
   )
@@ -516,8 +518,10 @@ task aggregateIntTestReports( dependsOn: [ 'runJsIntTest', 'intTest']) << {
         new File( project.buildDir, 'reports/allIntTests'));
 }
 
+/*
 intTest.finalizedBy aggregateIntTestReports
 runJsIntTest.finalizedBy aggregateIntTestReports
+*/
 
 def aggregateReports( File resultsDir, File reportDir) {
     if( !reportDir.exists() ) {

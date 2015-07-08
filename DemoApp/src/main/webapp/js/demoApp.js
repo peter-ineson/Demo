@@ -31,6 +31,11 @@ demoApp = (function () {
     if( demoApp.dialog.login ) {
       demoApp.dialog.login.initModule( $( "#login-dialog" ) );
     }
+    demoApp.model.initModule();
+    demoApp.data.initModule();
+
+    demoApp.data.loadPlanets();
+
   };
     
   return {

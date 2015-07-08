@@ -141,6 +141,7 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="Sun"/>
       <xs:enumeration value="Planet"/>
+      <xs:enumeration value="DwarfPlanet"/>
     </xs:restriction>
   </xs:simpleType>
 

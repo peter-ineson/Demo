@@ -13,7 +13,6 @@
     <script src='<c:url value="/webjars/jquery-ui/1.11.1/jquery-ui.min.js" />'></script>
     <script src='<c:url value="/webjars/jquery-blockui/2.65/jquery.blockUI.js" />'></script>
      
-
     <style>
 	    body { font-size: 62.5%; }
 	    label, input { display:block; }
@@ -30,12 +29,16 @@
 
     </style>
 
+    <script src='<c:url value="/js/lib/taffy-2.7.js" />'></script>
+
     <script src='<c:url value="/js/demoApp.js" />'></script>
     <script src='<c:url value="/js/demoApp.dialog.js" />'></script>
     <c:if test="${security.guest}">
       <script src='<c:url value="/js/demoApp.dialog.login.js" />'></script>
     </c:if>
     <script src='<c:url value="/js/cssMenu.js" />'></script>
+    <script src='<c:url value="/js/demoApp.model.js" />'></script>
+    <script src='<c:url value="/js/demoApp.data.js" />'></script>
      
     <script type="text/javascript">
 

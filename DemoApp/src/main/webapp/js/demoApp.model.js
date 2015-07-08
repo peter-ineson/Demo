@@ -10,67 +10,42 @@ demoApp.model = (function () {
     configMap = { guest_id: 'guest'},
     stateMap = {
       guest_user: null,
-      cid_serial: 0,
-      solar_body_cid_map: {},
       solar_body_db: TAFFY(),
       user: null,
       is_connected: false
     },
     isFakeData = false,
     
-    personProto, makeCid, completeLogin,
-    makePerson, removePerson, people, initModule,
+    solarBodyProto, makeSolarBody, removePerson, solarBody, initModule,
     setDataMode;
   
-  personProto = {
-    get_is_user: function() {
-      return this.cid === stateMap.user.cid;
-    },
-    get_is_guest: function() {
-      return this.cid === stateMap.guest_user.cid;
+  solarBodyProto = {
+    get_is_planet: function() {
+      return this.bodyType === 'planet';
     }
   };
   
-  makeCid = function() {
-    return 'c' + stateMap.cid_serial++;
-  };
   
-  completeLogin = function( user_list) {
-    console.log( "completeLogin");
-    var user_map = user_list[ 0];
-    delete stateMap.people_cid_map[ user_map.cid];
+  makeSolarBody = function( solarBody_map) {
+    var solarBody,
+      id = solarBody_map.id,
+      name = solarBody_map.name;
     
-    stateMap.user.cid = user_map._id;
-    stateMap.user.id = user_map._id;
-    stateMap.user.css_map = user_map.css_map;
-    stateMap.people_cid_map[ user_map._id] = stateMap.user;
-    //chat.join();
-    //$.gevent.publish( 'spa-login', [ stateMap.user]);
-  };
-
-  makePerson = function( person_map) {
-    var person,
-      cid = person_map.cid,
-      css_map = person_map.css_map,
-      id = person_map.id,
-      name = person_map.name;
+    solarBody = Object.create( solarBodyProto);
+    solarBody.id = id;
+    solarBody.name = name;
+    solarBody.bodyType = solarBody_map.bodyType;
+    solarBody.description = solarBody_map.description;
+    solarBody.orbitBodyId = solarBody_map.orbitBodyId;
+    solarBody.orbitDistance = solarBody_map.orbitDistance;
+    solarBody.radius = solarBody_map.radius;
+    solarBody.mass = solarBody_map.mass;
     
-    if( cid === undefined || ! name) {
-      throw 'Client id and name required';
-    }
-    
-    person = Object.create( personProto);
-    person.cid = cid;
-    person.name = name;
-    person.css_map = css_map;
-    
-    if( id ) { person.id = id; }
-    
-    stateMap.people_cid_map[ cid] = person;
-    stateMap.people_db.insert( person);
+    stateMap.solar_body_db.insert( solarBody);
     return person;
   };
 
+  /*
   removePerson = function( person) {
     if( ! person) { return false; }
     if( person.id === configMap.anon_id) { return false; }
@@ -81,65 +56,32 @@ demoApp.model = (function () {
     }
     return true;
   };
-
-  people = (function() {
-    var get_by_cid, get_db, get_user, login, logout;
+  */
+  
+  solarBody = (function() {
+    var get_by_id, get_db, get_by_body_type;
     
-    get_by_cid = function( cid) {
-      return stateMap.people_cid_map[ cid];
+    get_by_id = function( byId) {
+      return stateMap.solar_body_db({ id: byId});
     };
 
-    get_db = function() { return stateMap.people_db; };
-
-    get_user = function() { return stateMap.user; };
-    
-    login = function( name) {
-      console.log( "isFakeData: " + isFakeData);
-      var sio = isFakeData ? spa.fake.mockSio : spa.data.getSio();
-      console.log( "sio: " , sio);
-      
-      stateMap.user = makePerson({
-        cid: makeCid(),
-        css_map: { top: 25, left: 25, 'background-color': '#8f8'},
-        name: name
-      });
-      
-      sio.on( 'userupdate', completeLogin);
-      sio.emit( 'adduser', {
-        cid: stateMap.user.cid,
-        css_map: stateMap.user.css_map,
-        name: stateMap.user.name
-      });
+    get_by_body_type = function( byBodyType) {
+        return stateMap.solar_body_db({ bodyType: byBodyType});
     };
 
-    logout = function() {
-      var user = stateMap.user;
-      
-      chat._leave();
-      stateMap.user = stateMap.anon_user;
-      clearPeopleDb();
-      
-      $.gevent.publish( 'spa-logout', [user]);
-    };
+    get_db = function() { return stateMap.solar_body_db; };
+
    
     return {
-      get_by_cid: get_by_cid,
-      get_db: get_db,
-      get_user: get_user,
-      login: login,
-      logout: logout
+      get_by_id: get_by_id,
+      get_by_body_type: get_by_body_type,
+      get_db: get_db
     };
   }());
 
   
   initModule = function() {
-    var i, solar_body_list, person_map;
-    stateMap.guest_user = makePerson({
-      cid : configMap.anon_id,
-      id : configMap.anon_id,
-      name: 'Anonymous'
-    });
-    stateMap.user = stateMap.anon_user;
+    var i, solar_body_list;
   };
 
   setDataMode = function( arg_str ) {
@@ -148,8 +90,7 @@ demoApp.model = (function () {
   
   return{
     initModule: initModule,
-    chat: chat,
-    people: people,
+    solarBody: solarBody,
     setDataMode: setDataMode
   };
 }());
