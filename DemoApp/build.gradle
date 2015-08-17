@@ -8,7 +8,7 @@ buildscript {
     dependencies {
         classpath(
             [ "org.codehaus.groovy.modules.http-builder:http-builder:0.7.+"],
-            [ "net.serenity-bdd:serenity-gradle-plugin:1.0.+" ],
+            [ "net.serenity-bdd:serenity-gradle-plugin:$serenityVersion" ],
             [ "me.ineson.gradle:mochaJsPlugin:0.+" ]
         ) 
         
@@ -118,9 +118,10 @@ dependencies {
 
   // TODO: "accTestCompile(" - note currently the eclipse plugin does not pick up the acceptance test classpath
   testCompile(
-    [ "net.serenity-bdd:core:1.0.+" ],
-    [ "net.serenity-bdd:serenity-spring:1.0.+" ],
-    [ "net.serenity-bdd:serenity-junit:1.0.+" ],
+//    [ "net.serenity-bdd:core:1.0.+" ],
+    [ "net.serenity-bdd:serenity-core:$serenityVersion" ],
+    [ "net.serenity-bdd:serenity-spring:$serenityVersion" ],
+    [ "net.serenity-bdd:serenity-junit:$serenityVersion" ],
     [ "net.serenity-bdd:serenity-cucumber:1.0.+" ],
     [ "net.serenity-bdd:serenity-jbehave:1.0.+" ],
     [ "org.slf4j:slf4j-simple:1.+" ]
