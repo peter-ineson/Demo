@@ -9,7 +9,7 @@ demoApp.data = (function() {
   'use strict';
   var
     stateMap = { sio: null },
-    loadPlanets, initModule;
+    loadSun, loadPlanets, initModule;
   
 /*
   makeSio = function() {
@@ -38,23 +38,35 @@ demoApp.data = (function() {
   //encodeURIComponent( "bodyType=PLANET");
   loadPlanets = function() {
 	$.getJSON( "rest/solarBodies", { where: "bodyType=PLANET"} , function( planets ) {
-        console.log( "planets = ", planets )
+      //console.log( "planets = ", planets )
       for (var planetIdx in planets) {
-        console.log( "planetIdx = ", planetIdx );
-        console.log( "Planet = ",  planets[ planetIdx]);
+        //console.log( "planetIdx = ", planetIdx );
+        //console.log( "Planet = ",  planets[ planetIdx]);
 		demoApp.model.makeSolarBody(planets[ planetIdx]);
       }
+      events.emit('onPlanetsLoaded');
     });
   };
 
+  loadSun = function() {
+		$.getJSON( "rest/solarBodies", { where: "bodyType=SUN"} , function( bodies ) {
+	      //console.log( "sun = ", bodies )
+	      for (var sunIdx in bodies) {
+	        //console.log( "sunIdx = ", sunIdx );
+	        //console.log( "Sun = ",  bodies[ sunIdx]);
+			demoApp.model.makeSolarBody(bodies[ sunIdx]);
+	      }
+	      events.emit('onPlanetsLoaded');
+	    });
+	  };
   
-  initModule = function() {};
+  initModule = function() { };
   
   return {
+	loadSun: loadSun,
 	loadPlanets: loadPlanets,
     initModule: initModule
   };
 
 }());
-
 

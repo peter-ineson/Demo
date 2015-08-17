@@ -42,7 +42,7 @@ demoApp.model = (function () {
     solarBody.mass = solarBody_map.mass;
     
     stateMap.solar_body_db.insert( solarBody);
-    return person;
+    return solarBody;
   };
 
   /*
@@ -90,6 +90,7 @@ demoApp.model = (function () {
   
   return{
     initModule: initModule,
+    makeSolarBody: makeSolarBody,
     solarBody: solarBody,
     setDataMode: setDataMode
   };

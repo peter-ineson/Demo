@@ -1,5 +1,5 @@
 /* jshint undef: true, unused: true, strict: true */
-/* global demoApp.shell */
+/* global demoApp.dialog */
 
 demoApp.dialog = (function( ) {
   'use strict';

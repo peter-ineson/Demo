@@ -29,10 +29,13 @@
 
     </style>
 
+    <script src='<c:url value="/js/lib/jsviews-1.0.0-alpha.min.js" />'></script>
     <script src='<c:url value="/js/lib/taffy-2.7.js" />'></script>
+    <script src='<c:url value="/webjars/EventEmitter/4.2.7/EventEmitter.js" />'></script>
 
     <script src='<c:url value="/js/demoApp.js" />'></script>
     <script src='<c:url value="/js/demoApp.dialog.js" />'></script>
+    <script src='<c:url value="/js/demoApp.shell.js" />'></script>
     <c:if test="${security.guest}">
       <script src='<c:url value="/js/demoApp.dialog.login.js" />'></script>
     </c:if>
@@ -42,8 +45,16 @@
      
     <script type="text/javascript">
 
+    function Events(){
+        EventEmitter.call(this);
+        // custom initialization here
+      }
+    Events.prototype = Object.create(EventEmitter.prototype);
+    //Job.prototype = new EventEmitter;
+    events = new Events();
     
       $(document).ready(function() {
+    	  
     	  demoApp.initModule();
     	  
         $( "#menuOption_logout" ).on("click", demoApp.logout);

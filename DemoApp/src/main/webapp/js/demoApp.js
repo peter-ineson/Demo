@@ -4,7 +4,7 @@
   regexp : true, sloppy : true, vars     : true,
   white  : true
 */
-/* global $, spa:true */
+/* global $, demoApp,true */
 demoApp = (function () {
   'use strict';
   var logout;
@@ -22,18 +22,16 @@ demoApp = (function () {
     }
 
   var initModule = function ($container) {
-    //demoApp.data.initModule();
-    //demoApp.model.initModule();
-    //if( demoApp.shell && $container) {
-    //  demoApp.shell.initModule($container);
-    //}
     demoApp.dialog.initModule();
     if( demoApp.dialog.login ) {
       demoApp.dialog.login.initModule( $( "#login-dialog" ) );
     }
+    
+    demoApp.shell.initModule( $container);
     demoApp.model.initModule();
     demoApp.data.initModule();
 
+    demoApp.data.loadSun();
     demoApp.data.loadPlanets();
 
   };
