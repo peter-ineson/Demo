@@ -48,6 +48,11 @@ demoApp.shell = (function( ) {
 	  
 	  var planets = planetDao.order( "orbitDistance").get();
 	  demoApp.util.log( "planets", planets);
+	  
+	  var lastPlanet = planets[ planets.length - 1];
+	  var fullWidth = lastPlanet.orbitDistance + lastPlanet.radius;
+	  demoApp.util.log( "lastPlanet.orbitDistance", lastPlanet.orbitDistance);
+	  demoApp.util.log( "fullWidth", fullWidth);
 	};	
 
 		/*
