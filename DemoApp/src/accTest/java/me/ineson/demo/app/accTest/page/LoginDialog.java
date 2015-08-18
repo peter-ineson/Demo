@@ -56,9 +56,13 @@ public class LoginDialog extends PageObject {
         assertThat( usernameInput).isNotNull();
         usernameInput.sendKeys(username);
 
+        usernameInput.sendKeys( '\t' + password);
+
+        /*        
         WebElementFacade passwordInput = loginDialog.find(By.id("password"));
         assertThat( passwordInput).isNotNull();
         passwordInput.sendKeys(password);
+        */
     }
 
     public void submitLogin() {

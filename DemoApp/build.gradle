@@ -201,6 +201,7 @@ task intTestReport(dependsOn: jar, type: TestReport) {
 
 task accTest(type: Test) {
 
+	
 //    systemProperty "browser", "chrome"
     systemProperty "serenity.use.unique.browser", "false"
     systemProperty "thucydides.use.unique.browser", "false"

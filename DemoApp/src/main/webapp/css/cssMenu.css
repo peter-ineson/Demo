@@ -18,7 +18,7 @@
   display: block;
   background: #2b2f3a;
   width: 100%;
-  z-index: 500;
+  z-index: 1;
   border: 2px solid #7A8189;
   border-radius: 22px;
   -moz-border-radius: 22px;
@@ -132,7 +132,7 @@
   -ms-transition: opacity .3s ease, top .25s ease;
   -o-transition: opacity .3s ease, top .25s ease;
   transition: opacity .3s ease, top .25s ease;
-  z-index: 1000;
+  z-index: 2;
 }
 #cssmenu ul ul ul {
   top: 37px;
