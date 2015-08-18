@@ -9,7 +9,9 @@ demoApp.data = (function() {
   'use strict';
   var
     stateMap = { sio: null },
-    loadSun, loadPlanets, initModule;
+    loadSun, loadPlanets,
+    getSun, getPlanets, getPlanetById,
+    initModule;
   
 /*
   makeSio = function() {
@@ -59,13 +61,13 @@ demoApp.data = (function() {
 	      events.emit('onPlanetsLoaded');
 	    });
 	  };
-  
+
   initModule = function() { };
   
   return {
 	loadSun: loadSun,
 	loadPlanets: loadPlanets,
-    initModule: initModule
+	initModule: initModule
   };
 
 }());

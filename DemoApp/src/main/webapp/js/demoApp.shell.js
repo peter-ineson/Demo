@@ -30,7 +30,24 @@ demoApp.shell = (function( ) {
 	};
 
 	displaySolarSystem = function() { 
-		console.log( "displaySolarSystem");
+	  demoApp.util.log( "displaySolarSystem");
+	  var dao = demoApp.model.solarBody;
+	  var sunDao = dao.get_by_body_type(dao.BODY_TYPE_SUN);
+	  demoApp.util.log( "sun count: ", sunDao.count());
+	  if( sunDao.count() === 0) {
+		  return;
+	  }
+	  var sun = sunDao.first();
+	  demoApp.util.log( "sun", sun);
+	  
+	  var planetDao = dao.get_by_body_type(dao.BODY_TYPE_PLANET);
+	  demoApp.util.log( "planets count: ", planetDao.count());
+	  if( planetDao.count() === 0) {
+		  return;
+	  }
+	  
+	  var planets = planetDao.order( "orbitDistance").get();
+	  demoApp.util.log( "planets", planets);
 	};	
 
 		/*

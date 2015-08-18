@@ -59,13 +59,18 @@ demoApp.model = (function () {
   */
   
   solarBody = (function() {
-    var get_by_id, get_db, get_by_body_type;
+    var get_by_id, get_db, get_by_body_type,
+      BODY_TYPE_SUN = "SUN",
+      BODY_TYPE_PLANET = "PLANET"
+    ;
     
     get_by_id = function( byId) {
       return stateMap.solar_body_db({ id: byId});
     };
 
     get_by_body_type = function( byBodyType) {
+  	  demoApp.util.log( "by: " + byBodyType);
+
         return stateMap.solar_body_db({ bodyType: byBodyType});
     };
 
@@ -75,11 +80,13 @@ demoApp.model = (function () {
     return {
       get_by_id: get_by_id,
       get_by_body_type: get_by_body_type,
-      get_db: get_db
+      get_db: get_db,
+      
+      BODY_TYPE_SUN: BODY_TYPE_SUN,
+      BODY_TYPE_PLANET: BODY_TYPE_PLANET
     };
   }());
 
-  
   initModule = function() {
     var i, solar_body_list;
   };

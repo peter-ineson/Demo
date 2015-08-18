@@ -34,14 +34,16 @@
     <script src='<c:url value="/webjars/EventEmitter/4.2.7/EventEmitter.js" />'></script>
 
     <script src='<c:url value="/js/demoApp.js" />'></script>
+    <script src='<c:url value="/js/demoApp.util.js" />'></script>
+    <script src='<c:url value="/js/demoApp.model.js" />'></script>
+    <script src='<c:url value="/js/demoApp.data.js" />'></script>
+
+    <script src='<c:url value="/js/cssMenu.js" />'></script>
     <script src='<c:url value="/js/demoApp.dialog.js" />'></script>
     <script src='<c:url value="/js/demoApp.shell.js" />'></script>
     <c:if test="${security.guest}">
       <script src='<c:url value="/js/demoApp.dialog.login.js" />'></script>
     </c:if>
-    <script src='<c:url value="/js/cssMenu.js" />'></script>
-    <script src='<c:url value="/js/demoApp.model.js" />'></script>
-    <script src='<c:url value="/js/demoApp.data.js" />'></script>
      
     <script type="text/javascript">
 

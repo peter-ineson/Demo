@@ -42,4 +42,4 @@ demoApp = (function () {
   };
 }());
 
-
+var debug = true;
