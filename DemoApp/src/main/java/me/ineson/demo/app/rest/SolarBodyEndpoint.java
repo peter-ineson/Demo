@@ -14,11 +14,8 @@
  */
 package me.ineson.demo.app.rest;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -32,9 +29,8 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.StatusType;
-import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.StreamingOutput;
 
 import me.ineson.demo.app.Config;
 import me.ineson.demo.service.SolarBodyImage;
@@ -156,6 +152,7 @@ public class SolarBodyEndpoint {
           })
           .type( image.getContentType())
           .header("content-attachment" , "filename=" + image.getFilename())
+          .header("Content-Length" , image.getImage().length)
           .build();
             
             //return 

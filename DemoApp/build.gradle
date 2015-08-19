@@ -81,7 +81,6 @@ dependencies {
     //compile "org.springframework:spring-context:" + springVersion
 
   compile(
-    [ "commons-io:commons-io:2.+" ],
     [ "commons-configuration:commons-configuration:1.+" ],
     [ "commons-collections:commons-collections:3.2.+" ],
     [ "org.springframework:spring-webmvc:$springVersion" ],
@@ -118,6 +117,7 @@ dependencies {
 
   // TODO: "accTestCompile(" - note currently the eclipse plugin does not pick up the acceptance test classpath
   testCompile(
+    [ "net.serenity-bdd:core:1.0.+" ],
 //    [ "net.serenity-bdd:core:1.0.+" ],
     [ "net.serenity-bdd:serenity-core:$serenityVersion" ],
     [ "net.serenity-bdd:serenity-spring:$serenityVersion" ],

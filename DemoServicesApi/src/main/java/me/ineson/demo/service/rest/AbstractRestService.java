@@ -36,7 +36,7 @@ public abstract class AbstractRestService<T> {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractRestService.class);
 
-    private final static Client CLIENT = ClientBuilder.newClient();
+    protected final static Client CLIENT = ClientBuilder.newClient();
 
     private final Class<T> dtoClass;
 

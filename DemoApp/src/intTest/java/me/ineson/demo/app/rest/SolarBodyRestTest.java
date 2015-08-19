@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response.Status;
 
 import me.ineson.demo.app.DbConstants;
 import me.ineson.demo.service.SolarBody;
@@ -249,6 +250,39 @@ public class SolarBodyRestTest {
         Assert.assertNotNull("outer orbit", body);
         Assert.assertEquals("outer orbit id", DbConstants.NEPTUNE_ID, body.getId());
         Assert.assertEquals("outer orbit body id", DbConstants.SUN_ID, body.getOrbitBodyId());
+    }
+
+    /**
+     */
+    @Test
+    public void testGetImage() {
+        SolarBodyRestClient client = new SolarBodyRestClient(MediaType.APPLICATION_JSON_TYPE);
+        log.debug("test testGetImageNotFound: with new client to: " + HOST_URL);
+        SolarBodyRestClient.FileResponse response = client.getImage(HOST_URL, DbConstants.EARTH_ID);
+
+        log.debug("File response ok: {}", response);
+        Assert.assertNotNull(response);
+        Assert.assertEquals("status", Status.OK.getStatusCode(), response.getStatus());
+        Assert.assertTrue("response length " + response.getContentLength(), (response.getContentLength() > 0));
+        Assert.assertNotNull("file content", response.getContent());
+        Assert.assertEquals("content length match", response.getContent().length, response.getContentLength());
+        Assert.assertNotNull("MediaType", response.getMediaType());
+        Assert.assertNotNull("Filename", response.getFilename());
+    }
+    
+    /**
+     */
+    @Test
+    public void testGetImageNotFound() {
+        SolarBodyRestClient client = new SolarBodyRestClient(MediaType.APPLICATION_JSON_TYPE);
+        log.debug("test testGetImageNotFound: with new client to: " + HOST_URL);
+        SolarBodyRestClient.FileResponse response = client.getImage(HOST_URL, Long.MAX_VALUE);
+
+        log.debug("File response 404: {}", response);
+        Assert.assertNotNull(response);
+        Assert.assertEquals("status", Status.NOT_FOUND.getStatusCode(), response.getStatus());
+        Assert.assertNull("file content", response.getContent());
+        Assert.assertNull("Filename", response.getFilename());
     }
 
 }

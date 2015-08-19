@@ -36,6 +36,7 @@ jar.dependsOn copyWSDLs
 
 dependencies {
 	compile(
+    [ "commons-io:commons-io:2.+" ],
     [ "javax.servlet:javax.servlet-api:+" ],
     [ "javax.ws.rs:javax.ws.rs-api:2.+" ],
     [ "org.glassfish.jersey.containers:jersey-container-servlet:2.+" ],
