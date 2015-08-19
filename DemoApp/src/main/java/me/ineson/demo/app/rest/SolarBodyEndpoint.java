@@ -14,20 +14,31 @@
  */
 package me.ineson.demo.app.rest;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.StatusType;
+import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.core.Response.Status;
 
 import me.ineson.demo.app.Config;
+import me.ineson.demo.service.SolarBodyImage;
+import me.ineson.demo.service.rest.SolarBodyImageRestClient;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -122,5 +133,33 @@ public class SolarBodyEndpoint {
 
         return Response.ok( result, response.getMediaType()).build();
     }    
-    
+
+    @GET @Path("{solarBodyId}/image")
+    public Response findImageById(
+            @PathParam("solarBodyId") Long solarBodyId) {
+        log.debug("Find solar body image by id {}", solarBodyId);
+
+        SolarBodyImageRestClient client = new SolarBodyImageRestClient();
+        SolarBodyImage image = client.findById( config.getStringManadtory( Config.SERVICE_REST_URL), solarBodyId);
+
+        if( image == null) {
+            return Response.status(Status.NOT_FOUND).build();
+        }
+        
+        
+        return Response.ok().entity(new StreamingOutput() {
+            @Override
+            public void write(OutputStream output) throws IOException, WebApplicationException {
+                output.write(image.getImage());
+                output.flush();
+            }
+          })
+          .type( image.getContentType())
+          .header("content-attachment" , "filename=" + image.getFilename())
+          .build();
+            
+            //return 
+        //Response.ok(image, MediaType.APPLICATION_OCTET_STREAM).header("content-attachment; filename=image_from_server.png") .build();
+    }
+
 }
