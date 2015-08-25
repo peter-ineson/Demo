@@ -15,11 +15,13 @@
 package me.ineson.demo.service.utils;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import me.ineson.demo.service.db.domain.SolarBody;
+import me.ineson.demo.service.db.domain.SolarBodyImage;
 import me.ineson.demo.service.db.domain.SolarBodyType;
 
 import org.junit.Assert;
@@ -67,13 +69,15 @@ public class SolarBodyHelperTest {
         Assert.assertNull( dtoSolarBody.getRadius());
         Assert.assertNull( dtoSolarBody.getOrbitBodyId());
         Assert.assertNull( dtoSolarBody.getOrbitDistance());
+        Assert.assertNull( dtoSolarBody.getImageWidth());
+        Assert.assertNull( dtoSolarBody.getImageHeight());
     }
 
     /**
      * Test method for {@link me.ineson.demo.service.utils.SolarBodyHelper#convert(me.ineson.demo.service.db.domain.SolarBody)}.
      */
     @Test
-    public void testConvert() {
+    public void testConvertNoImage() {
         SolarBody dbSolarBody = new SolarBody();
         dbSolarBody.setId( 6L);
         dbSolarBody.setBodyType( SolarBodyType.Planet);
@@ -82,7 +86,7 @@ public class SolarBodyHelperTest {
         dbSolarBody.setMass( MASS_55);
         dbSolarBody.setRadius( 400L);
         dbSolarBody.setOrbitDistance(777L);
-        
+
         SolarBody dbOrbitsBody = new SolarBody();
         dbOrbitsBody.setId( 2L);
         dbSolarBody.setOrbitBody(dbOrbitsBody);
@@ -98,6 +102,49 @@ public class SolarBodyHelperTest {
         Assert.assertEquals( "radius check", Long.valueOf(400L), dtoSolarBody.getRadius());
         Assert.assertEquals( "orbit body id check", Long.valueOf(2L), dtoSolarBody.getOrbitBodyId());
         Assert.assertEquals( "orbit distance check", Long.valueOf(777L), dtoSolarBody.getOrbitDistance());
+        Assert.assertNull( "image width", dtoSolarBody.getImageWidth());
+        Assert.assertNull( "image height", dtoSolarBody.getImageHeight());
+    }
+    
+    /**
+     * Test method for {@link me.ineson.demo.service.utils.SolarBodyHelper#convert(me.ineson.demo.service.db.domain.SolarBody)}.
+     */
+    @Test
+    public void testConvert() {
+        SolarBody dbSolarBody = new SolarBody();
+        dbSolarBody.setId( 6L);
+        dbSolarBody.setBodyType( SolarBodyType.Planet);
+        dbSolarBody.setName( "t1");
+        dbSolarBody.setDescription( "t2");
+        dbSolarBody.setMass( MASS_55);
+        dbSolarBody.setRadius( 400L);
+        dbSolarBody.setOrbitDistance(777L);
+
+        final BigInteger imageWidth = BigInteger.valueOf( 223L);
+        final BigInteger imageHeight = BigInteger.valueOf( 324L);
+        SolarBodyImage dbSolarBodyImage = new SolarBodyImage();
+        dbSolarBodyImage.setSolarBodyId( 6L);
+        dbSolarBodyImage.setImageWidth(imageWidth);
+        dbSolarBodyImage.setImageHeight(imageHeight);
+        dbSolarBody.setImage(dbSolarBodyImage);
+
+        SolarBody dbOrbitsBody = new SolarBody();
+        dbOrbitsBody.setId( 2L);
+        dbSolarBody.setOrbitBody(dbOrbitsBody);
+
+        me.ineson.demo.service.SolarBody dtoSolarBody = SolarBodyHelper.convert(dbSolarBody);
+        
+        Assert.assertNotNull( dtoSolarBody);
+        Assert.assertEquals( "id check", Long.valueOf(6L), dtoSolarBody.getId());
+        Assert.assertEquals( "body type check", me.ineson.demo.service.SolarBodyType.PLANET, dtoSolarBody.getBodyType());
+        Assert.assertEquals( "name check", "t1", dtoSolarBody.getName());
+        Assert.assertEquals( "desc check", "t2", dtoSolarBody.getDescription());
+        Assert.assertEquals( "mass check", MASS_55, dtoSolarBody.getMass());
+        Assert.assertEquals( "radius check", Long.valueOf(400L), dtoSolarBody.getRadius());
+        Assert.assertEquals( "orbit body id check", Long.valueOf(2L), dtoSolarBody.getOrbitBodyId());
+        Assert.assertEquals( "orbit distance check", Long.valueOf(777L), dtoSolarBody.getOrbitDistance());
+        Assert.assertEquals( "image width", imageWidth, dtoSolarBody.getImageWidth());
+        Assert.assertEquals( "image height", imageHeight, dtoSolarBody.getImageHeight());
     }
 
 

@@ -13,7 +13,10 @@ demoApp.shell = (function( ) {
       resize_interval: 200
 	},
     stateMap = {
-        $container: undefined
+        $container: undefined,
+        $displayContainer: undefined,
+        $template: undefined,
+        restUrl: undefined
     },
 	jQueryMap = {},
 	
@@ -25,7 +28,10 @@ demoApp.shell = (function( ) {
 	setJqueryMap = function() {
 	  var $container = stateMap.$container;
 	  jQueryMap = {
-	    $container : $container
+	    $container : $container,
+	    $displayContainer : stateMap.$displayContainer,
+	    $template : stateMap.$template,
+	    restUrl : stateMap.restUrl
 	  };
 	};
 
@@ -53,6 +59,25 @@ demoApp.shell = (function( ) {
 	  var fullWidth = lastPlanet.orbitDistance + lastPlanet.radius;
 	  demoApp.util.log( "lastPlanet.orbitDistance", lastPlanet.orbitDistance);
 	  demoApp.util.log( "fullWidth", fullWidth);
+
+	  var templateData = {
+	    restUrl: jQueryMap.restUrl,
+	    sun: sun,
+	    planets: planets
+	  };
+
+	  var htmlOutput = jQueryMap.$template.render(templateData);
+	  demoApp.util.log( "htmlOutput", htmlOutput);
+	  jQueryMap.$displayContainer.html(htmlOutput);
+
+	  demoApp.util.log( "done ....................");
+	  
+	  /*
+	  templateShellData.restUrl = "<c:url value='/rest/solarBodies' />";
+
+	  var template = $.templates("#templateShell");
+
+	  */
 	};	
 
 		/*
@@ -70,12 +95,14 @@ demoApp.shell = (function( ) {
 
     // ---- Init
 		
-  initModule = function( $container) {
+  initModule = function( $container, restUrl) {
     
-	  stateMap.$container = $container;
-//	  $container.html( configMap.main_html);
-//	  setJqueryMap();
-		  
+    stateMap.$container = $container;
+    stateMap.$displayContainer = $container.find( "#shellContainer");
+    stateMap.$template = $.templates( "#templateShell");
+    stateMap.restUrl = restUrl;
+
+    setJqueryMap();
 
     events.on('onPlanetsLoaded', displaySolarSystem);
       

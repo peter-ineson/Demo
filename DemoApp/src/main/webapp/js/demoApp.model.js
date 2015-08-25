@@ -40,6 +40,8 @@ demoApp.model = (function () {
     solarBody.orbitDistance = solarBody_map.orbitDistance;
     solarBody.radius = solarBody_map.radius;
     solarBody.mass = solarBody_map.mass;
+    solarBody.imageWidth = solarBody_map.imageWidth;
+    solarBody.imageHeight = solarBody_map.imageHeight;
     
     stateMap.solar_body_db.insert( solarBody);
     return solarBody;

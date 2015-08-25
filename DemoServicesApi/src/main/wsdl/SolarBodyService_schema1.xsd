@@ -133,6 +133,8 @@
         <xs:element name="orbitDistance" type="xs:long" minOccurs="0"/>
         <xs:element name="radius" type="xs:long" minOccurs="0"/>
         <xs:element name="mass" type="xs:decimal" minOccurs="0"/>
+        <xs:element name="imageWidth" type="xs:integer" minOccurs="0"/>
+        <xs:element name="imageHeight" type="xs:integer" minOccurs="0"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -169,9 +171,9 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element name="solarBodyId" type="xs:long" minOccurs="0"/>
-        <xs:element name="image" type="xs:base64Binary" minOccurs="0"/>
         <xs:element name="filename" type="xs:string" minOccurs="0"/>
         <xs:element name="contentType" type="xs:string" minOccurs="0"/>
+        <xs:element name="image" type="xs:base64Binary" minOccurs="0"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>

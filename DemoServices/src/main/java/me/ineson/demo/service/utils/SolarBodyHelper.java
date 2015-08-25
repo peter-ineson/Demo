@@ -19,6 +19,7 @@ import java.util.List;
 
 import me.ineson.demo.service.SolarBodyType;
 import me.ineson.demo.service.db.domain.SolarBody;
+import me.ineson.demo.service.db.domain.SolarBodyImage;
 
 /**
  * Set of utilities for converting between DTO and DB object for the solar bodies.
@@ -79,6 +80,13 @@ public class SolarBodyHelper {
             solarBody.setOrbitDistance(dbSolarBody.getOrbitDistance());
             solarBody.setRadius(dbSolarBody.getRadius());
             solarBody.setMass(dbSolarBody.getMass());
+            
+            SolarBodyImage dbSolarBodyImage = dbSolarBody.getImage();
+            if( dbSolarBodyImage != null) {
+            	solarBody.setImageWidth( dbSolarBodyImage.getImageWidth());
+            	solarBody.setImageHeight( dbSolarBodyImage.getImageHeight());
+            }
+
         }
 
         return solarBody;

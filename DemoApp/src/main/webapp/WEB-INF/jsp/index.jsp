@@ -57,7 +57,9 @@
     
       $(document).ready(function() {
     	  
-    	  demoApp.initModule();
+    	  var baseUrl = "<c:url value='/' />";
+
+    	  demoApp.initModule( $('#demoApp'), baseUrl);
     	  
         $( "#menuOption_logout" ).on("click", demoApp.logout);
         if( demoApp.dialog.login ) {
@@ -69,8 +71,8 @@
 
   </head>
   <body>
-  
-		<div id='cssmenu'>
+    <div id="demoApp">
+	  <div id='cssmenu'>
 		<ul>
 		   <li><a href='#'><span>Home</span></a></li>
 		   <li class='active has-sub'><a href='#'><span>View</span></a>
@@ -102,12 +104,17 @@
 		   </li>
 		</ul>
 		</div>
-    <div id="menuBackground">
-    </div>  
+      <div id="menuBackground">
+      </div>  
     
-    <c:if test="${security.guest}">
-      <jsp:include page="dialog/login.html"/>
-    </c:if>
+      <p>Hello start</p>
+      <div id="shellContainer"></div>
+      <p>Hello end</p>
+      <c:if test="${security.guest}">
+        <jsp:include page="dialog/login.jsp"/>
+      </c:if>
+      <jsp:include page="shell.jsp"/>
+    </div>  
 
   </body>
 </html>

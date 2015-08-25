@@ -21,13 +21,16 @@ demoApp = (function () {
       });           
     }
 
-  var initModule = function ($container) {
+  var initModule = function ($container, baseUrl) {
+	  
+    var restUrl = baseUrl + "rest";
+
     demoApp.dialog.initModule();
     if( demoApp.dialog.login ) {
-      demoApp.dialog.login.initModule( $( "#login-dialog" ) );
+      demoApp.dialog.login.initModule( $container.find( "#login-dialog") );
     }
-    
-    demoApp.shell.initModule( $container);
+
+    demoApp.shell.initModule( $container, restUrl + "/solarBodies");
     demoApp.model.initModule();
     demoApp.data.initModule();
 

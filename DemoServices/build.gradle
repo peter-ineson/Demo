@@ -136,14 +136,19 @@ test {
 }
 
 
-task exportDb() << {
-  ant.echo(message: "Exporting db" )
-/*    
+task updateImages(type:JavaExec) {
+
   systemProperties "db.driver": "com.mysql.jdbc.Driver"
-  systemProperties "db.url": "jdbc:mysql://localhost:3306/solarSystemTest"
-  systemProperties "db.userid": "planetTest"
+  systemProperties "db.url": "jdbc:mysql://localhost:3306/solarSystem"
+  systemProperties "db.userid": "planet"
   systemProperties "db.password": "plan3t"
-*/
+   
+  main = "me.ineson.demo.helper.DbUpdateImageDimensions"
+  classpath = sourceSets.test.runtimeClasspath
+}
+
+task exportDb(dependsOn: updateImages) << {
+  ant.echo(message: "Exporting db" )
 
   ant.taskdef(name: 'dbunit', 
       classname: 'org.dbunit.ant.DbUnitTask',
@@ -152,12 +157,21 @@ task exportDb() << {
 
   ant.dbunit(
     driver: "com.mysql.jdbc.Driver",
+    url: "jdbc:mysql://localhost:3306/solarSystem",
+    userid: "planet",
+    password: "plan3t"
+  ) {
+    export(dest: 'src/main/domain/dbUnitExport.xml', format: 'flat')
+  }
+/*  ant.dbunit(
+    driver: "com.mysql.jdbc.Driver",
     url: "jdbc:mysql://localhost:3306/solarSystemTest",
     userid: "planetTest",
     password: "plan3t"
   ) {
     export(dest: 'src/main/domain/dbUnitExport.xml', format: 'flat')
   }
+  */
 }
 
 tasks.withType(Test) {

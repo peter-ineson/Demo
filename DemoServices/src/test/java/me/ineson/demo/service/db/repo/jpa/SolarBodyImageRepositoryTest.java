@@ -15,6 +15,9 @@
 package me.ineson.demo.service.db.repo.jpa;
 
 import static org.junit.Assert.assertNull;
+
+import java.math.BigInteger;
+
 import me.ineson.demo.service.db.DbConstants;
 import me.ineson.demo.service.db.domain.SolarBody;
 import me.ineson.demo.service.db.domain.SolarBodyImage;
@@ -87,6 +90,14 @@ public class SolarBodyImageRepositoryTest {
         SolarBody sun = image.getSolarBody();
         Assert.assertNotNull(sun);
         Assert.assertEquals(DbConstants.SUN_ID, sun.getId());
+        
+        Assert.assertNotNull("not null imageWidth", image.getImageWidth());
+        int intValue = image.getImageWidth().intValue();
+        Assert.assertTrue("value of imageWidth: " + intValue, (intValue > 100 && intValue < 1000));
+
+        Assert.assertNotNull("not null imageHeight", image.getImageHeight());
+        intValue = image.getImageHeight().intValue();
+        Assert.assertTrue("value of imageHeight: " + intValue, (intValue > 100 && intValue < 1000));
 
         assertNull("No image return null", imageRepository.findOne(Long.MIN_VALUE));
     }
@@ -105,6 +116,9 @@ public class SolarBodyImageRepositoryTest {
      */
     @Test
     public void testDeleteAndInsert() {
+        final BigInteger imageWidth = BigInteger.valueOf( 223L);
+        final BigInteger imageHeight = BigInteger.valueOf( 324L);
+
         SolarBodyImage image = imageRepository.findOne(DbConstants.MARS_ID);
         Assert.assertNotNull(image);
         Assert.assertNotEquals(DbConstants.NEW_IMAGE,image.getImage());
@@ -115,6 +129,8 @@ public class SolarBodyImageRepositoryTest {
         
         SolarBodyImage newImage = new SolarBodyImage();
         newImage.setSolarBodyId(DbConstants.MARS_ID);
+        newImage.setImageWidth(imageWidth);
+        newImage.setImageHeight(imageHeight);
         newImage.setImage(DbConstants.NEW_IMAGE);
         newImage.setFilename("newImage.png");
         newImage.setContentType(MediaType.IMAGE_PNG_VALUE);
@@ -126,6 +142,8 @@ public class SolarBodyImageRepositoryTest {
         Assert.assertEquals(DbConstants.NEW_IMAGE,image.getImage());
         Assert.assertEquals( "image filename", "newImage.png", image.getFilename());
         Assert.assertEquals( "image contentType", MediaType.IMAGE_PNG_VALUE, image.getContentType());
+        Assert.assertEquals( "image width", imageWidth, image.getImageWidth());
+        Assert.assertEquals( "image height", imageHeight, image.getImageHeight());
     }
 
     /**
@@ -133,21 +151,27 @@ public class SolarBodyImageRepositoryTest {
      */
     @Test
     public void testSave() {
-        SolarBodyImage image = imageRepository.findOne(DbConstants.NEPTUNE_ID);
+        final BigInteger imageWidth = BigInteger.valueOf( 150L);
+        final BigInteger imageHeight = BigInteger.valueOf( 244L);
+
+    	SolarBodyImage image = imageRepository.findOne(DbConstants.NEPTUNE_ID);
         Assert.assertNotNull(image);
         Assert.assertNotEquals(DbConstants.NEW_IMAGE,image.getImage());
 
         image.setImage(DbConstants.NEW_IMAGE);
         image.setFilename("newImage2.gif");
         image.setContentType(MediaType.IMAGE_GIF_VALUE);
+        image.setImageWidth(imageWidth);
+        image.setImageHeight(imageHeight);
         imageRepository.save(image);
-        
+
         SolarBodyImage savedImage = imageRepository.findOne(DbConstants.NEPTUNE_ID);
         Assert.assertNotNull(savedImage);
         Assert.assertEquals(DbConstants.NEW_IMAGE,savedImage.getImage());
         Assert.assertEquals( "image filename", "newImage2.gif", image.getFilename());
         Assert.assertEquals( "image contentType", MediaType.IMAGE_GIF_VALUE, image.getContentType());
+        Assert.assertEquals( "image width", imageWidth, image.getImageWidth());
+        Assert.assertEquals( "image height", imageHeight, image.getImageHeight());
     }
-
 
 }

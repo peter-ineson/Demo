@@ -236,6 +236,14 @@ public class SolarBodyRestTest {
         Assert.assertNull("sun orbit distance", body.getOrbitDistance());
         Assert.assertEquals("sun radius", Long.valueOf(696342L), body.getRadius());
         Assert.assertEquals("sun mass", 0, new BigDecimal("1.989E30").compareTo(body.getMass()));
+ 
+        Assert.assertNotNull("not null imageWidth", body.getImageWidth());
+        int intValue = body.getImageWidth().intValue();
+        Assert.assertTrue("value of imageWidth: " + intValue, (intValue > 100 && intValue < 1000));
+
+        Assert.assertNotNull("not null imageHeight", body.getImageHeight());
+        intValue = body.getImageHeight().intValue();
+        Assert.assertTrue("value of imageHeight: " + intValue, (intValue > 100 && intValue < 1000));
     }
 
     /**

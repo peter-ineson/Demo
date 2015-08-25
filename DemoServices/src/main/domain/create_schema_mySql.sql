@@ -26,9 +26,9 @@ CREATE TABLE `SolarBodyImage` (
   `solarBodyId` INT NOT NULL,
   `filename` VARCHAR(255) NOT NULL,
   `contentType` VARCHAR(255) NOT NULL,
-  `image` MEDIUMBLOB NOT NULL,
   `imageWidth` INT,
   `imageHeight` INT,
+  `image` MEDIUMBLOB NOT NULL,
   PRIMARY KEY (solarBodyId),
   CONSTRAINT `FK_SolarBody_solarBodyImageId`
     FOREIGN KEY ( `solarBodyId`) REFERENCES `SolarBody` (`id`)  

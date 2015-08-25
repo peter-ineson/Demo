@@ -15,6 +15,7 @@
 package me.ineson.demo.service.db.domain;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -53,12 +54,18 @@ public class SolarBodyImage implements Serializable {
     @JoinColumn(name = "solarBodyId")    
 	@Getter@Setter private SolarBody solarBody;
 
-	@Column( nullable=false)
-    @Getter@Setter private byte image[];
-
     @Column( nullable=false)
     @Getter@Setter private String filename;
 
     @Column( nullable=false)
     @Getter@Setter private String contentType;
+
+    @Column( nullable=false)
+    @Getter@Setter private BigInteger imageHeight;
+
+    @Column( nullable=false)
+    @Getter@Setter private BigInteger imageWidth;
+
+    @Column( nullable=false)
+    @Getter@Setter private byte image[];
 }
