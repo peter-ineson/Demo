@@ -80,8 +80,8 @@ public class SolarBodyImageRepositoryTest {
         Assert.assertNotNull(image);
         Assert.assertNotNull("not null image", image.getImage());
         Assert.assertTrue("image length", image.getImage().length > 1024);
-        Assert.assertEquals( "image filename", "sun.jpg", image.getFilename());
-        Assert.assertEquals( "image contentType", MediaType.IMAGE_JPEG_VALUE, image.getContentType());
+        Assert.assertEquals( "image filename", "sun.png", image.getFilename());
+        Assert.assertEquals( "image contentType", MediaType.IMAGE_PNG_VALUE, image.getContentType());
         log.info("Sun: " + image);
         log.info("Sun: " + image.getSolarBody());
         SolarBody sun = image.getSolarBody();

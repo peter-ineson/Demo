@@ -32,7 +32,7 @@ public class SolarBodyImageEndpointTest {
         log.info("Solar body Image filename: " + image.getFilename());
         Assert.assertNotNull("sun image", image);
         Assert.assertEquals("image filename", "sun.jpg", image.getFilename());
-        Assert.assertEquals("image contentType", org.springframework.http.MediaType.IMAGE_JPEG_VALUE, image.getContentType());
+        Assert.assertEquals("image contentType", org.springframework.http.MediaType.IMAGE_PNG_VALUE, image.getContentType());
     }
 
     /**
