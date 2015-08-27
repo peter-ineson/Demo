@@ -26,3 +26,50 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#999999', endColorstr='#ededed', GradientType=0 );
 }    
 
+
+
+#shellContainer {
+  position: absolute;
+  top: 25%;
+  margin-top: 50px;
+  width: 99%;
+}
+
+/*
+div#shellContainer img {
+  top:0
+	}
+  vertical-align: middle;
+*/
+
+.displaySun {
+  height: 200px;
+  width:  200px; 
+  left: -80px;
+  position: relative;
+
+}
+
+.planetContainer {
+  width: 100%;
+  top: -100px;
+  height: 0px;
+  position: relative;
+  vertical-align: middle;
+
+/*
+
+*/  
+
+}
+
+.displayPlanet {
+  left: 40%;
+  position: absolute;
+
+/*	
+  position: relative;
+	float: left;
+  vertical-align: middle;
+*/
+	}

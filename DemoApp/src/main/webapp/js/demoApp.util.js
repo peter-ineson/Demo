@@ -7,7 +7,7 @@
 /*global $, io, spa */
 demoApp.util = (function() {
   'use strict';
-  var log;
+  var log, toInt;
 
   log = function( p1, p2) { 
     if( debug) {
@@ -19,8 +19,17 @@ demoApp.util = (function() {
     }
   };
   
+  toInt = function( num) { 
+    if( num == undefined) {
+      return 0;
+    }
+    return Math.round( num);
+
+  };
+	  
   return {
-	log: log
+	log: log,
+	toInt: toInt
   };
 
 }());

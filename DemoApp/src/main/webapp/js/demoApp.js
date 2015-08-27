@@ -23,7 +23,7 @@ demoApp = (function () {
 
   var initModule = function ($container, baseUrl) {
 	  
-    var restUrl = baseUrl + "rest";
+    var restUrl = baseUrl + "/rest";
 
     demoApp.dialog.initModule();
     if( demoApp.dialog.login ) {

@@ -1,11 +1,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script id="templateShell" type="text/x-jsrender">
-  <div>
-
-    <img src="{{:restUrl}}/{{:sun.id}}/image" alt="Sun" height="100" width="100"> 
+  <img id="sun_{{:sun.id}}" src="{{:restUrl}}/{{:sun.id}}/image" alt="Sun" title="Sun"
+       class="displaySun" width="{{:sunWidth}}" height="{{:sunHeight}}" >
+  <div class="planetContainer" >
     {{for planets ~url=restUrl}}
-      <img src="{{:~url}}/{{:id}}/image" alt="{{>name}}" height="50" width="50"> 
+      <img id="planet_{{:planet.id}}" src="{{:~url}}/{{:planet.id}}/image" alt="{{>planet.name}}" title="{{>planet.name}}"
+           width="{{:width}}" height="{{:height}}"
+           class="displayPlanet" style="top:{{:top}}px; left: {{: 15 + (#index * 10) }}%;" > 
     {{/for}}
-  </div>
+   </div>
 </script>

@@ -57,7 +57,7 @@
     
       $(document).ready(function() {
     	  
-    	  var baseUrl = "<c:url value='/' />";
+    	  var baseUrl = "<%=request.getContextPath()%>";
 
     	  demoApp.initModule( $('#demoApp'), baseUrl);
     	  
@@ -104,15 +104,14 @@
 		   </li>
 		</ul>
 		</div>
-      <div id="menuBackground">
-      </div>  
+      <div id="menuBackground"></div>  
     
-      <p>Hello start</p>
       <div id="shellContainer"></div>
-      <p>Hello end</p>
+      
       <c:if test="${security.guest}">
         <jsp:include page="dialog/login.jsp"/>
       </c:if>
+
       <jsp:include page="shell.jsp"/>
     </div>  
 
