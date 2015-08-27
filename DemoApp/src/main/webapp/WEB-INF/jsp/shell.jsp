@@ -7,7 +7,7 @@
     {{for planets ~url=restUrl}}
       <img id="planet_{{:planet.id}}" src="{{:~url}}/{{:planet.id}}/image" alt="{{>planet.name}}" title="{{>planet.name}}"
            width="{{:width}}" height="{{:height}}"
-           class="displayPlanet" style="top:{{:top}}px; left: {{: 15 + (#index * 10) }}%;" > 
+           class="displayPlanet" style="top:{{:top}}px; left: {{:orbitDistance}}%;" > 
     {{/for}}
    </div>
 </script>

@@ -13,8 +13,8 @@ demoApp.shell = (function( ) {
       sun_height: 200,
       min_plant_height: 25,
       max_plant_height: 70,
-      orbit_distance_start: 10,
-      orbit_distance_end: 95,
+      orbit_distance_start: 14,
+      orbit_distance_end: 87,
       resize_interval: 200
 	},
     stateMap = {
@@ -95,7 +95,7 @@ demoApp.shell = (function( ) {
 	  var planet_radius_range = max_planet_radius - min_planet_radius;
 
 	  var planet_height_range = configMap.max_plant_height - configMap.min_plant_height;
-      var orbit_distance_gap = Math.floor( (configMap.orbit_distance_end - configMap.orbit_distance_start) / planetsData.length);  
+      var orbit_distance_gap = (configMap.orbit_distance_end - configMap.orbit_distance_start) / (planetsData.length - 1);  
 	  
 	  for (var i = 0; i < planetsData.length; i++) {
         var planetData = planetsData[ i];
@@ -104,8 +104,8 @@ demoApp.shell = (function( ) {
         var height = demoApp.util.toInt( configMap.min_plant_height + (planet_height_range * radiusRatio));
         var top = - ( demoApp.util.toInt( height / 2));
         var width = demoApp.util.toInt((height / planetData.planet.imageHeight) * planetData.planet.imageWidth);
-        
-        var orbitDistance = demoApp.util.toInt( configMap.orbit_distance_start + (configMap.orbit_distance_gap * i) );
+ 
+        var orbitDistance = demoApp.util.toInt( configMap.orbit_distance_start + (orbit_distance_gap * i) );
         
         planetData.width = width;
         planetData.height = height;
