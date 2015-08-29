@@ -23,20 +23,22 @@ demoApp = (function () {
 
   var initModule = function ($container, baseUrl) {
 	  
-    var restUrl = baseUrl + "/rest";
+    var solarBodiesRestUrl = baseUrl + "/rest/solarBodies";
 
     demoApp.dialog.initModule();
     if( demoApp.dialog.login ) {
       demoApp.dialog.login.initModule( $container.find( "#login-dialog") );
     }
 
-    demoApp.shell.initModule( $container, restUrl + "/solarBodies");
+    demoApp.shell.initModule( $container, solarBodiesRestUrl);
     demoApp.model.initModule();
     demoApp.data.initModule();
 
     demoApp.data.loadSun();
     demoApp.data.loadPlanets();
 
+    demoApp.dialog.solarBody.initModule( $container, solarBodiesRestUrl);
+    
   };
     
   return {

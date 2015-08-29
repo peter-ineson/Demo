@@ -1,10 +1,11 @@
 /* jshint undef: true, unused: true, strict: true */
-/* global demoApp.dialog.login */
+/* global demoApp.dialog.viewPlanet */
 
-demoApp.dialog.login = (function( ) {
+demoApp.dialog.solarBody = (function( ) {
   'use strict';
   var 
     configMap = {
+        restUrl: undefined,  
         CLASS_HIGHLIGHT: 'ui-state-highlight',
         FIELD_ERROR: 'ui-state-error',
         ERROR_TEXT: 'ui-state-error-text',
@@ -12,29 +13,36 @@ demoApp.dialog.login = (function( ) {
     },
     stateMap = {
         $container: undefined,
+        $dialogContainer: undefined,
         $dialog: undefined,
-        $form: undefined
+        $template: undefined,
+        $form: undefined,
+        model: undefined
     },
     jQueryMap = {},
     setJqueryMap,
     initModule,
     openDialog,
     closeDialog,
-    updateTips, resetForm, checkLength, checkMadatory, loginUser
+    updateTips, populateForm, resetForm, checkLength, checkMadatory, loginUser
     ;
 
   // ---- DOM methods
   setJqueryMap = function() {
     var
       $container = stateMap.$container,
+      $dialogContainer = stateMap.$dialogContainer,
       $dialog = stateMap.$dialog,
+      $template = stateMap.$template,
       $form = stateMap.$form,
       $username = $form.find( '#username' ),
       $password = $form.find( '#password' );
 	  
     jQueryMap = {
       $container : $container,
+      $dialogContainer : $dialogContainer,
       $dialog : $dialog,
+      $template : $template,
       $form : $form,
       $username: $username,
       $password: $password,
@@ -51,6 +59,40 @@ demoApp.dialog.login = (function( ) {
 	setTimeout(function() {
 	    jQueryMap.$tips.removeClass( configMap.CLASS_HIGHLIGHT, 2000 );
  	  }, 750 );
+  }
+
+  populateForm = function( solarBodyId, editMode) {
+	  var solarBodyDao = demoApp.model.solarBody.get_by_id(solarBodyId);
+	  demoApp.util.log( "solarBodyDao count: ", solarBodyDao.count());
+	  if( solarBodyDao.count() === 0) {
+		  alert( "Error: Failed to find a solar body with an id of " + solarBodyId);
+		  return;
+	  }
+	  var solarBody = solarBodyDao.first();
+	  demoApp.util.log( "solarBody", solarBody);
+	  
+      stateMap.model = new Object();
+      $.extend( stateMap.model, solarBody);
+      stateMap.model.editMode = editMode;
+      stateMap.model.restUrl = configMap.restUrl;	  
+	  jQueryMap.$dialog.dialog( "option", "title", (editMode ? "Edit details of " : "View details for ") + solarBody.name);
+
+	  demoApp.util.log( "model", stateMap.model);
+/*	  
+	  var template = $.templates("#theTmpl");
+	  template.link("#result", data);
+
+	  var htmlOutput = jQueryMap.$template.link( stateMap.model);
+
+*/
+	  var htmlOutput = jQueryMap.$template.link( "#solarBody-dialog", stateMap.model);
+	  
+	  /*
+	  demoApp.util.log( "htmlOutput", htmlOutput);
+	  jQueryMap.$dialogContainer.html( htmlOutput);
+*/
+	  
+	  return;
   }
 
   resetForm = function() {
@@ -123,20 +165,27 @@ demoApp.dialog.login = (function( ) {
   	jQueryMap.$dialog.dialog( "close" );
   }
     
-  openDialog = function() {
-    resetForm();
+  openDialog = function( solarBodyId, editMode) {
+	if( editMode == undefined) {
+		editMode = false;
+	}
+    populateForm( solarBodyId, editMode);
     jQueryMap.$dialog.dialog( "open" );
   }
       
     
   // ---- Init
-  initModule = function( $container) {
+  initModule = function( $container, restUrl) {
     var data_mode_str;
-    
-    stateMap.$dialog = $container.dialog({
+
+    stateMap.$dialogContainer = $container.find( "#solarBody-dialog");
+
+    var $dialogDom = $container.find(  );
+
+    stateMap.$dialog = stateMap.$dialogContainer.dialog({
         autoOpen: false,
-        height: 300,
-        width: 400,
+        height: 450,
+        width: 600,
         modal: true,
         buttons: {
           "Login": {
@@ -153,12 +202,14 @@ demoApp.dialog.login = (function( ) {
         }
       });
 
-      stateMap.$form = $container.find( "form" ).on( "submit", function( event ) {
+      stateMap.$form = $dialogDom.find( "form" ).on( "submit", function( event ) {
         event.preventDefault();
         loginUser();
       });
 
       stateMap.$container = $container;
+      stateMap.$template = $.templates( "#templateSolarBodyDialog");
+      configMap.restUrl = restUrl;
       
 	  setJqueryMap();
 		  

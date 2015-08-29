@@ -10,6 +10,7 @@ demoApp.shell = (function( ) {
   'use strict';
   var 
     configMap = {
+      restUrl: undefined, 
       sun_height: 200,
       min_plant_height: 25,
       max_plant_height: 70,
@@ -20,8 +21,7 @@ demoApp.shell = (function( ) {
     stateMap = {
         $container: undefined,
         $displayContainer: undefined,
-        $template: undefined,
-        restUrl: undefined
+        $template: undefined
     },
 	jQueryMap = {},
 	
@@ -35,8 +35,7 @@ demoApp.shell = (function( ) {
 	  jQueryMap = {
 	    $container : $container,
 	    $displayContainer : stateMap.$displayContainer,
-	    $template : stateMap.$template,
-	    restUrl : stateMap.restUrl
+	    $template : stateMap.$template
 	  };
 	};
 
@@ -127,7 +126,7 @@ demoApp.shell = (function( ) {
               + ", sun.imageHeight = " + sun.imageHeight);
 
       var templateData = {
-	    restUrl: jQueryMap.restUrl,
+	    restUrl: configMap.restUrl,
 	    sun: sun,
 	    sunWidth: sunWidth,
 	    sunHeight: configMap.sun_height,
@@ -138,14 +137,7 @@ demoApp.shell = (function( ) {
 	  //demoApp.util.log( "htmlOutput", htmlOutput);
 	  jQueryMap.$displayContainer.html(htmlOutput);
 
-	  demoApp.util.log( "done ....................");
-	  
-	  /*
-	  templateShellData.restUrl = "<c:url value='/rest/solarBodies' />";
-
-	  var template = $.templates("#templateShell");
-
-	  */
+	  demoApp.dialog.solarBody.open( 3);
 	};	
 
 		/*
@@ -168,7 +160,7 @@ demoApp.shell = (function( ) {
     stateMap.$container = $container;
     stateMap.$displayContainer = $container.find( "#shellContainer");
     stateMap.$template = $.templates( "#templateShell");
-    stateMap.restUrl = restUrl;
+    configMap.restUrl = restUrl;
 
     setJqueryMap();
 

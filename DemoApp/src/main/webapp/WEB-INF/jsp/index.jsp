@@ -3,6 +3,8 @@
 <html>
   <head>
     <title>Demo Application</title> 
+
+    <link href='https://fonts.googleapis.com/css?family=Lato|Josefin+Sans|Orbitron|Nunito|Play' rel='stylesheet' type='text/css'>
     
     <link rel="stylesheet" href='<c:url value="/webjars/jquery-ui-themes/1.11.0/vader/jquery-ui.min.css" />' >
 
@@ -13,22 +15,6 @@
     <script src='<c:url value="/webjars/jquery-ui/1.11.1/jquery-ui.min.js" />'></script>
     <script src='<c:url value="/webjars/jquery-blockui/2.65/jquery.blockUI.js" />'></script>
      
-    <style>
-	    body { font-size: 62.5%; }
-	    label, input { display:block; }
-	    input.text { margin-bottom:12px; width:95%; padding: .4em; }
-	    fieldset { padding:0; border:0; margin-top:25px; }
-	    h1 { font-size: 1.2em; margin: .6em 0; }
-/*
-	    div#users-contain { width: 350px; margin: 20px 0; }
-	    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
-	    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
-	    */
-	    .ui-dialog .ui-state-error { padding: .3em; }
-      .validateTips { border: 1px solid transparent; padding: 0.3em; }
-
-    </style>
-
     <script src='<c:url value="/js/lib/jsviews-1.0.0-alpha.min.js" />'></script>
     <script src='<c:url value="/js/lib/taffy-2.7.js" />'></script>
     <script src='<c:url value="/webjars/EventEmitter/4.2.7/EventEmitter.js" />'></script>
@@ -44,6 +30,7 @@
     <c:if test="${security.guest}">
       <script src='<c:url value="/js/demoApp.dialog.login.js" />'></script>
     </c:if>
+    <script src='<c:url value="/js/demoApp.dialog.solarBody.js" />'></script>
      
     <script type="text/javascript">
 
@@ -77,9 +64,9 @@
 		   <li><a href='#'><span>Home</span></a></li>
 		   <li class='active has-sub'><a href='#'><span>View</span></a>
 		      <ul>
-		         <li><a href='#'><span><c:out value="${sun.name}"/></span></a></li>
+		         <li><a href='#' onclick="demoApp.dialog.solarBody.open( ${sun.id});"><span><c:out value="${sun.name}"/></span></a></li>
 		         <c:forEach items="${planets}" var="planet">
-               <li><a href='#'><span><c:out value="${planet.name}"/></span></a></li>
+               <li><a href='#' onclick="demoApp.dialog.solarBody.open( ${planet.id});"><span><c:out value="${planet.name}"/></span></a></li>
 		         </c:forEach>
 		      </ul>
 		   </li>
@@ -107,12 +94,14 @@
       <div id="menuBackground"></div>  
     
       <div id="shellContainer"></div>
-      
+
       <c:if test="${security.guest}">
         <jsp:include page="dialog/login.jsp"/>
       </c:if>
 
       <jsp:include page="shell.jsp"/>
+      <jsp:include page="dialog/solarBody.jsp"/>
+      
     </div>  
 
   </body>

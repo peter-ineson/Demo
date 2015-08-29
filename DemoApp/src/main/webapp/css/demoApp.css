@@ -1,6 +1,16 @@
 
+/*
+font-family: 'Lato', sans-serif;
+font-family: 'Josefin Sans', sans-serif;
+font-family: 'Orbitron', sans-serif;
+font-family: 'Nunito', sans-serif;
+font-family: 'Play', sans-serif;
+*/
+
+
 body {
-     background-image: url('../images/Starry-Sky.jpg');
+  background-image: url('../images/Starry-Sky.jpg');
+  font-size: 11px;
 } 
     
 .hidden {
@@ -27,20 +37,12 @@ body {
 }    
 
 
-
 #shellContainer {
   position: absolute;
   top: 25%;
   margin-top: 50px;
   width: 99%;
 }
-
-/*
-div#shellContainer img {
-  top:0
-	}
-  vertical-align: middle;
-*/
 
 .displaySun {
   height: 200px;
@@ -56,20 +58,29 @@ div#shellContainer img {
   height: 0px;
   position: relative;
   vertical-align: middle;
-
-/*
-
-*/  
-
 }
 
 .displayPlanet {
   left: 40%;
   position: absolute;
+}
+
+	
+	
+.dataForm {
+	font-size: 14px;
+}	
 
 /*	
-  position: relative;
-	float: left;
-  vertical-align: middle;
+	    body { font-size: 62.5%; }
+	    label, input { display:block; }
+	    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+	    fieldset { padding:0; border:0; margin-top:25px; }
+	    h1 { font-size: 1.2em; margin: .6em 0; }
 */
-	}
+
+
+.ui-dialog .ui-state-error { padding: .3em; }
+
+.validateTips { border: 1px solid transparent; padding: 0.3em; }
+	
