@@ -1,12 +1,9 @@
 package me.ineson.demo.app.accTest.steps;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import me.ineson.demo.app.accTest.page.HomePage;
-import me.ineson.demo.app.accTest.page.LoginDialog;
-import me.ineson.demo.service.db.domain.User;
-import me.ineson.demo.service.db.repo.jpa.UserRepository;
-import net.thucydides.core.annotations.Step;
-import net.thucydides.junit.spring.SpringIntegration;
+import static org.assertj.core.api.StrictAssertions.assertThat;
+
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Rule;
@@ -14,6 +11,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+
+import me.ineson.demo.app.accTest.page.HomePage;
+import me.ineson.demo.app.accTest.page.LoginDialog;
+import me.ineson.demo.service.db.domain.SolarBody;
+import me.ineson.demo.service.db.domain.User;
+import me.ineson.demo.service.db.repo.jpa.SolarBodyRepository;
+import me.ineson.demo.service.db.repo.jpa.UserRepository;
+import net.thucydides.core.annotations.Step;
+import net.thucydides.junit.spring.SpringIntegration;
 
 @ContextConfiguration(locations = "classpath:/spring/accTest-config.xml")
 public class LandingPageSteps {
@@ -29,7 +35,10 @@ public class LandingPageSteps {
 	
 	@Autowired
 	private UserRepository userRepository;
-	
+
+	@Autowired
+	private SolarBodyRepository solarBodyRepository;
+
 	@Step
 	public void openHomePage() {
 		log.debug("Display home page");
@@ -46,10 +55,15 @@ public class LandingPageSteps {
     }
 
     @Step
-    public void checkForMenuOptions(boolean hasOption, Iterable<String> menuOptions) {
-        homePage.checkMenuOptions(hasOption, menuOptions);
+    public void checkForMenuOptions( Iterable<String> menuOptions, boolean hasOption) {
+        homePage.checkMenuOptions( menuOptions, hasOption);
     }
-	
+
+    @Step
+    public void selectMenuOption( Iterable<String> menuOptions) {
+        homePage.navigateMenuOptions( menuOptions, true, true);
+    }
+
     @Step
     public void loginAsUser(String username) {
         log.info("Login as user {} with correct password", username);
@@ -92,6 +106,13 @@ public class LandingPageSteps {
         loginDialog.getErrorMessage();
     }
 
+    @Step
+	public void selectIconForSolarBody(String solarBodyName) {
+		log.debug("select icon for {}", solarBodyName);
+		List<SolarBody>solarBodies = solarBodyRepository.findByNameIgnoreCase(solarBodyName);
+		assertThat(solarBodies).isNotEmpty().hasSize(1);
+		SolarBody solarBody = solarBodies.get(0);
 
-
+        homePage.selectIconForSolarBody( solarBody);
+	}
 }

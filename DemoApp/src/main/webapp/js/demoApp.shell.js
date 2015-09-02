@@ -15,8 +15,7 @@ demoApp.shell = (function( ) {
       min_plant_height: 25,
       max_plant_height: 70,
       orbit_distance_start: 14,
-      orbit_distance_end: 87,
-      resize_interval: 200
+      orbit_distance_end: 87
 	},
     stateMap = {
         $container: undefined,
@@ -136,24 +135,9 @@ demoApp.shell = (function( ) {
 	  var htmlOutput = jQueryMap.$template.render(templateData);
 	  //demoApp.util.log( "htmlOutput", htmlOutput);
 	  jQueryMap.$displayContainer.html(htmlOutput);
-
-	  demoApp.dialog.solarBody.open( 3);
 	};	
 
-		/*
-		onResize = function() {
-
-      if( stateMap.resize_toid) { return true; }
-      
-      spa.chat.handleResize();
-      stateMap.resize_toid = setTimeout(
-          function() { stateMap.resize_toid = undefined; },
-          configMap.resize_interval);
-      return true;
-    };
-    */
-
-    // ---- Init
+  // ---- Init
 		
   initModule = function( $container, restUrl) {
     
@@ -165,11 +149,6 @@ demoApp.shell = (function( ) {
     setJqueryMap();
 
     events.on('onPlanetsLoaded', displaySolarSystem);
-      
-//    $(window)
-//      .bind( 'resize', onResize)
-//    	.bind( 'hashchange', onHashchange)
-//      .trigger( 'hashchange');
   };
     
   return {

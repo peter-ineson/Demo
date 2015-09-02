@@ -73,9 +73,9 @@
 		   <c:if test="${security.admin}">
 	       <li class='active has-sub'><a href='#'><span>Edit</span></a>
 	          <ul>
-	             <li><a href='#'><span><c:out value="${sun.name}"/></span></a></li>
+	             <li><a href='#' onclick="demoApp.dialog.solarBody.open( ${sun.id});"><span><c:out value="${sun.name}"/></span></a></li>
 	             <c:forEach items="${planets}" var="planet">
-	               <li><a href='#'><span><c:out value="${planet.name}"/></span></a></li>
+	               <li><a href='#' onclick="demoApp.dialog.solarBody.open( ${planet.id});"><span><c:out value="${planet.name}"/></span></a></li>
 	             </c:forEach>
 	          </ul>
 	       </li>

@@ -117,13 +117,11 @@ dependencies {
 
   // TODO: "accTestCompile(" - note currently the eclipse plugin does not pick up the acceptance test classpath
   testCompile(
-    [ "net.serenity-bdd:core:1.0.+" ],
-//    [ "net.serenity-bdd:core:1.0.+" ],
     [ "net.serenity-bdd:serenity-core:$serenityVersion" ],
     [ "net.serenity-bdd:serenity-spring:$serenityVersion" ],
     [ "net.serenity-bdd:serenity-junit:$serenityVersion" ],
-    [ "net.serenity-bdd:serenity-cucumber:1.0.+" ],
-    [ "net.serenity-bdd:serenity-jbehave:1.0.+" ],
+    [ "net.serenity-bdd:serenity-cucumber:1.1.+" ],
+    [ "net.serenity-bdd:serenity-jbehave:1.1.+" ],
     [ "org.slf4j:slf4j-simple:1.+" ]
   )
   
@@ -201,10 +199,9 @@ task intTestReport(dependsOn: jar, type: TestReport) {
 
 task accTest(type: Test) {
 
-	
+//    systemProperty "serenity.use.unique.browser", "false"
+//    systemProperty "thucydides.use.unique.browser", "false"
 //    systemProperty "browser", "chrome"
-    systemProperty "serenity.use.unique.browser", "false"
-    systemProperty "thucydides.use.unique.browser", "false"
 //    systemProperty "webdriver.chrome.driver", "C:\\Users\\peter\\Downloads\\chromedriver_win32\\chromedriver.exe"
 //    systemProperty "browser", "ie"
 //    systemProperty "webdriver.ie.driver", "C:\\Users\\peter\\Downloads\\IEDriverServer_x64_2.43.0\\IEDriverServer.exe"

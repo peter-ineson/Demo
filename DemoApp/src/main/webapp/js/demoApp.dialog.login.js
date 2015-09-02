@@ -29,8 +29,8 @@ demoApp.dialog.login = (function( ) {
       $container = stateMap.$container,
       $dialog = stateMap.$dialog,
       $form = stateMap.$form,
-      $username = $form.find( '#username' ),
-      $password = $form.find( '#password' );
+      $username = $form.find( '#loginForm-username' ),
+      $password = $form.find( '#loginForm-password' );
 	  
     jQueryMap = {
       $container : $container,
@@ -135,7 +135,7 @@ demoApp.dialog.login = (function( ) {
     
     stateMap.$dialog = $container.dialog({
         autoOpen: false,
-        height: 300,
+        height: 250,
         width: 400,
         modal: true,
         buttons: {

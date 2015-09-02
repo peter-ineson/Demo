@@ -63,8 +63,13 @@ demoApp.model = (function () {
   solarBody = (function() {
     var get_by_id, get_db, get_by_body_type,
       BODY_TYPE_SUN = "SUN",
-      BODY_TYPE_PLANET = "PLANET"
-    ;
+      BODY_TYPE_PLANET = "PLANET",
+      BODY_TYPE_DWARF_PLANET = "DWARF_PLANET",
+      BODY_TYPES = [ 
+        { id: BODY_TYPE_SUN,          description: "Sun"},
+        { id: BODY_TYPE_PLANET,       description: "Planet"},
+        { id: BODY_TYPE_DWARF_PLANET, description: "Dwarf Planet"}
+      ];
     
     get_by_id = function( byId) {
       return stateMap.solar_body_db({ id: byId});
@@ -85,7 +90,9 @@ demoApp.model = (function () {
       get_db: get_db,
       
       BODY_TYPE_SUN: BODY_TYPE_SUN,
-      BODY_TYPE_PLANET: BODY_TYPE_PLANET
+      BODY_TYPE_PLANET: BODY_TYPE_PLANET,
+      BODY_TYPE_DWARF_PLANET: BODY_TYPE_DWARF_PLANET,
+      BODY_TYPES: BODY_TYPES
     };
   }());
 

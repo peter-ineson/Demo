@@ -48,7 +48,7 @@ subprojects {
 
   ext {
      springVersion = '4.1.6.RELEASE'
-     serenityVersion = '1.0.59'
+     serenityVersion = '1.1.+'
   }
 
   dependencies {

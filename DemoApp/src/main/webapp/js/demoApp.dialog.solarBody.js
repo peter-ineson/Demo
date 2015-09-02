@@ -9,7 +9,23 @@ demoApp.dialog.solarBody = (function( ) {
         CLASS_HIGHLIGHT: 'ui-state-highlight',
         FIELD_ERROR: 'ui-state-error',
         ERROR_TEXT: 'ui-state-error-text',
-        DEFAULT_MESSAGE: 'Enter your username and password.'
+        DEFAULT_MESSAGE: 'Enter your username and password.',
+        view_buttons: {
+          Ok: function() {
+            closeDialog();
+          }
+        },
+        save_buttons: {
+            "Save": {
+              text: "Save",
+              id: "solarBodyForm-buttonSave", 
+              click: loginUser
+            },
+            Cancel: function() {
+              closeDialog();
+            }
+          }
+	
     },
     stateMap = {
         $container: undefined,
@@ -74,23 +90,14 @@ demoApp.dialog.solarBody = (function( ) {
       stateMap.model = new Object();
       $.extend( stateMap.model, solarBody);
       stateMap.model.editMode = editMode;
-      stateMap.model.restUrl = configMap.restUrl;	  
+      stateMap.model.restUrl = configMap.restUrl;
+      stateMap.model.BODY_TYPES = demoApp.model.solarBody.BODY_TYPES;
+	  jQueryMap.$dialog.dialog( "option", "buttons", (editMode ? configMap.save_buttons : configMap.view_buttons));
 	  jQueryMap.$dialog.dialog( "option", "title", (editMode ? "Edit details of " : "View details for ") + solarBody.name);
 
-	  demoApp.util.log( "model", stateMap.model);
-/*	  
-	  var template = $.templates("#theTmpl");
-	  template.link("#result", data);
+	  //demoApp.util.log( "model", stateMap.model);
 
-	  var htmlOutput = jQueryMap.$template.link( stateMap.model);
-
-*/
 	  var htmlOutput = jQueryMap.$template.link( "#solarBody-dialog", stateMap.model);
-	  
-	  /*
-	  demoApp.util.log( "htmlOutput", htmlOutput);
-	  jQueryMap.$dialogContainer.html( htmlOutput);
-*/
 	  
 	  return;
   }
@@ -185,18 +192,8 @@ demoApp.dialog.solarBody = (function( ) {
     stateMap.$dialog = stateMap.$dialogContainer.dialog({
         autoOpen: false,
         height: 450,
-        width: 600,
+        width: 560,
         modal: true,
-        buttons: {
-          "Login": {
-          	text: "Login",
-          	id: "login-dialog-button-login", 
-          	click: loginUser
-          },
-          Cancel: function() {
-        	  closeDialog();
-          }
-        },
         close: function() {
           resetForm();
         }

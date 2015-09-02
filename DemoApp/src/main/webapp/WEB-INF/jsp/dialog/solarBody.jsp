@@ -8,46 +8,53 @@
       <p class="validateTips">Enter your username and password.</p>
     {{/if}}
     <form id="solarBody-form" name="solarBody-form" >
-      <div style="display: inline-block;">
-        <div style="display: inline-block;">
-          <img src="{{:restUrl}}/{{:id}}/image" alt="{{>name}}" title="{{>name}}"
-               width="200px" height="200px" >
+      <div class="inputFieldBlock">
+        <div class="inputFieldBlock">
+          <img id="solarBodyForm-solarBodyImage" src="{{:restUrl}}/{{:id}}/image" alt="{{>name}}" title="{{>name}}"
+            {{if imageWidth > imageHeight}}width="150px"{{else}}height="150px"{{/if}}
+          >
         </div>
-        <div style="display: inline-block; vertical-align: top;">
-          <div>
-            <label for="xabc" style="float: left; font-family: 'Orbitron', sans-serif;" >Name</label>
-            <input {{if editMode}}disabled{{/if}}
-                  style="font-family: 'Orbitron', sans-serif;" id="xabc" data-link="name" />
-          </div>
-          <div>
-            <label 
-                   for="xabd" style="float: left; font-family: 'Lato', sans-serif;" >Radius</label>
+        <div class="inputFieldBlock">
+          <div class="inputField">
+            <label for="solarBodyForm-name" class="width100">Name:</label>
             <input {{if editMode != true}}disabled{{/if}}
-                   style="font-family: 'Lato', sans-serif;" id="xabd" data-link="radius" />
+                  class="text ui-widget-content ui-corner-all width150"
+                  id="solarBodyForm-name" data-link="name" />
           </div>
-          <div>
-            <label for="xabe" style="float: left; font-family: 'Josefin Sans', sans-serif;" >Mass</label>
-            <input style="font-family: 'Josefin Sans', sans-serif;" id="xabe" data-link="mass" />
+          <div class="inputField">
+            <label for="solarBodyForm-bodyType" class="width100">Type:</label>
+            <select class="text ui-widget-content ui-corner-all width150"
+                    id="solarBodyForm-bodyType" 
+                    data-link="bodyType disabled{:editMode != true}">
+              <option value="">Please select</option>
+              {^{for BODY_TYPES}}
+                <option data-link="value{:id} {:description} selected{:id == ~root.bodyType}"></option>
+              {{/for}}
+`          </select>
           </div>
-          <div>
-            <label for="xabf" style="float: left; font-family: 'Nunito', sans-serif;" >Orbit distance</label>
-            <input style="font-family: 'Nunito', sans-serif;" id="xabf" data-link="orbitDistance" />
+          <div class="inputField">
+            <label for="solarBodyForm-radius" class="width100">Radius:</label>
+            <input {{if editMode != true}}disabled{{/if}}
+                  class="text ui-widget-content ui-corner-all width150 number"
+                   id="solarBodyForm-radius" data-link="radius" /> km
           </div>
-          <div>
-            <label for="xabg" style="float: left; font-family: 'Lato', sans-serif;" >Orbit distance</label>
-            <input style="font-family: 'Lato', sans-serif;" id="xabg" data-link="orbitDistance" />
+          <div class="inputField">
+            <label for="solarBodyForm-mass" class="width100">Mass:</label>
+            <input {{if editMode != true}}disabled{{/if}} id="solarBodyForm-mass" data-link="mass"
+                   class="text ui-widget-content ui-corner-all width150 number" /> kg
           </div>
-          <!-- Allow form submission with keyboard without duplicating the dialog button -->
-          <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+          <div class="inputField">
+            <label for="solarBodyForm-orbitDistance" class="width100">Orbit distance:</label>
+            <input {{if editMode != true}}disabled{{/if}} id="solarBodyForm-orbitDistance" data-link="orbitDistance"
+                   class="text ui-widget-content ui-corner-all width150 number" /> km
+          </div>
         </div>
       </div>
       <div>
-        <label for="xabx" style="font-family: 'Play', sans-serif;" >Description</label>
-        <textarea {{if editMode != true}}disabled{{/if}} style="font-family: 'Play', sans-serif;" id="xabx" data-link="description" rows="4" cols="80" ></textarea>
-      </div>
-      <div>
-        <label for="xaby" style="font-family: 'Play', sans-serif;" >Description</label>
-        <textarea {{if editMode != true}}readonly{{/if}} style="font-family: 'Play', sans-serif;" id="xaby" data-link="description" rows="4" cols="80" ></textarea>
+        <p>Description</p>
+        <textarea {{if editMode != true}}readonly{{/if}} 
+                  class="textarea ui-widget-content ui-corner-all"
+                  id="solarBodyForm-description" data-link="description"></textarea>
       </div>
     </form>
   </div>

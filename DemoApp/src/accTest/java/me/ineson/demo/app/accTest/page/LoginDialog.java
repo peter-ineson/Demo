@@ -52,14 +52,14 @@ public class LoginDialog extends PageObject {
     public void enterCredentials( String username, String password) {
         assertThat( loginDialog.isVisible()).as( "Login form visable").isEqualTo(true);
 
-        WebElementFacade usernameInput = loginDialog.find(By.id("username"));
+        WebElementFacade usernameInput = loginDialog.find(By.id("loginForm-username"));
         assertThat( usernameInput).isNotNull();
         usernameInput.sendKeys(username);
 
         usernameInput.sendKeys( '\t' + password);
 
         /*        
-        WebElementFacade passwordInput = loginDialog.find(By.id("password"));
+        WebElementFacade passwordInput = loginDialog.find(By.id("loginForm-password"));
         assertThat( passwordInput).isNotNull();
         passwordInput.sendKeys(password);
         */

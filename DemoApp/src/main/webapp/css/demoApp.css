@@ -37,6 +37,60 @@ body {
 }    
 
 
+
+/* ========================================================================= */
+/* = General visuals for the forms within dialogs                            */
+/* ========================================================================= */
+
+.ui-widget { 
+  font-family: 'Lato', sans-serif !important;
+  font-size: 13px !important;
+}
+
+.ui-dialog .ui-state-error { padding: .3em; }
+
+.validateTips { border: 1px solid transparent; padding: 0.3em; }
+	
+.dataForm {
+  font-size: 14px;
+  font-family: 'Lato', sans-serif;
+}	
+
+
+.dataForm label {
+  text-align: right;
+  padding-right: 15px;
+  vertical-align: text-top;
+  display:inline-block;
+}
+
+.dataForm .inputFieldBlock {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.dataForm .inputField {
+  margin-top:5px;
+  margin-top:5px;
+}
+
+.dataForm .number {
+  text-align: right;
+}
+
+.width100 {
+	width: 100px;
+}
+
+.width150 {
+	width: 150px;
+}
+
+
+/* ========================================================================= */
+/* = Visuals for the main shell                                              */
+/* ========================================================================= */
+
 #shellContainer {
   position: absolute;
   top: 25%;
@@ -45,11 +99,14 @@ body {
 }
 
 .displaySun {
-  height: 200px;
-  width:  200px; 
   left: -80px;
   position: relative;
-
+  display: block;
+  max-width:200px;
+  max-height:200px;
+  width: auto;
+  height: auto;
+  cursor:pointer;"
 }
 
 .planetContainer {
@@ -61,26 +118,25 @@ body {
 }
 
 .displayPlanet {
-  left: 40%;
   position: absolute;
+  cursor:pointer;
 }
 
 	
-	
-.dataForm {
-	font-size: 14px;
-}	
-
-/*	
-	    body { font-size: 62.5%; }
-	    label, input { display:block; }
-	    input.text { margin-bottom:12px; width:95%; padding: .4em; }
-	    fieldset { padding:0; border:0; margin-top:25px; }
-	    h1 { font-size: 1.2em; margin: .6em 0; }
-*/
+/* ========================================================================= */
+/* = Visuals for the solar body dialog/form                                  */
+/* ========================================================================= */
 
 
-.ui-dialog .ui-state-error { padding: .3em; }
+#solarBodyForm-solarBodyImage {
+  margin: 5px 10px 0px 15px;
+  padding: 5px 5px 5px 5px;
+  border-radius: 6px;
+  border: 3px solid #47476B;
+}
 
-.validateTips { border: 1px solid transparent; padding: 0.3em; }
-	
+#solarBodyForm-description {
+  width:520px;
+  height:110px;	
+}
+

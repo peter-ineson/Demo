@@ -1,6 +1,8 @@
 package me.ineson.demo.app.accTest.features;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import me.ineson.demo.app.accTest.page.HomePage;
 import me.ineson.demo.app.accTest.steps.LandingPageSteps;
 import net.thucydides.core.annotations.Steps;
 
@@ -51,7 +53,6 @@ public class AuthenticationScenarioSteps {
         landingPageSteps.loginWithIncorrectPassword(username);
     }
 
-    
     @When("^logout$")
     public void logout() {
         landingPageSteps.logout();
@@ -67,9 +68,6 @@ public class AuthenticationScenarioSteps {
         landingPageSteps.loginFailed();
     }
 
-    
-    private final static Splitter MENU_OPTION_SPLITTER = Splitter.on("->");
- 
     //the main menu does not have a Edit option
     @Then("^the main menu (.*) have a (.*) option$")
     public void checkMenuForOptions(String condition, String options) {
@@ -78,8 +76,7 @@ public class AuthenticationScenarioSteps {
         
         assertThat( options).isNotEmpty();
 
-        Iterable<String>menuOptions = MENU_OPTION_SPLITTER.split(options);
-        landingPageSteps.checkForMenuOptions(hasOption, menuOptions);
+        landingPageSteps.checkForMenuOptions( HomePage.parseMenuOptions(options), hasOption);
     }
 
 }
