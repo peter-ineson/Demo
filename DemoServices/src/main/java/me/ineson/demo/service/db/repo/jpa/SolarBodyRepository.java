@@ -16,6 +16,8 @@ package me.ineson.demo.service.db.repo.jpa;
 
 import me.ineson.demo.service.db.domain.SolarBody;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,4 +29,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface SolarBodyRepository extends PagingAndSortingRepository<SolarBody, Long>, JpaSpecificationExecutor<SolarBody> {
 
+	List<SolarBody> findByNameIgnoreCase(String name);
 }

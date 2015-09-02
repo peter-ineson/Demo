@@ -15,6 +15,7 @@
 package me.ineson.demo.service.db.repo.jpa;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import me.ineson.demo.service.db.DbConstants;
 import me.ineson.demo.service.db.domain.SolarBody;
@@ -152,5 +153,30 @@ public class SolarBodyRepositoryTest {
         Assert.assertEquals("after check", DbConstants.NEW_NAME, updatedMars.getName());
         
     }
-  
+
+    
+    /**
+     * Test case for method {@link SolarBodyRepository#findByNameIgnoreCase(String)}.
+     */
+    @Test
+    public void testByNameSuccess() {
+        List<SolarBody> recs = solarBodyRepository.findByNameIgnoreCase( DbConstants.MARS_NAME);
+        log.debug( "Search for Mars " + recs);
+        Assert.assertNotNull( "Find Sun", recs);
+        Assert.assertEquals( "Find Mars count", 1, recs.size());
+        
+        SolarBody rec = recs.get(0);
+        Assert.assertEquals( "check id", DbConstants.MARS_ID, rec.getId());
+    }
+
+    /**
+     * Test case for method {@link SolarBodyRepository#findByNameIgnoreCase(String)}.
+     */
+    @Test
+    public void testByNameNotFound() {
+        List<SolarBody> recs = solarBodyRepository.findByNameIgnoreCase( "#@$@#$@#$#@$");
+        log.debug( "Not found name Search " + recs);
+        Assert.assertNotNull( "Not found name search", recs);
+        Assert.assertEquals( "Find Mars count", 0, recs.size());
+    }
 }
