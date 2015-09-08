@@ -39,10 +39,10 @@ public class DbUpdateImageDimensions {
     
     try (Connection conn = DriverManager.getConnection(url, user, password)) {
 	 
-      String selectSql = "SELECT solarBodyId, image FROM solarBodyImage WHERE imageWidth IS NULL OR imageHeight IS NULL ORDER BY solarBodyId ASC";
+      String selectSql = "SELECT solarBodyId, image FROM SolarBodyImage WHERE imageWidth IS NULL OR imageHeight IS NULL ORDER BY solarBodyId ASC";
       try( PreparedStatement statement = conn.prepareStatement(selectSql)) {
 
-        String updateSql = "UPDATE solarBodyImage SET imageWidth = ?, imageHeight = ? WHERE solarBodyId = ?";
+        String updateSql = "UPDATE SolarBodyImage SET imageWidth = ?, imageHeight = ? WHERE solarBodyId = ?";
         try( PreparedStatement update = conn.prepareStatement(updateSql)) {
       
           try( ResultSet result = statement.executeQuery()) {
